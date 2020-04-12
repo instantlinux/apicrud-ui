@@ -1,0 +1,9 @@
+*~
+.coverage
+.env
+coverage.xml
+env-config.js
+htmlcov
+node_modules
+results.xml
+tmp
