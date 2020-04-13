@@ -6,7 +6,7 @@ include Makefile.vars
 
 REACT_APP_API_URL    ?= http://$(shell hostname -f):$(APP_PORT)/api/v1
 REACT_APP_MEDIA_URL  ?= http://$(shell hostname -f):$(MEDIA_PORT)/api/v1
-REGISTRY             ?= $(REGISTRY_URI)
+REGISTRY             ?= $(REGISTRY_URI)/instantlinux
 export APICRUD_ENV   ?= local
 
 # Local dev - you need 6 services running; see the Makefile in
@@ -24,6 +24,14 @@ ui_local: .env /usr/bin/yarn
 	@echo 'REACT_APP_MEDIA_URL=$(REACT_APP_MEDIA_URL)' >>$@
 	@echo 'REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)' >>$@
 	@echo 'PORT=$(APICRUD_UI_PORT)' >>$@
+
+analysis:
+	@echo "Running ESLint code analysis"
+	yarn && yarn lint
+
+test:
+	@echo "Running unit tests"
+	yarn ci-test
 
 test_functional:
 	@echo "Run Functional Tests - not yet implemented"
@@ -65,7 +73,7 @@ ifeq ($(TAG),)
 	@echo Please specify a new tag in form yy.mm.x
 	@exit 1
 endif
-	@echo docker build -t $(REGISTRY)/apicrud-ui:$(TAG) -f Dockerfile
+	@echo docker build -t $(REGISTRY)/apicrud-ui:$(TAG) -f Dockerfile.ui
 	@docker build -t $(REGISTRY)/apicrud-ui:$(TAG) . \
 	 -f Dockerfile.ui \
 	 --build-arg=VCS_REF=$(shell git rev-parse HEAD^) \

@@ -5,5 +5,6 @@ coverage.xml
 env-config.js
 htmlcov
 node_modules
-results.xml
+npm-debug.log
+junit.xml
 tmp

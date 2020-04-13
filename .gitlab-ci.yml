@@ -1,25 +1,30 @@
 # Usage:
 # Set these private variables in gitlab-ci environment:
 #   CI_JOB_TOKEN
-#   DOCKER_LOGIN
-
-variables:
-  REGISTRY: nexus.instantlinux.net
-  GIT_SSL_NO_VERIFY: "1"
+#   REGISTRY_URI
 
 stages:
+  - Analyze and Unit Test
   - ui
   - Functional Tests
   - Promote Images
+  - Publish Package
   - Clean
+
+cache:
+  paths: [ .targets ]
+image: docker:19.03.8
+services: [ "docker:dind" ]
 
 before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
+  - apk add make
 
 .registry_template: &registry_login
   before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
-  - docker login -u $DOCKER_LOGIN -p $CI_JOB_TOKEN $REGISTRY
+  - apk add make
+  - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $REGISTRY_URI
 
 .create_image_template: &create_image
   script: make create_image && echo k8s/$CI_JOB_STAGE >> .targets
@@ -29,15 +34,36 @@ create_apicrud_ui:
   <<: *registry_login
   <<: *create_image
 
+analysis:
+  stage: Analyze and Unit Test
+  image: node:12.16.2-alpine
+  script:
+  - set -e
+  - make analysis
+  - make test
+  artifacts:
+    paths:
+    - yarn-error.log
+    - junit.xml
+    reports:
+      junit: junit.xml
+
 test:
   stage: Functional Tests
   script: make test_functional
 
 promote_images:
   stage: Promote Images
+  image: node:12.16.2-alpine
   <<: *registry_login
   script: IMAGES=`cat .targets` make promote_images
   only: { refs: [ master ] }
+
+publish:
+  stage: Publish Package
+  image: node:12.16.2-alpine
+  script: make publish
+  only: [ tags ]
 
 clean:
   stage: Clean

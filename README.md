@@ -1,7 +1,9 @@
 ## apicrud-ui
-[![](https://images.microbadger.com/badges/version/instantlinux/apicrud-ui.svg)](https://microbadger.com/images/instantlinux/apicrud-ui "Version badge") [![](https://images.microbadger.com/badges/image/instantlinux/apicrud-ui.svg)](https://microbadger.com/images/instantlinux/apicrud-ui "Image badge") [![](https://images.microbadger.com/badges/commit/instantlinux/apicrud-ui.svg)](https://microbadger.com/images/instantlinux/apicrud-ui "Commit badge")
+[![](https://images.microbadger.com/badges/version/instantlinux/apicrud-ui.svg)](https://microbadger.com/images/instantlinux/apicrud-ui "Version badge") [![](https://images.microbadger.com/badges/image/instantlinux/apicrud-ui.svg)](https://microbadger.com/images/instantlinux/apicrud-ui "Image badge") [![](https://images.microbadger.com/badges/commit/instantlinux/apicrud-ui.svg)](https://microbadger.com/images/instantlinux/apicrud-ui "Commit badge") [![](https://gitlab.com/instantlinux/apicrud-ui/badges/master/pipeline.svg)](https://gitlab.com/instantlinux/apicrud-ui/pipelines "pipelines") [![](https://gitlab.com/instantlinux/apicrud-ui/badges/master/coverage.svg)](https://gitlab.com/instantlinux/apicrud-ui/-/jobs/artifacts/master/browse?job=analysis "coverage")
 
 ### What is this
+
+Skip the python/React.js learning curve and put your ideas in production!
 
 The _apicrud_ framework was created to make it far easier to get started on full-stack development of REST-based services ranging from a simple CLI wrapper for queries of local APIs to full web-scale consumer-facing applications.
 
@@ -15,6 +17,8 @@ Clone this repo to your local environment. To start this UI service in a shell s
 * Set environment variables as defined below, at least `REACT_APP_API_URL`.
 * Invoke `make ui_local` to bring up the UI, and access by the URL http://localhost:3000.
 * Initial login for `admin` for a newly created database is `p@ssw0rd`.
+
+Documentation for the API, defined in openapi.yaml in the instantlinux/apicrud application example (swagger format), can be viewed through the UI as http://localhost:8080/api/v1/ui.
 
 ### Environment variables
 
@@ -34,7 +38,9 @@ The rise of Docker and Kubernetes starting around 2017 made it possible to set u
 Implementation/design includes these technologies: <a href="http://www.celeryproject.org/">celery</a>, <a href="https://aws.amazon.com/cloudfront/">CloudFront and S3</a>, <a href="https://www.docker.com/">docker</a>, <a href="http://flask.pocoo.org/">flask</a>, <a href="https://kubernetes.io/">kubernetes</a>, <a href="https://developer.mapquest.com/documentation/open/geocoding-api/">MapQuest geocoding</a>, <a href="https://www.mapbox.com/">mapbox</a>, <a href="https://mariadb.org/">MariaDB</a>, <a href="https://docs.python.org/3/">python 3</a>, <a href="https://www.rabbitmq.com/">RabbitMQ</a>, <a href="https://reactjs.org">react.js</a>, <a href="https://marmelab.com/react-admin">react-admin</a>, <a href="https://www.sqlalchemy.org/">sqlalchemy</a>, <a href="https://uwsgi-docs.readthedocs.io/en/latest/">uWSGI</a>.
 
 ### Contributions
-	Your pull-requests and bug-reports are welcome here. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Your pull-requests and bug-reports are welcome here. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### License
-        Software copyright &copy; 2020 by Richard Braun &bull; <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license <p />
+
+Software copyright &copy; 2020 by Richard Braun &bull; <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license <p />
