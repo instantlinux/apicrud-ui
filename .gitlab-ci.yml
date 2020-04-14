@@ -62,7 +62,7 @@ promote_images:
 publish:
   stage: Publish Package
   image: node:12.16.2-alpine
-  script: make publish
+  script: apk add docker-cli && make publish
   only: [ tags ]
 
 clean:
