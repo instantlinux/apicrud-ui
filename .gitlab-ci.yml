@@ -43,10 +43,11 @@ analysis:
   - make test
   artifacts:
     paths:
-    - yarn-error.log
+    - coverage/
     - junit.xml
     reports:
       junit: junit.xml
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 
 test:
   stage: Functional Tests
@@ -56,7 +57,9 @@ promote_images:
   stage: Promote Images
   image: node:12.16.2-alpine
   <<: *registry_login
-  script: IMAGES=`cat .targets` make promote_images
+  script:
+    - apk add docker-cli
+    - IMAGES=`cat .targets` make promote_images
   only: { refs: [ master ] }
 
 publish:

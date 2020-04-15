@@ -54,7 +54,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "ci-test": "CI=true react-scripts test --reporters=default --reporters=jest-junit",
+    "ci-test": "CI=true react-scripts test --reporters=default --reporters=jest-junit --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

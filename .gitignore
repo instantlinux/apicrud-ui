@@ -1,7 +1,7 @@
 *~
 .coverage
 .env
-coverage.xml
+coverage
 env-config.js
 htmlcov
 node_modules
