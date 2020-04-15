@@ -23,7 +23,7 @@ before_script:
 .registry_template: &registry_login
   before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
-  - apk add make
+  - apk add docker-cli make
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $REGISTRY_URI
 
 .create_image_template: &create_image
@@ -58,7 +58,6 @@ promote_images:
   image: node:12.16.2-alpine
   <<: *registry_login
   script:
-    - apk add docker-cli
     - IMAGES=`cat .targets` make promote_images
   only: { refs: [ master ] }
 
