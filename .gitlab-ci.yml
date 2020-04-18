@@ -1,7 +1,6 @@
 # Usage:
 # Set these private variables in gitlab-ci environment:
-#   CI_JOB_TOKEN
-#   REGISTRY_URI
+#   DOCKER_TOKEN, REGISTRY_URI
 
 stages:
   - Analyze and Unit Test
@@ -51,17 +50,17 @@ analysis:
 
 test:
   stage: Functional Tests
-  script: apk add make && make test_functional
+  script: make test_functional
 
 promote_images:
   stage: Promote Images
   <<: *registry_login
   script: IMAGES=ui make promote_images
-  only: { refs: [ master ] }
+  # only: { refs: [ master ] }
 
 publish:
   stage: Publish Package
-  script: make publish
+  script: TAG=$CI_COMMIT_TAG make publish
   only: [ tags ]
 
 clean:
