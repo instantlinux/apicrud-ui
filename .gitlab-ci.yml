@@ -11,7 +11,7 @@ stages:
   - Publish Package
   - Clean
 
-image: docker:19.03.8
+image: instantlinux/node-builder:12.16.2-alpine
 
 before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
@@ -20,7 +20,8 @@ before_script:
   before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $REGISTRY_URI
-  image: instantlinux/node-builder:12.16.2-alpine
+  - apk add make
+  image: docker:19.03.8
   services: [ "docker:dind" ]
 
 .create_image_template: &create_image
@@ -33,7 +34,6 @@ create_apicrud_ui:
 
 analysis:
   stage: Analyze and Unit Test
-  image: instantlinux/node-builder:12.16.2-alpine
   script:
   - set -e
   - make analysis
@@ -56,18 +56,16 @@ test:
 promote_images:
   stage: Promote Images
   <<: *registry_login
-  script:
-    - IMAGES=ui make promote_images
+  script: IMAGES=ui make promote_images
   only: { refs: [ master ] }
 
 publish:
   stage: Publish Package
-  image: instantlinux/node-builder:12.16.2-alpine
-#  script: apk add docker-cli && make publish
   script: make publish
   only: [ tags ]
 
 clean:
   stage: Clean
+  image: docker:19.03.8
   script: apk add make && make clean_images
   when: always
