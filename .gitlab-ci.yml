@@ -15,13 +15,13 @@ image: docker:19.03.8
 
 before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
-  - apk add make
 
 .registry_template: &registry_login
   before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
   - apk add docker-cli make
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $REGISTRY_URI
+  image: instantlinux/node-builder:12.16.2-alpine
   services: [ "docker:dind" ]
 
 .create_image_template: &create_image
@@ -49,11 +49,10 @@ analysis:
 
 test:
   stage: Functional Tests
-  script: make test_functional
+  script: apk add make && make test_functional
 
 promote_images:
   stage: Promote Images
-  image: node:12.16.2-alpine
   <<: *registry_login
   script:
     - IMAGES=ui make promote_images
@@ -62,10 +61,11 @@ promote_images:
 publish:
   stage: Publish Package
   image: instantlinux/node-builder:12.16.2-alpine
-  script: apk add docker-cli && make publish
+#  script: apk add docker-cli && make publish
+  script: make publish
   only: [ tags ]
 
 clean:
   stage: Clean
-  script: make clean_images
+  script: apk add make && make clean_images
   when: always
