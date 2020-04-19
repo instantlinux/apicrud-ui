@@ -65,7 +65,7 @@ promote_images:
   <<: *registry_login
   script: apk add curl && IMAGES=ui make promote_images
   only:
-  - { refs: [ master ] }
+  - master
   - tags
 
 publish:
