@@ -41,8 +41,8 @@ publish:
 	npm publish
 
 create_image:
-	@echo docker build -t $(REGISTRY)/apicrud-$(CI_JOB_STAGE):$(TAG)
-	@docker build -t $(REGISTRY)/apicrud-$(CI_JOB_STAGE):$(TAG) . \
+	@echo docker build -t $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
+	@docker build -t $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG) . \
 	 -f Dockerfile.$(CI_JOB_STAGE) \
 	 --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
 	 --build-arg=TAG=$(TAG) \
@@ -50,14 +50,15 @@ create_image:
 	 --build-arg=REACT_APP_API_URL=https://apicrud-dev.$(DOMAIN)/api/v1 \
 	 --build-arg=REACT_APP_MEDIA_URL=https://apicrud-media-dev.$(DOMAIN)/api/v1 \
 	 --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
-	docker push $(REGISTRY)/apicrud-$(CI_JOB_STAGE):$(TAG)
+	docker push $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
 
 promote_images:
 	$(foreach target, $(IMAGES), \
 	  image=$(shell basename $(target)) && \
-	  docker tag $(REGISTRY)/apicrud-$${image}:$(TAG) \
-	    $(REGISTRY)/apicrud-$${image}:latest && \
-	  docker push $(REGISTRY)/apicrud-$${image}:latest \
+	  docker pull $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) && \
+	  docker tag $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) \
+	    $(REGISTRY)/$(APPNAME)-$${image}:latest && \
+	  docker push $(REGISTRY)/$(APPNAME)-$${image}:latest \
 	;)
 ifneq ($(CI_COMMIT_TAG), "")
 	# Also push to dockerhub, if registry is somewhere like GitLab
@@ -65,18 +66,18 @@ ifneq ($(REGISTRY), $(USER_LOGIN))
 	docker login -u $USER_LOGIN -p $DOCKER_TOKEN
 	$(foreach target, $(IMAGES), \
 	  image=$(shell basename $(target)) && \
-	  docker tag $(REGISTRY)/apicrud-$${image}:$(TAG) \
-	    $(USER_LOGIN)/apicrud-$${image}:$(CI_COMMIT_TAG) && \
-	  docker tag $(REGISTRY)/apicrud-$${image}:$(TAG) \
-	    $(USER_LOGIN)/apicrud-$${image}:latest && \
-	  docker push $(USER_LOGIN)/apicrud-$${image}:$(CI_COMMIT_TAG) \
-	  docker push $(USER_LOGIN)/apicrud-$${image}:latest \
+	  docker tag $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) \
+	    $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) && \
+	  docker tag $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) \
+	    $(USER_LOGIN)/$(APPNAME)-$${image}:latest && \
+	  docker push $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) \
+	  docker push $(USER_LOGIN)/$(APPNAME)-$${image}:latest \
 	;)
 endif
 endif
 
 clean_images:
-	docker rmi $(REGISTRY)/apicrud-ui:$(TAG) || true
+	docker rmi $(REGISTRY)/$(APPNAME)-ui:$(TAG) || true
 
 apicrud-%/tag:
 	docker pull $(REGISTRY)/$(@D):latest
@@ -88,8 +89,8 @@ ifeq ($(TAG),)
 	@echo Please specify a new tag in form yy.mm.x
 	@exit 1
 endif
-	@echo docker build -t $(REGISTRY)/apicrud-ui:$(TAG) -f Dockerfile.ui
-	@docker build -t $(REGISTRY)/apicrud-ui:$(TAG) . \
+	@echo docker build -t $(REGISTRY)/$(APPNAME)-ui:$(TAG) -f Dockerfile.ui
+	@docker build -t $(REGISTRY)/$(APPNAME)-ui:$(TAG) . \
 	 -f Dockerfile.ui \
 	 --build-arg=VCS_REF=$(shell git rev-parse HEAD^) \
 	 --build-arg=TAG=$(TAG) \
@@ -97,7 +98,7 @@ endif
 	 --build-arg=REACT_APP_API_URL=https://apicrud-ui.$(DOMAIN)/api/v1 \
 	 --build-arg=REACT_APP_MEDIA_URL=https://apicrud-media.$(DOMAIN)/api/v1 \
 	 --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
-	docker push $(REGISTRY)/apicrud-ui:$(TAG)
+	docker push $(REGISTRY)/$(APPNAME)-ui:$(TAG)
 
 clean:
 	find . -regextype egrep -regex '.*(coverage.xml|results.xml|~)' \

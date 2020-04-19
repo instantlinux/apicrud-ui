@@ -10,8 +10,8 @@ stages:
   - Publish Package
   - Clean
 
-image: instantlinux/node-builder:12.16.2-alpine
-
+# image: instantlinux/node-builder:12.16.2-alpine
+image: node:12.16.2-alpine
 before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
 
@@ -49,8 +49,10 @@ analysis:
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 
 test:
+  # TODO not yet implemented
   stage: Functional Tests
   script: make test_functional
+  when: never
 
 promote_images:
   stage: Promote Images
