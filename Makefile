@@ -71,7 +71,7 @@ ifneq ($(REGISTRY), $(USER_LOGIN))
 	    $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) && \
 	  docker tag $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) \
 	    $(USER_LOGIN)/$(APPNAME)-$${image}:latest && \
-	  docker push $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) \
+	  docker push $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) && \
 	  docker push $(USER_LOGIN)/$(APPNAME)-$${image}:latest \
 	;)
 endif
