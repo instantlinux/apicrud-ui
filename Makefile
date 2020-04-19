@@ -60,6 +60,7 @@ promote_images:
 	    $(REGISTRY)/$(APPNAME)-$${image}:latest && \
 	  docker push $(REGISTRY)/$(APPNAME)-$${image}:latest \
 	;)
+	echo commit_tag=$(CI_COMMIT_TAG)
 ifneq ($(CI_COMMIT_TAG), "")
 	# Also push to dockerhub, if registry is somewhere like GitLab
 ifneq ($(REGISTRY), $(USER_LOGIN))
