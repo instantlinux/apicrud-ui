@@ -48,11 +48,12 @@ create_apicrud_ui:
   stage: ui
   <<: *registry_login
   <<: *create_image
-  cache:
-    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
-    paths:
-    - node_modules/
-    policy: pull
+  # TODO docker-mount this cache to speed up image build
+  # cache:
+  #   key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+  #   paths:
+  #   - node_modules/
+  #   policy: pull
 
 # test:
 #   # TODO not yet implemented
