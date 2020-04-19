@@ -12,14 +12,12 @@ stages:
 
 image: node:12.16.2-alpine
 before_script:
-  # - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
+  - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
   - apk add make
-variables:
-  TAG: bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
 
 .registry_template: &registry_login
   before_script:
-  # - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
+  - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
   - apk add make
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $REGISTRY_URI
   image: docker:19.03.8
@@ -27,11 +25,6 @@ variables:
 
 .create_image_template: &create_image
   script: make create_image
-
-create_apicrud_ui:
-  stage: ui
-  <<: *registry_login
-  <<: *create_image
 
 analysis:
   stage: Analyze and Unit Test
@@ -46,15 +39,25 @@ analysis:
     reports:
       junit: junit.xml
   cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
     paths:
     - node_modules/
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+
+create_apicrud_ui:
+  stage: ui
+  <<: *registry_login
+  <<: *create_image
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+    paths:
+    - node_modules/
+    policy: pull
 
 # test:
 #   # TODO not yet implemented
 #   stage: Functional Tests
 #   script: make test_functional
-
 
 promote_images:
   stage: Promote Images
