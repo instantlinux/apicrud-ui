@@ -14,6 +14,7 @@ stages:
 image: node:12.16.2-alpine
 before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
+  - apk add make
 
 .registry_template: &registry_login
   before_script:
@@ -48,11 +49,11 @@ analysis:
     - node_modules/
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 
-test:
-  # TODO not yet implemented
-  stage: Functional Tests
-  script: make test_functional
-  when: never
+# test:
+#   # TODO not yet implemented
+#   stage: Functional Tests
+#   script: make test_functional
+
 
 promote_images:
   stage: Promote Images
