@@ -6,7 +6,7 @@ include Makefile.vars
 
 REACT_APP_API_URL    ?= http://$(shell hostname -f):$(APP_PORT)/api/v1
 REACT_APP_MEDIA_URL  ?= http://$(shell hostname -f):$(MEDIA_PORT)/api/v1
-REGISTRY             ?= $(REGISTRY_URI)/$(CI_REGISTRY_USER)
+REGISTRY             ?= $(REGISTRY_URI)/$(USER_LOGIN)
 export APICRUD_ENV   ?= local
 
 # Local dev - you need 6 services running; see the Makefile in
@@ -61,16 +61,16 @@ promote_images:
 	;)
 ifneq ($(CI_COMMIT_TAG), "")
 	# Also push to dockerhub, if registry is somewhere like GitLab
-ifneq ($(REGISTRY), $(CI_REGISTRY_USER))
-	docker login -u $CI_REGISTRY_USER -p $DOCKER_TOKEN
+ifneq ($(REGISTRY), $(USER_LOGIN))
+	docker login -u $USER_LOGIN -p $DOCKER_TOKEN
 	$(foreach target, $(IMAGES), \
 	  image=$(shell basename $(target)) && \
 	  docker tag $(REGISTRY)/apicrud-$${image}:$(TAG) \
-	    $(CI_REGISTRY_USER)/apicrud-$${image}:$(CI_COMMIT_TAG) && \
+	    $(USER_LOGIN)/apicrud-$${image}:$(CI_COMMIT_TAG) && \
 	  docker tag $(REGISTRY)/apicrud-$${image}:$(TAG) \
-	    $(CI_REGISTRY_USER)/apicrud-$${image}:latest && \
-	  docker push $(CI_REGISTRY_USER)/apicrud-$${image}:$(CI_COMMIT_TAG) \
-	  docker push $(CI_REGISTRY_USER)/apicrud-$${image}:latest \
+	    $(USER_LOGIN)/apicrud-$${image}:latest && \
+	  docker push $(USER_LOGIN)/apicrud-$${image}:$(CI_COMMIT_TAG) \
+	  docker push $(USER_LOGIN)/apicrud-$${image}:latest \
 	;)
 endif
 endif
