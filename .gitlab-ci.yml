@@ -63,8 +63,10 @@ create_apicrud_ui:
 promote_images:
   stage: Promote Images
   <<: *registry_login
-  script: IMAGES=ui make promote_images
-  # only: { refs: [ master ] }
+  script: apk add curl && IMAGES=ui make promote_images
+  # only:
+  # - { refs: [ master ] }
+  # - tags
 
 publish:
   stage: Publish Package

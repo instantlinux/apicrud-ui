@@ -61,7 +61,7 @@ promote_images:
 	  docker push $(REGISTRY)/$(APPNAME)-$${image}:latest \
 	;)
 	echo commit_tag=$(CI_COMMIT_TAG)
-ifneq ($(CI_COMMIT_TAG), "")
+ifneq ($(CI_COMMIT_TAG),)
 	# Also push to dockerhub, if registry is somewhere like GitLab
 ifneq ($(REGISTRY), $(USER_LOGIN))
 	docker login -u $(USER_LOGIN) -p $(DOCKER_TOKEN)
@@ -74,6 +74,7 @@ ifneq ($(REGISTRY), $(USER_LOGIN))
 	  docker push $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) && \
 	  docker push $(USER_LOGIN)/$(APPNAME)-$${image}:latest \
 	;)
+	curl -X post https://hooks.microbadger.com/images/$(USER_LOGIN)/$(APPNAME)-$${image}/git-pull/$(MICROBADGER_TOKEN)
 endif
 endif
 
