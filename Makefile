@@ -63,7 +63,7 @@ promote_images:
 ifneq ($(CI_COMMIT_TAG), "")
 	# Also push to dockerhub, if registry is somewhere like GitLab
 ifneq ($(REGISTRY), $(USER_LOGIN))
-	docker login -u $USER_LOGIN -p $DOCKER_TOKEN
+	docker login -u $(USER_LOGIN) -p $(DOCKER_TOKEN)
 	$(foreach target, $(IMAGES), \
 	  image=$(shell basename $(target)) && \
 	  docker tag $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) \
