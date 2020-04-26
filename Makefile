@@ -4,8 +4,6 @@
 
 include Makefile.vars
 
-REACT_APP_API_URL    ?= http://$(shell hostname -f):$(APP_PORT)/api/v1
-REACT_APP_MEDIA_URL  ?= http://$(shell hostname -f):$(MEDIA_PORT)/api/v1
 REGISTRY             ?= $(REGISTRY_URI)/$(USER_LOGIN)
 export APICRUD_ENV   ?= local
 
@@ -47,8 +45,8 @@ create_image:
 	 --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
 	 --build-arg=TAG=$(TAG) \
 	 --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
-	 --build-arg=REACT_APP_API_URL=https://apicrud-dev.$(DOMAIN)/api/v1 \
-	 --build-arg=REACT_APP_MEDIA_URL=https://apicrud-media-dev.$(DOMAIN)/api/v1 \
+	 --build-arg=REACT_APP_API_URL=$(REACT_APP_API_URL) \
+	 --build-arg=REACT_APP_MEDIA_URL=$(REACT_APP_MEDIA_URL) \
 	 --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
 	docker push $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
 
@@ -97,8 +95,8 @@ endif
 	 --build-arg=VCS_REF=$(shell git rev-parse HEAD^) \
 	 --build-arg=TAG=$(TAG) \
 	 --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
-	 --build-arg=REACT_APP_API_URL=https://apicrud-ui.$(DOMAIN)/api/v1 \
-	 --build-arg=REACT_APP_MEDIA_URL=https://apicrud-media.$(DOMAIN)/api/v1 \
+	 --build-arg=REACT_APP_API_URL=$(REACT_APP_API_URL) \
+	 --build-arg=REACT_APP_MEDIA_URL=$(REACT_APP_MEDIA_URL) \
 	 --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
 	docker push $(REGISTRY)/$(APPNAME)-ui:$(TAG)
 
