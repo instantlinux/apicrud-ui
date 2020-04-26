@@ -103,6 +103,7 @@ endif
 	docker push $(REGISTRY)/$(APPNAME)-ui:$(TAG)
 
 clean:
+	rm -rf .env coverage
 	find . -regextype egrep -regex '.*(coverage.xml|results.xml|~)' \
 	 -exec rm -rf {} \;
 wipe_clean: clean

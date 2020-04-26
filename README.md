@@ -1,5 +1,5 @@
 ## apicrud-ui
-[![](https://img.shields.io/npm/v/apicrud-ui.svg)](https://npmjs.org/package/apicrud-ui) [![](https://images.microbadger.com/badges/version/instantlinux/apicrud-ui.svg)](https://microbadger.com/images/instantlinux/apicrud-ui "Version badge") [![](https://images.microbadger.com/badges/image/instantlinux/apicrud-ui.svg)](https://microbadger.com/images/instantlinux/apicrud-ui "Image badge") [![](https://images.microbadger.com/badges/commit/instantlinux/apicrud-ui.svg)](https://microbadger.com/images/instantlinux/apicrud-ui "Commit badge") [![](https://gitlab.com/instantlinux/apicrud-ui/badges/master/pipeline.svg)](https://gitlab.com/instantlinux/apicrud-ui/pipelines "pipelines") [![](https://gitlab.com/instantlinux/apicrud-ui/badges/master/coverage.svg)](https://gitlab.com/instantlinux/apicrud-ui/-/jobs/artifacts/master/file/coverage/lcov-report/index.html?job=analysis "coverage")
+[![](https://img.shields.io/npm/v/apicrud-ui.svg)](https://npmjs.org/package/apicrud-ui) [![](https://images.microbadger.com/badges/image/instantlinux/apicrud-ui.svg)](https://microbadger.com/images/instantlinux/apicrud-ui "Image badge") [![](https://images.microbadger.com/badges/commit/instantlinux/apicrud-ui.svg)](https://microbadger.com/images/instantlinux/apicrud-ui "Commit badge") [![](https://gitlab.com/instantlinux/apicrud-ui/badges/master/pipeline.svg)](https://gitlab.com/instantlinux/apicrud-ui/pipelines "pipelines") [![](https://gitlab.com/instantlinux/apicrud-ui/badges/master/coverage.svg)](https://gitlab.com/instantlinux/apicrud-ui/-/jobs/artifacts/master/file/coverage/lcov-report/index.html?job=analysis "coverage")
 
 
 ### What is this
@@ -26,8 +26,8 @@ Documentation for the API, defined in openapi.yaml in the instantlinux/apicrud a
 Variable | Default | Description
 -------- | ------- | -----------
 PORT | 3000 | Port to listen on
-REACT_APP_API_URL | | Backend, e.g. https://api.yours.com:8080/api/v1
-REACT_APP_MEDIA_URL | | Media API backend
+REACT_APP_API_URL | http://localhost:32080 | Backend, e.g. https://api.yours.com:8080/api/v1
+REACT_APP_MEDIA_URL | http://localhost:32085 | Media API backend
 REACT_APP_TOKEN_MAPBOX | | API key for location map (see [mapbox.com](https://account.mapbox.com/auth/signup))
 
 TODO: the published docker image won't read these values at startup until the implementation of [env-config.js](https://www.freecodecamp.org/news/how-to-implement-runtime-environment-variables-with-create-react-app-docker-and-nginx-7f9d42a91d70/) is completed.
