@@ -1,9 +1,8 @@
 // created 22-apr-2019 by rich braun <docker@instantlinux.net>
 
 import React from 'react';
-import { BooleanInput, ChipField, CheckboxGroupInput, Create,
-         Datagrid, DateField, Edit, FormTab, FunctionField, List,
-         RadioButtonGroupInput, ReferenceField,  RichTextField, Show,
+import { ChipField, Create, Datagrid, DateField, Edit, FormTab, FunctionField,
+         List, RadioButtonGroupInput, ReferenceField,  RichTextField, Show,
          SimpleShowLayout, TabbedForm, TextField,
          TextInput } from 'react-admin';
 // import { Link } from 'react-router-dom';
@@ -17,69 +16,56 @@ import { validateRequired128String,
          validateRequired4096String } from '../lib/validate';
 
 function redirect(props) {
-    const { event_id } = (typeof props.location.state !== 'undefined' 
+    const { list_id } = (typeof props.location.state !== 'undefined' 
                           && props.location.state.record);
-    return event_id ? `/event/${event_id}/show/2` : 'show';
+    console.log('redirect list_id=' + list_id);
+    return list_id ? `/list/${list_id}/show` : 'show';
 }
 
 export const messageCreate = ({permissions, ...props}) => (
-      // TODO figure out how to create / display album
-      <Create {...props}>
-        <TabbedForm redirect={redirect(props)} >
-          <FormTab label='Message'>
-            <TextInput source='subject'
-                validate={validateRequired128String} />
-            <RichTextInput source='content' toolbar={toolbarOpts}
-                validate={validateRequired4096String} />
-            {permissions && 
-                permissions.match(/manager/) &&
-            <BooleanInput source='mailblast' defaultValue={false}
-                label='Send to External Email' />}
-            {permissions && 
-                permissions.match(/manager/) &&
-            <CheckboxGroupInput source='mailto' choices={[
-              { id: 'member', name: 'guests' },
-              { id: 'not_responded', name: 'not responded' },
-              { id: 'declined', name: 'declined' },
-              { id: 'waitlist', name: 'waitlist' },
-              { id: 'manager', name: 'hosts' },
-              { id: 'attendee', name: 'attendees' },
-            ]} defaultValue={['member']} />}
-            <TextInput disabled source='privacy' defaultValue='invitees' />
-          </FormTab>
-        {/*
-          <FormTab label='Pictures'>
-              <ReferenceManyField reference='album' target='uid' 
-                      filter={{event_id: null, list_id: null}} addLabel={false}>
-                  <Datagrid  rowClick='edit'>
-                      <TextField source='name' label='Album' />
-                      <ChipField source='privacy' />
-                      <DateField source='created' />
-                  </Datagrid>
-              </ReferenceManyField>
-              <CreateAlbumButton />
-          </FormTab>
-         */}
-        </TabbedForm>
-      </Create>
+    // TODO figure out how to create / display album
+    <Create {...props}>
+      <TabbedForm redirect={redirect(props)} >
+        <FormTab label='Message'>
+          <TextInput source='subject'
+              validate={validateRequired128String} />
+          <RichTextInput source='content' toolbar={toolbarOpts}
+              validate={validateRequired4096String} />
+          <TextInput disabled source='privacy' defaultValue='invitee' />
+        </FormTab>
+      {/*
+        <FormTab label='Pictures'>
+            <ReferenceManyField reference='album' target='uid' 
+                    filter={{list_id: null, list_id: null}} addLabel={false}>
+                <Datagrid  rowClick='edit'>
+                    <TextField source='name' label='Album' />
+                    <ChipField source='privacy' />
+                    <DateField source='created' />
+                </Datagrid>
+            </ReferenceManyField>
+            <CreateAlbumButton />
+        </FormTab>
+       */}
+      </TabbedForm>
+    </Create>
 );
 
 export const messageEdit = props => (
-      <Edit {...props}>
-        <TabbedForm redirect={redirect(props)} >
-          <FormTab label='Message'>
-            <TextInput source='subject'
-                validate={validateRequired128String} />
-            <RichTextInput source='content' toolbar={toolbarOpts}
-                validate={validateRequired4096String} />
-            <RadioButtonGroupInput source='privacy' choices={privacyChoices} />
-          </FormTab>
-        {/*
-          <FormTab label='Pictures'>
-          </FormTab>
-         */}
-        </TabbedForm>
-      </Edit>
+    <Edit {...props}>
+      <TabbedForm redirect={redirect(props)} >
+        <FormTab label='Message'>
+          <TextInput source='subject'
+              validate={validateRequired128String} />
+          <RichTextInput source='content' toolbar={toolbarOpts}
+              validate={validateRequired4096String} />
+          <RadioButtonGroupInput source='privacy' choices={privacyChoices} />
+        </FormTab>
+      {/*
+        <FormTab label='Pictures'>
+        </FormTab>
+       */}
+      </TabbedForm>
+    </Edit>
 );
 
 export const messageList = props => (

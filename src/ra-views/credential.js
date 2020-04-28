@@ -16,12 +16,12 @@ const vendors = [
 
 export const credentialCreate = props => (
     <Create {...props}>
-      <SimpleForm>
+      <SimpleForm redirect={`/settings/${sessionStorage.getItem('settings_id')}/2`} >
         <TextInput source='name' validate={validateNameShort} />
 	<AutocompleteInput source='vendor' choices={vendors} />
-        <TextInput source='key' />
+        <TextInput source='key' label='Username or key ID' />
 	<TextInput source='secret' type='password' />
-	<TextInput source='otherdata' labe='Other data' type='password' />
+	<TextInput source='otherdata' label='Other data' type='password' />
         <TextInput source='type' />
         <TextInput source='url' label='URL' type='url' />
         <DateTimeInput source='expires' />
@@ -31,7 +31,7 @@ export const credentialCreate = props => (
 
 export const credentialEdit = props => (
     <Edit {...props} title={<MenuTitle />}>
-      <SimpleForm>
+      <SimpleForm redirect={`/settings/${sessionStorage.getItem('settings_id')}/2`} >
         <TextInput source='name' validate={validateNameShort} />
 	<AutocompleteInput source='vendor' choices={vendors} />
         <TextInput source='key' />

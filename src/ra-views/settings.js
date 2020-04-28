@@ -3,12 +3,12 @@
 import React from 'react';
 import { AutocompleteInput, ChipField, Create, Datagrid, DateField, Edit,
          FormTab, List, NumberField, NumberInput, ReferenceField,
-	 ReferenceInput, ReferenceManyField, SelectInput, SimpleForm,
-	 TabbedForm, TextField, TextInput, UrlField } from 'react-admin';
+         ReferenceInput, ReferenceManyField, SelectInput, SimpleForm,
+         TabbedForm, TextField, TextInput, UrlField } from 'react-admin';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-import { privacyChoices } from '../lib/constants';
+import { mediaEnabled, privacyChoices } from '../lib/constants';
 import { BottombarNoSaveDel } from '../lib/ra-custom';
 import { validateKeywordAlpha } from '../lib/validate';
 
@@ -20,6 +20,13 @@ export const settingsCreate = props => (
             defaultValue='public' />
         <TextInput source='smtp_smarthost' />
         <NumberInput source='smtp_port' />
+        <ReferenceInput source='smtp_credential_id' label='SMTP credential'
+                reference='credential'>
+           <SelectInput optionText='name' />
+        </ReferenceInput>
+        <ReferenceInput source="smtp_credential_id" reference="credential">
+           <SelectInput optionText="name" />
+        </ReferenceInput>
         <ReferenceInput source="administrator_id" reference="person">
            <SelectInput optionText="name" />
         </ReferenceInput>
@@ -42,32 +49,37 @@ export const settingsEdit = props => (
      <TabbedForm >
         <FormTab label='settings'>
           <TextInput source='name' validation={validateKeywordAlpha} />
-	  <SelectInput source='privacy' label='Default privacy'
+          <SelectInput source='privacy' label='Default privacy'
               choices={privacyChoices} defaultValue='public' />
-	  <TextInput source='smtp_smarthost' label='SMTP smarthost' />
-	  <NumberInput source='smtp_port' label='SMTP port' />
-	  <ReferenceInput source='administrator_id' reference='person'>
-	     <SelectInput optionText='name' />
-	  </ReferenceInput>
-	  <TextInput source='country' />
-	  <AutocompleteInput source='lang' label='Default language' choices={[
-	      { id: 'zh', name: 'Chinese' },
-	      { id: 'en_US', name: 'English' },
-	      { id: 'fr', name: 'French' },
-	      { id: 'de', name: 'German' },
-	      { id: 'pt', name: 'Portuguese' },
-	      { id: 'es', name: 'Spanish' },
-	  ]} defaultValue='en_US' />
+          <TextInput source='smtp_smarthost' label='SMTP smarthost' />
+          <NumberInput source='smtp_port' label='SMTP port' />
+          <ReferenceInput source='smtp_credential_id' label='SMTP credential'
+                  reference='credential'>
+             <SelectInput optionText='name' />
+          </ReferenceInput>
+          <ReferenceInput source='administrator_id' reference='person'>
+             <SelectInput optionText='name' />
+          </ReferenceInput>
+          <TextInput source='country' />
+          <AutocompleteInput source='lang' label='Default language' choices={[
+              { id: 'zh', name: 'Chinese' },
+              { id: 'en_US', name: 'English' },
+              { id: 'fr', name: 'French' },
+              { id: 'de', name: 'German' },
+              { id: 'pt', name: 'Portuguese' },
+              { id: 'es', name: 'Spanish' },
+          ]} defaultValue='en_US' />
           <ReferenceInput source='tz_id' reference='tz'
                label='Default timezone'>
              <AutocompleteInput optionText='name' />
           </ReferenceInput>
-	  <TextInput source='url' label='URL' />
-	  <TextInput source='window_title' />
+          <TextInput source='url' label='URL' />
+          <TextInput source='window_title' />
+          {mediaEnabled &&
           <ReferenceInput source='default_storage_id' reference='storage'
                label='Default storage volume'>
              <AutocompleteInput optionText='name' />
-          </ReferenceInput>
+          </ReferenceInput>}
           <ReferenceInput source='default_hostlist_id' reference='list'
                label='Default hostlist' >
             <AutocompleteInput optionText='name' />
@@ -77,33 +89,34 @@ export const settingsEdit = props => (
              <AutocompleteInput optionText='name' />
           </ReferenceInput>
         </FormTab>
+        {mediaEnabled &&
         <FormTab label='Storage' toolbar={<BottombarNoSaveDel />} >
             <ReferenceManyField reference='storage' target='uid'
                     filter={{uid: sessionStorage.getItem('uid')}}
-		    addLabel={false}>
+                    addLabel={false}>
                 <Datagrid rowClick='edit'>
                     <TextField source='name' />
                     <TextField source='prefix' />
                     <TextField source='bucket' />
-		    <ChipField source='privacy' />
-		    <ReferenceField source='credentials_id' reference='credential'>
-		       <TextField source='name' />
-		    </ReferenceField>
-	            <ChipField source='status' />
+                    <ChipField source='privacy' />
+                    <ReferenceField source='credentials_id' reference='credential'>
+                       <TextField source='name' />
+                    </ReferenceField>
+                    <ChipField source='status' />
                 </Datagrid>
             </ReferenceManyField>
             <CreateStorageButton />
-        </FormTab>
+         </FormTab>}
         <FormTab label='Credentials' toolbar={<BottombarNoSaveDel />}>
             <ReferenceManyField reference='credential' target='settings_id'
                                 addLabel={false}>
                 <Datagrid rowClick='edit'>
                     <TextField source='name' />
                     <TextField source='vendor' />
-		    <TextField source='key' emptyText=' ' />
-		    <TextField source='type' emptyText=' ' />
-		    <DateField source='expires' />
-	            <ChipField source='status' />
+                    <TextField source='key' emptyText=' ' />
+                    <TextField source='type' emptyText=' ' />
+                    <DateField source='expires' />
+                    <ChipField source='status' />
                 </Datagrid>
             </ReferenceManyField>
             <CreateCredentialButton />
@@ -136,6 +149,7 @@ const CreateCredentialButton = ({ record }) => (
         Add
     </Button>
 );
+
 
 const CreateStorageButton = ({ record }) => (
     <Button component={Link} variant='contained'

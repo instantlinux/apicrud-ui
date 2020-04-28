@@ -14,12 +14,14 @@ export APICRUD_ENV   ?= local
 
 .PHONY: apicrud-%/tag
 ui_local: .env /usr/bin/yarn
+	REACT_APP_API_URL=$(REACT_APP_API_URL_DEV) \
+	REACT_APP_MEDIA_URL=$(REACT_APP_MEDIA_URL_DEV) \
 	yarn dev
 
 # All vars passed via process.env must be prefixed REACT_APP_
 .env:
-	echo 'REACT_APP_API_URL=$(REACT_APP_API_URL)' >$@
-	@echo 'REACT_APP_MEDIA_URL=$(REACT_APP_MEDIA_URL)' >>$@
+	echo 'REACT_APP_API_URL=$(REACT_APP_API_URL_DEV)' >$@
+	@echo 'REACT_APP_MEDIA_URL=$(REACT_APP_MEDIA_URL_DEV)' >>$@
 	@echo 'REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)' >>$@
 	@echo 'PORT=$(APICRUD_UI_PORT)' >>$@
 

@@ -8,6 +8,7 @@ import listIcon from '@material-ui/icons/Sort';
 import locationIcon from '@material-ui/icons/Place';
 import messageIcon from '@material-ui/icons/Chat';
 import personIcon from '@material-ui/icons/People';
+import pictureIcon from '@material-ui/icons/PhotoCamera';
 
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 import chineseMessages from 'ra-language-chinese';
@@ -25,8 +26,10 @@ import authProvider from './authProvider';
 import dataProvider from './dataProvider';
 import { customLayout, theme } from './customLayout';
 import customRoutes from './customRoutes';
+import { mediaEnabled } from './lib/constants';
 import { accountCreate, accountEdit, accountList, accountPassword,
          accountShow } from './ra-views/account';
+import { albumCreate, albumEdit, albumList, albumShow } from './ra-views/album';
 import { credentialCreate, credentialEdit } from './ra-views/credential';
 import { categoryCreate, categoryEdit, categoryList } from './ra-views/category';
 import { contactCreate, contactEdit } from './ra-views/contact';
@@ -36,6 +39,7 @@ import { locationCreate, locationEdit, locationList,
 import { messageCreate, messageEdit, messageShow } from './ra-views/message';
 import { personCreate, personEdit, personList,
          personShow } from './ra-views/person';
+import { pictureCreate, pictureEdit } from './ra-views/picture';
 import { settingsEdit } from './ra-views/settings';
 import { storageCreate, storageEdit } from './ra-views/storage';
 import { tzEdit } from './ra-views/tz';
@@ -66,6 +70,10 @@ const App = () => (
           show={permissions.match(loggedin) ? accountShow : null}
           icon={accountIcon} />,
         <Resource name='account_password' edit={accountPassword} />,
+        <Resource name='album'
+          list={mediaEnabled && permissions.match(/^admin/) ? albumList : null}
+          create={albumCreate} edit={albumEdit}
+          show={albumShow} icon={pictureIcon} />,
         <Resource name='credential'
           create={permissions.match(loggedin) ? credentialCreate : null}
           edit={permissions.match(loggedin) ? credentialEdit : null} />,
@@ -93,6 +101,9 @@ const App = () => (
           list={permissions.match(loggedin) ? personList : null}
           create={permissions.match(loggedin) ? personCreate : null}
           edit={personEdit} show={personShow} icon={personIcon} />,
+        <Resource name='picture'
+          create={permissions.match(loggedin) ? pictureCreate : null}
+          edit={permissions.match(loggedin) ? pictureEdit : null} />,
         <Resource name='storage'
           create={permissions.match(loggedin) ? storageCreate : null}
           edit={permissions.match(loggedin) ? storageEdit : null} />,
