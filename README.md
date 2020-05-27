@@ -27,7 +27,6 @@ Variable | Default | Description
 -------- | ------- | -----------
 PORT | 3000 | Port to listen on
 REACT_APP_API_URL | http://localhost:32080 | Backend, e.g. https://api.yours.com:8080/api/v1
-REACT_APP_MEDIA_URL | http://localhost:32085 | Media API backend
 REACT_APP_TOKEN_MAPBOX | | API key for location map (see [mapbox.com](https://account.mapbox.com/auth/signup))
 
 TODO: the published docker image won't read these values at startup until the implementation of [env-config.js](https://www.freecodecamp.org/news/how-to-implement-runtime-environment-variables-with-create-react-app-docker-and-nginx-7f9d42a91d70/) is completed.

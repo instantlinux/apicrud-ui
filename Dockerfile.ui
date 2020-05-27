@@ -13,9 +13,7 @@ WORKDIR /app
 #  right now it has to be hardcoded at build time
 ARG REACT_APP_API_URL=https://example-dev.ci.net/api/v1
 ARG REACT_APP_TOKEN_MAPBOX=must-be-set
-ARG REACT_APP_MEDIA_URL=https://example-media-dev.ci.net/api/v1
-ENV REACT_APP_MEDIA_URL=$REACT_APP_MEDIA_URL \
-    REACT_APP_TOKEN_MAPBOX=$REACT_APP_TOKEN_MAPBOX
+ENV REACT_APP_TOKEN_MAPBOX=$REACT_APP_TOKEN_MAPBOX
 
 COPY package.json yarn.lock ./
 RUN yarn

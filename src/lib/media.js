@@ -6,8 +6,6 @@ import ImageGallery from 'react-image-gallery';
 import 'react-dropzone-uploader/dist/styles.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
-import { mediaUrl } from './constants';
-
 function Headers() {
     return {
 	Accept: 'application/json',
@@ -21,6 +19,7 @@ function Headers() {
 
 export const MediaInput = props => {
   const storage_id = sessionStorage.getItem('storage_id')
+  var mediaUrl = JSON.parse(sessionStorage.getItem('resource_endpoints'))['file']
   const getUploadParams = async ({ meta: {
           duration, height, lastModifiedDate, name, size, type, videoHeight,
           videoWidth, width} }) => {
@@ -91,12 +90,13 @@ class GalleryView extends React.Component {
 	    album_id: props.id,
 	    isLoading: true,
 	    media: [],
+            mediaUrl: JSON.parse(sessionStorage.getItem('resource_endpoints'))['file'],
 	    error: null
 	}
     }
 
     componentDidMount(){
-	fetch(mediaUrl + '/album/' + this.state.album_id + '?details=true',
+	fetch(this.state.mediaUrl + '/album/' + this.state.album_id + '?details=true',
 	        { headers: Headers()})
 	    .then (response => {
 		if (response.ok) {

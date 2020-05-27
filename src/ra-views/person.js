@@ -9,9 +9,9 @@ import { AutocompleteInput, BooleanField, ChipField, Create, Datagrid,
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-import { mediaEnabled } from '../lib/constants';
-import { BottombarSaveOnly, ListPagination, LocationRenderer, MenuTitle,
-         TopbarActions, TopbarNoActions } from '../lib/ra-custom'
+import { BottombarSaveOnly, ListPagination, LocationRenderer,
+         MenuTitle, TopbarActions, TopbarNoActions } from '../lib/ra-custom'
+import isRegistered from '../lib/registry'
 
 export const personCreate = props => (
     <Create {...props} title={<MenuTitle />} redirect='show' >
@@ -59,10 +59,10 @@ export const personEdit = ({permissions, data, ...props}) => {
               uid === props.id) &&
              <CreateContactButton />}
         </FormTab>
-        {mediaEnabled &&
+        {isRegistered('picture') &&
         <FormTab label='Pictures' >
             <ReferenceManyField reference='album' target='uid' 
-                    filter={{event_id: null, list_id: null}} addLabel={false}>
+                    filter={{list_id: null}} addLabel={false}>
                 <Datagrid  rowClick='show'>
                     <TextField source='name' label='Album' />
                     <ReferenceField label='Cover' source='cover_id'
@@ -114,7 +114,7 @@ export const personShow = (props) => (
         </Tab>
         <Tab label='Pictures' >
             <ReferenceManyField reference='album' target='uid' 
-                    filter={{event_id: null, list_id: null}} addLabel={false}>
+                    filter={{list_id: null}} addLabel={false}>
                 <Datagrid  rowClick='show'>
                     <TextField source='name' label='Album' />
                     <ReferenceField label='Cover' source='cover_id'

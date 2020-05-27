@@ -26,7 +26,7 @@ import authProvider from './authProvider';
 import dataProvider from './dataProvider';
 import { customLayout, theme } from './customLayout';
 import customRoutes from './customRoutes';
-import { mediaEnabled } from './lib/constants';
+import isRegistered from './lib/registry';
 import { accountCreate, accountEdit, accountList, accountPassword,
          accountShow } from './ra-views/account';
 import { albumCreate, albumEdit, albumList, albumShow } from './ra-views/album';
@@ -71,7 +71,7 @@ const App = () => (
           icon={accountIcon} />,
         <Resource name='account_password' edit={accountPassword} />,
         <Resource name='album'
-          list={mediaEnabled && permissions.match(/^admin/) ? albumList : null}
+          list={isRegistered('album') && permissions.match(/^admin/) ? albumList : null}
           create={albumCreate} edit={albumEdit}
           show={albumShow} icon={pictureIcon} />,
         <Resource name='credential'

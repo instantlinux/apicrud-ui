@@ -3,9 +3,6 @@
 export const apiUrl = process.env.REACT_APP_API_URL;
 export const apiCacheSec = 30;
 export const defaultThumbnailSizes = [120, 720];
-export const mediaEnabled = false
-export const mediaResources = ['album', 'file', 'picture', 'storage'];
-export const mediaUrl = process.env.REACT_APP_MEDIA_URL;
 export const privacyChoices = [
     { id: 'public', name: 'public' },
     { id: 'invitee', name: 'invitees' },

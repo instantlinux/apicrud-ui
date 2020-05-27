@@ -8,7 +8,8 @@ import { AutocompleteInput, ChipField, Create, Datagrid, DateField, Edit,
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-import { mediaEnabled, privacyChoices } from '../lib/constants';
+import isRegistered from '../lib/registry'
+import { privacyChoices } from '../lib/constants';
 import { BottombarNoSaveDel } from '../lib/ra-custom';
 import { validateKeywordAlpha } from '../lib/validate';
 
@@ -75,7 +76,7 @@ export const settingsEdit = props => (
           </ReferenceInput>
           <TextInput source='url' label='URL' />
           <TextInput source='window_title' />
-          {mediaEnabled &&
+          {isRegistered('storage') &&
           <ReferenceInput source='default_storage_id' reference='storage'
                label='Default storage volume'>
              <AutocompleteInput optionText='name' />
@@ -89,7 +90,7 @@ export const settingsEdit = props => (
              <AutocompleteInput optionText='name' />
           </ReferenceInput>
         </FormTab>
-        {mediaEnabled &&
+        {isRegistered('storage') &&
         <FormTab label='Storage' toolbar={<BottombarNoSaveDel />} >
             <ReferenceManyField reference='storage' target='uid'
                     filter={{uid: sessionStorage.getItem('uid')}}

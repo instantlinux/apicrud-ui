@@ -5,14 +5,13 @@
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
-import { apiCacheSec, excludeExifFields, excludeFields,
-         mediaResources } from './lib/constants';
+import { apiCacheSec, excludeExifFields, excludeFields
+       } from './lib/constants';
 
 function urlPrefix(resource) {
-    const apiUrl = process.env.REACT_APP_API_URL;
-    const mediaUrl = process.env.REACT_APP_MEDIA_URL;
-    return `${mediaResources.indexOf(resource) >= 0 ? mediaUrl :
-              apiUrl}/${resource}`;
+    const fallbackUrl = process.env.REACT_APP_API_URL;
+    var res = JSON.parse(sessionStorage.getItem('resource_endpoints'))
+    return `${res && resource in res ? res[resource] : fallbackUrl}/${resource}`;
 }
 
 function httpClient(url, options={}) {
@@ -88,7 +87,7 @@ export default {
         excludeFields.forEach(function(val) {
             delete params.data[val];
         });
-	if (mediaResources.includes(resource)) {
+	if (resource === 'picture') {
 	  excludeExifFields.forEach(function(val) {
 	      delete params.data[val];
 	  })

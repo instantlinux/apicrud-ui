@@ -15,13 +15,11 @@ export APICRUD_ENV   ?= local
 .PHONY: apicrud-%/tag
 ui_local: .env /usr/bin/yarn
 	REACT_APP_API_URL=$(REACT_APP_API_URL_DEV) \
-	REACT_APP_MEDIA_URL=$(REACT_APP_MEDIA_URL_DEV) \
 	yarn dev
 
 # All vars passed via process.env must be prefixed REACT_APP_
 .env:
 	echo 'REACT_APP_API_URL=$(REACT_APP_API_URL_DEV)' >$@
-	@echo 'REACT_APP_MEDIA_URL=$(REACT_APP_MEDIA_URL_DEV)' >>$@
 	@echo 'REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)' >>$@
 	@echo 'PORT=$(APICRUD_UI_PORT)' >>$@
 
@@ -42,13 +40,13 @@ publish:
 
 create_image:
 	@echo docker build -t $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
+	@echo Hardcoded REACT_APP_API_URL=$(REACT_APP_API_URL)
 	@docker build -t $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG) . \
 	 -f Dockerfile.$(CI_JOB_STAGE) \
 	 --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
 	 --build-arg=TAG=$(TAG) \
 	 --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
 	 --build-arg=REACT_APP_API_URL=$(REACT_APP_API_URL) \
-	 --build-arg=REACT_APP_MEDIA_URL=$(REACT_APP_MEDIA_URL) \
 	 --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
 	docker push $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
 
@@ -98,7 +96,6 @@ endif
 	 --build-arg=TAG=$(TAG) \
 	 --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
 	 --build-arg=REACT_APP_API_URL=$(REACT_APP_API_URL) \
-	 --build-arg=REACT_APP_MEDIA_URL=$(REACT_APP_MEDIA_URL) \
 	 --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
 	docker push $(REGISTRY)/$(APPNAME)-ui:$(TAG)
 

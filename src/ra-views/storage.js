@@ -10,9 +10,9 @@ import { validate64String, validateNameShort,
 
 export const storageCreate = props => (
     <Create {...props}>
-      <SimpleForm>
+      <SimpleForm redirect={`/settings/${sessionStorage.getItem('settings_id')}/1`} >
         <TextInput source='name' validate={validateNameShort} />
-        <TextInput source='prefix' validate={validate64String} />
+        <TextInput source='prefix' />
         <TextInput source='bucket' validate={validateNameShort} />
         <TextInput source='cdn_uri' label='CDN service URL'
             validate={validateURI} />
@@ -29,9 +29,9 @@ export const storageCreate = props => (
 
 export const storageEdit = props => (
     <Edit {...props} title={<MenuTitle />}>
-      <SimpleForm>
+      <SimpleForm redirect={`/settings/${sessionStorage.getItem('settings_id')}/1`} >
         <TextInput source='name' validate={validateNameShort} />
-        <TextInput source='prefix' validate={validate64String} />
+        <TextInput source='prefix' />
         <TextInput source='bucket' validate={validateNameShort} />
         <TextInput source='cdn_uri' label='CDN service URL'
             validate={validateURI} />
