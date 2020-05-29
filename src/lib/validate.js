@@ -16,8 +16,8 @@ const isCountryCode = (message = 'Use uppercase') =>
     value => value != null &&
       value.match(/^[A-Z][A-Z]$/) ? undefined : message;
 const isURI = (message = 'URI format') =>
-    value => value != null && (
-      value.match(/^https?:\/\/[a-zA-Z0-9+_=/.-]{1,56}$/)) ? undefined : message;
+    value => value && (
+      !value.match(/^https?:\/\/[a-zA-Z0-9+_=/.-]{1,56}$/)) ? message : undefined;
 const hasComplexity = (message = 'Must have upper, lower, and symbol chars') =>
     value => value != null && !(
       value.match(/[A-Z]+/) && value.match(/[a-z]+/) &&
