@@ -25,7 +25,7 @@ ui_local: .env .yarn/releases/yarn-berry.js
 	@echo 'REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)' >>$@
 	@echo 'PORT=$(APICRUD_UI_PORT)' >>$@
 
-analysis:
+analysis: .yarn/releases/yarn-berry.js
 	@echo "Running ESLint code analysis"
 	yarn && yarn lint
 
