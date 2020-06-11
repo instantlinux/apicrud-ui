@@ -44,7 +44,7 @@ create_image: qemu
 	@echo docker build -t $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
 	@echo Hardcoded REACT_APP_API_URL=$(REACT_APP_API_URL)
 	@docker buildx build \
-	 --tag $(REGISTRY)/$(APPNAME)-$(CI_JOB_NAME):$(TAG) . \
+	 --tag $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG) . \
 	 --push -f Dockerfile.$(CI_JOB_STAGE) \
 	 --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
 	 --build-arg=TAG=$(TAG) \
@@ -67,12 +67,14 @@ else
 	docker login -u $(USER_LOGIN) -p $(DOCKER_TOKEN)
 	$(foreach target, $(IMAGES), \
 	  image=$(shell basename $(target)) && \
-	  docker tag $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) \
-	    $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) && \
-	  docker tag $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) \
-	    $(USER_LOGIN)/$(APPNAME)-$${image}:latest && \
-	  docker push $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) && \
-	  docker push $(USER_LOGIN)/$(APPNAME)-$${image}:latest \
+	  docker buildx build --platform $(PLATFORMS) \
+	    --tag $(REGISTRY)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) \
+	    --tag $(REGISTRY)/$(APPNAME)-$${image}:latest \
+	    --tag $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) \
+	    --tag $(USER_LOGIN)/$(APPNAME)-$${image}:latest \
+	    --push --file Dockerfile.$${image} . \
+	    --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
+	    --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
 	;)
 	curl -X post https://hooks.microbadger.com/images/$(USER_LOGIN)/$(APPNAME)-$${image}/$(MICROBADGER_TOKEN)
 endif
@@ -91,6 +93,7 @@ ifeq ($(TAG),)
 	@exit 1
 endif
 	@echo docker build -t $(REGISTRY)/$(APPNAME)-ui:$(TAG) -f Dockerfile.ui
+	docker login -u $(USER_LOGIN) -p $(DOCKER_TOKEN)
 	@docker build -t $(REGISTRY)/$(APPNAME)-ui:$(TAG) . \
 	 -f Dockerfile.ui \
 	 --build-arg=VCS_REF=$(shell git rev-parse HEAD^) \
@@ -98,7 +101,6 @@ endif
 	 --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
 	 --build-arg=REACT_APP_API_URL=$(REACT_APP_API_URL) \
 	 --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
-	docker push $(REGISTRY)/$(APPNAME)-ui:$(TAG)
 
 clean:
 	rm -rf .env coverage
