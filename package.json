@@ -43,7 +43,8 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-saga": "^1.1.3"
+    "redux-saga": "^1.1.3",
+    "websocket-extensions": "^0.1.4"
   },
   "devDependencies": {
     "jest-junit": "^10.0.0"
