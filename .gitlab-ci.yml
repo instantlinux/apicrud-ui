@@ -13,7 +13,7 @@ stages:
   - Publish Package
   - Clean
 
-image: node:12.16.2-alpine
+image: node:12.18.0-alpine3.12
 before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
   - apk add make

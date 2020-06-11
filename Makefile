@@ -4,8 +4,10 @@
 
 include Makefile.vars
 
+BUILDX               ?= https://github.com/docker/buildx/releases/download/v0.4.1/buildx-v0.4.1.linux-amd64
 REGISTRY             ?= $(REGISTRY_URI)/$(USER_LOGIN)
 export APICRUD_ENV   ?= local
+export DOCKER_CLI_EXPERIMENTAL = enabled
 
 # Local dev - you need 6 services running; see the Makefile in
 #  github.com/instantlinux/apicrud. This Makefile supports:
@@ -106,6 +108,9 @@ wipe_clean: clean
 	rm -rf node_modules
 
 qemu:
+	mkdir -p /usr/lib/docker/cli-plugins
+	wget -O /usr/lib/docker/cli-plugins/docker-buildx $(BUILDX)
+	chmod +x /usr/lib/docker/cli-plugins/docker-buildx
 	docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 	docker buildx create --name multibuild
 	docker buildx use multibuild
