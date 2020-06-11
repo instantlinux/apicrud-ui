@@ -15,7 +15,7 @@ export DOCKER_CLI_EXPERIMENTAL = enabled
 #  make ui_local
 
 .PHONY: apicrud-%/tag qemu
-ui_local: .env /usr/bin/yarn
+ui_local: .env .yarn/releases/yarn-berry.js /usr/bin/yarn
 	REACT_APP_API_URL=$(REACT_APP_API_URL_DEV) \
 	yarn dev
 
@@ -25,9 +25,9 @@ ui_local: .env /usr/bin/yarn
 	@echo 'REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)' >>$@
 	@echo 'PORT=$(APICRUD_UI_PORT)' >>$@
 
-analysis:
+analysis: .yarn/releases/yarn-berry.js
 	@echo "Running ESLint code analysis"
-	yarn && yarn lint
+	yarn && yarn eslint
 
 test:
 	@echo "Running unit tests"
@@ -108,7 +108,7 @@ clean:
 	find . -regextype egrep -regex '.*(coverage.xml|results.xml|~)' \
 	 -exec rm -rf {} \;
 wipe_clean: clean
-	rm -rf node_modules
+	rm -rf .yarn node_modules
 
 qemu:
 	mkdir -p /usr/lib/docker/cli-plugins
@@ -117,6 +117,9 @@ qemu:
 	docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 	docker buildx create --name multibuild
 	docker buildx use multibuild
+
+.yarn/releases/yarn-berry.js:
+	yarn set version berry
 
 /usr/bin/yarn:
 	sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -

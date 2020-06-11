@@ -1,4 +1,4 @@
-FROM node:12.18.0-alpine3.12 as node-dep
+FROM node:12.18.0-alpine as node-dep
 MAINTAINER Rich Braun "docker@instantlinux.net"
 ARG BUILD_DATE
 ARG VCS_REF
@@ -15,8 +15,9 @@ ARG REACT_APP_API_URL=https://example-dev.ci.net/api/v1
 ARG REACT_APP_TOKEN_MAPBOX=must-be-set
 ENV REACT_APP_TOKEN_MAPBOX=$REACT_APP_TOKEN_MAPBOX
 
-COPY package.json yarn.lock ./
-RUN yarn
+COPY package.json yarn.lock .pnp.js ./
+COPY .yarn/ ./.yarn
+RUN yarn set version berry && yarn
 COPY public/ ./public
 COPY src/ ./src
 RUN yarn build

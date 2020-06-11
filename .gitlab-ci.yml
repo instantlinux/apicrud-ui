@@ -3,7 +3,7 @@
 #   DOCKER_TOKEN, REGISTRY_URI
 
 variables:
-  PLATFORMS: linux/amd64,linux/arm64,linux/arm/v7
+  PLATFORMS: linux/amd64,linux/arm/v6,linux/arm/v7
 
 stages:
   - Analyze and Unit Test
@@ -13,10 +13,14 @@ stages:
   - Publish Package
   - Clean
 
-image: node:12.18.0-alpine3.12
+image: node:12.18.0-alpine
 before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
   - apk add make
+cache:
+  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+  paths: [ .pnp.js, .yarn/ ]
+  policy: pull
 
 .registry_template: &registry_login
   before_script:
@@ -40,19 +44,13 @@ analysis:
     reports:
       junit: junit.xml
   cache:
-    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
-    paths: [ node_modules/ ]
+    policy: push
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 
 create_apicrud_ui:
   stage: ui
   <<: *registry_login
   <<: *create_image
-  # TODO docker-mount this cache to speed up image build
-  # cache:
-  #   key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
-  #   paths: [ node_modules/ ]
-  #   policy: pull
 
 # test:
 #   stage: Functional Tests
