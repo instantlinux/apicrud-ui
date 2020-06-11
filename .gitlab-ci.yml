@@ -62,7 +62,7 @@ promote_images:
   stage: Promote Images
   <<: *registry_login
   script: apk add curl && IMAGES=ui make promote_images
-#  only: [ master, tags ]
+  only: [ master, tags ]
 
 publish:
   stage: Publish Package

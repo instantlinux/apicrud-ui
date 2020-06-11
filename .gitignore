@@ -1,6 +1,9 @@
 *~
 .coverage
 .env
+.pnp.js
+.yarn
+.yarnrc.yml
 coverage
 env-config.js
 htmlcov
