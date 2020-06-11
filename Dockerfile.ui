@@ -16,8 +16,7 @@ ARG REACT_APP_TOKEN_MAPBOX=must-be-set
 ENV REACT_APP_TOKEN_MAPBOX=$REACT_APP_TOKEN_MAPBOX
 
 COPY package.json yarn.lock ./
-RUN yarn set version berry && \
-    yarn --network-timeout=250000
+RUN yarn set version berry && yarn
 COPY public/ ./public
 COPY src/ ./src
 RUN yarn build
