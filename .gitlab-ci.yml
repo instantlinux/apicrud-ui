@@ -2,6 +2,9 @@
 # Set these private variables in gitlab-ci environment:
 #   DOCKER_TOKEN, REGISTRY_URI
 
+variables:
+  PLATFORMS: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7
+
 stages:
   - Analyze and Unit Test
   - ui

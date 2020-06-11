@@ -12,7 +12,7 @@ export APICRUD_ENV   ?= local
 #
 #  make ui_local
 
-.PHONY: apicrud-%/tag
+.PHONY: apicrud-%/tag qemu
 ui_local: .env /usr/bin/yarn
 	REACT_APP_API_URL=$(REACT_APP_API_URL_DEV) \
 	yarn dev
@@ -38,19 +38,20 @@ publish:
 	@echo Publishing npm package
 	npm publish
 
-create_image:
+create_image: qemu
 	@echo docker build -t $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
 	@echo Hardcoded REACT_APP_API_URL=$(REACT_APP_API_URL)
-	@docker build -t $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG) . \
-	 -f Dockerfile.$(CI_JOB_STAGE) \
+	@docker buildx build \
+	 --tag $(REGISTRY)/$(APPNAME)-$(CI_JOB_NAME):$(TAG) . \
+	 --push -f Dockerfile.$(CI_JOB_STAGE) \
 	 --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
 	 --build-arg=TAG=$(TAG) \
 	 --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
 	 --build-arg=REACT_APP_API_URL=$(REACT_APP_API_URL) \
 	 --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
-	docker push $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
 
-promote_images:
+promote_images: qemu
+ifeq ($(CI_COMMIT_TAG),)
 	$(foreach target, $(IMAGES), \
 	  image=$(shell basename $(target)) && \
 	  docker pull $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) && \
@@ -59,9 +60,8 @@ promote_images:
 	  docker push $(REGISTRY)/$(APPNAME)-$${image}:latest \
 	;)
 	echo commit_tag=$(CI_COMMIT_TAG)
-ifneq ($(CI_COMMIT_TAG),)
+else
 	# Also push to dockerhub, if registry is somewhere like GitLab
-ifneq ($(REGISTRY), $(USER_LOGIN))
 	docker login -u $(USER_LOGIN) -p $(DOCKER_TOKEN)
 	$(foreach target, $(IMAGES), \
 	  image=$(shell basename $(target)) && \
@@ -73,7 +73,6 @@ ifneq ($(REGISTRY), $(USER_LOGIN))
 	  docker push $(USER_LOGIN)/$(APPNAME)-$${image}:latest \
 	;)
 	curl -X post https://hooks.microbadger.com/images/$(USER_LOGIN)/$(APPNAME)-$${image}/$(MICROBADGER_TOKEN)
-endif
 endif
 
 clean_images:
@@ -105,6 +104,11 @@ clean:
 	 -exec rm -rf {} \;
 wipe_clean: clean
 	rm -rf node_modules
+
+qemu:
+	docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+	docker buildx create --name multibuild
+	docker buildx use multibuild
 
 /usr/bin/yarn:
 	sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
