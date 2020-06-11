@@ -4,15 +4,17 @@
 
 include Makefile.vars
 
+BUILDX               ?= https://github.com/docker/buildx/releases/download/v0.4.1/buildx-v0.4.1.linux-amd64
 REGISTRY             ?= $(REGISTRY_URI)/$(USER_LOGIN)
 export APICRUD_ENV   ?= local
+export DOCKER_CLI_EXPERIMENTAL = enabled
 
 # Local dev - you need 6 services running; see the Makefile in
 #  github.com/instantlinux/apicrud. This Makefile supports:
 #
 #  make ui_local
 
-.PHONY: apicrud-%/tag
+.PHONY: apicrud-%/tag qemu
 ui_local: .env /usr/bin/yarn
 	REACT_APP_API_URL=$(REACT_APP_API_URL_DEV) \
 	yarn dev
@@ -38,19 +40,20 @@ publish:
 	@echo Publishing npm package
 	npm publish
 
-create_image:
+create_image: qemu
 	@echo docker build -t $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
 	@echo Hardcoded REACT_APP_API_URL=$(REACT_APP_API_URL)
-	@docker build -t $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG) . \
-	 -f Dockerfile.$(CI_JOB_STAGE) \
+	@docker buildx build \
+	 --tag $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG) . \
+	 --push -f Dockerfile.$(CI_JOB_STAGE) \
 	 --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
 	 --build-arg=TAG=$(TAG) \
 	 --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
 	 --build-arg=REACT_APP_API_URL=$(REACT_APP_API_URL) \
 	 --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
-	docker push $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
 
-promote_images:
+promote_images: qemu
+ifeq ($(CI_COMMIT_TAG),)
 	$(foreach target, $(IMAGES), \
 	  image=$(shell basename $(target)) && \
 	  docker pull $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) && \
@@ -59,21 +62,21 @@ promote_images:
 	  docker push $(REGISTRY)/$(APPNAME)-$${image}:latest \
 	;)
 	echo commit_tag=$(CI_COMMIT_TAG)
-ifneq ($(CI_COMMIT_TAG),)
+else
 	# Also push to dockerhub, if registry is somewhere like GitLab
-ifneq ($(REGISTRY), $(USER_LOGIN))
 	docker login -u $(USER_LOGIN) -p $(DOCKER_TOKEN)
 	$(foreach target, $(IMAGES), \
 	  image=$(shell basename $(target)) && \
-	  docker tag $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) \
-	    $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) && \
-	  docker tag $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) \
-	    $(USER_LOGIN)/$(APPNAME)-$${image}:latest && \
-	  docker push $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) && \
-	  docker push $(USER_LOGIN)/$(APPNAME)-$${image}:latest \
+	  docker buildx build --platform $(PLATFORMS) \
+	    --tag $(REGISTRY)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) \
+	    --tag $(REGISTRY)/$(APPNAME)-$${image}:latest \
+	    --tag $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) \
+	    --tag $(USER_LOGIN)/$(APPNAME)-$${image}:latest \
+	    --push --file Dockerfile.$${image} . \
+	    --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
+	    --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
 	;)
 	curl -X post https://hooks.microbadger.com/images/$(USER_LOGIN)/$(APPNAME)-$${image}/$(MICROBADGER_TOKEN)
-endif
 endif
 
 clean_images:
@@ -90,6 +93,7 @@ ifeq ($(TAG),)
 	@exit 1
 endif
 	@echo docker build -t $(REGISTRY)/$(APPNAME)-ui:$(TAG) -f Dockerfile.ui
+	docker login -u $(USER_LOGIN) -p $(DOCKER_TOKEN)
 	@docker build -t $(REGISTRY)/$(APPNAME)-ui:$(TAG) . \
 	 -f Dockerfile.ui \
 	 --build-arg=VCS_REF=$(shell git rev-parse HEAD^) \
@@ -97,7 +101,6 @@ endif
 	 --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
 	 --build-arg=REACT_APP_API_URL=$(REACT_APP_API_URL) \
 	 --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
-	docker push $(REGISTRY)/$(APPNAME)-ui:$(TAG)
 
 clean:
 	rm -rf .env coverage
@@ -105,6 +108,14 @@ clean:
 	 -exec rm -rf {} \;
 wipe_clean: clean
 	rm -rf node_modules
+
+qemu:
+	mkdir -p /usr/lib/docker/cli-plugins
+	wget -O /usr/lib/docker/cli-plugins/docker-buildx $(BUILDX)
+	chmod +x /usr/lib/docker/cli-plugins/docker-buildx
+	docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+	docker buildx create --name multibuild
+	docker buildx use multibuild
 
 /usr/bin/yarn:
 	sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
