@@ -56,10 +56,11 @@ promote_images: qemu
 ifeq ($(CI_COMMIT_TAG),)
 	$(foreach target, $(IMAGES), \
 	  image=$(shell basename $(target)) && \
-	  docker pull $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) && \
-	  docker tag $(REGISTRY)/$(APPNAME)-$${image}:$(TAG) \
-	    $(REGISTRY)/$(APPNAME)-$${image}:latest && \
-	  docker push $(REGISTRY)/$(APPNAME)-$${image}:latest \
+	  docker buildx build --platform $(PLATFORMS) \
+	    --tag $(REGISTRY)/$(APPNAME)-$${image}:latest \
+	    --push --file Dockerfile.$${image} . \
+	    --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
+	    --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
 	;)
 	echo commit_tag=$(CI_COMMIT_TAG)
 else
