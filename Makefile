@@ -15,7 +15,7 @@ export DOCKER_CLI_EXPERIMENTAL = enabled
 #  make ui_local
 
 .PHONY: apicrud-%/tag qemu
-ui_local: .env .yarn/releases/yarn-berry.js
+ui_local: .env .yarn/releases/yarn-berry.js /usr/bin/yarn
 	REACT_APP_API_URL=$(REACT_APP_API_URL_DEV) \
 	yarn dev
 
@@ -118,7 +118,7 @@ qemu:
 	docker buildx create --name multibuild
 	docker buildx use multibuild
 
-.yarn/releases/yarn-berry.js: /usr/bin/yarn
+.yarn/releases/yarn-berry.js:
 	yarn set version berry
 
 /usr/bin/yarn:
