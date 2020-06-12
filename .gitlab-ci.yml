@@ -17,6 +17,10 @@ image: node:12.18.0-alpine
 before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
   - apk add make
+cache:
+  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+  paths: [ .pnp.js, .yarn/ ]
+  policy: pull
 
 .registry_template: &registry_login
   before_script:
@@ -27,7 +31,7 @@ before_script:
   services: [ "docker:dind" ]
 
 .create_image_template: &create_image
-  script: ls -l .yarn ; make create_image
+  script: ls -l .yarn .pnp.js ; make create_image
 
 analysis:
   stage: Analyze and Unit Test
@@ -40,8 +44,6 @@ analysis:
     reports:
       junit: junit.xml
   cache:
-    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
-    paths: [ .pnp.js, .yarn/ ]
     policy: push
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 
@@ -49,10 +51,6 @@ create_apicrud_ui:
   stage: ui
   <<: *registry_login
   <<: *create_image
-  # TODO docker-mount this cache to speed up image build
-  cache:
-    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
-    paths: [ .pnp.js, .yarn/ ]
 
 # test:
 #   stage: Functional Tests
@@ -62,10 +60,6 @@ promote_images:
   stage: Promote Images
   <<: *registry_login
   script: apk add curl && IMAGES=ui make promote_images
-  cache:
-    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
-    paths: [ .pnp.js, .yarn/ ]
-    policy: pull
 #  only: [ master, tags ]
 
 publish:
