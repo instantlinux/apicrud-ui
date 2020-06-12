@@ -16,7 +16,7 @@ ARG REACT_APP_TOKEN_MAPBOX=must-be-set
 ENV REACT_APP_TOKEN_MAPBOX=$REACT_APP_TOKEN_MAPBOX
 
 COPY package.json yarn.lock ./
-RUN yarn set version berry && yarn
+RUN yarn set version berry && echo "pnpMode: loose" >> .yarnrc.yml && yarn
 COPY public/ ./public
 COPY src/ ./src
 RUN yarn build
