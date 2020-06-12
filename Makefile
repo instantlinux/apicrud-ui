@@ -27,7 +27,7 @@ ui_local: .env .yarn/releases/yarn-berry.js /usr/bin/yarn
 
 analysis: .yarn/releases/yarn-berry.js
 	@echo "Running ESLint code analysis"
-	yarn && yarn lint
+	yarn && yarn eslint
 
 test:
 	@echo "Running unit tests"

@@ -17,6 +17,7 @@
     "@material-ui/styles": "^4.10.0",
     "bluebird": "^3.7.2",
     "connected-react-router": "^6.8.0",
+    "eslint": "^7.2.0",
     "final-form": "^4.20.0",
     "history": "^4.10.1",
     "jsonexport": "^3.0.0",
@@ -63,7 +64,6 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "lint": "./node_modules/.bin/eslint src/",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
