@@ -24,6 +24,7 @@ cache:
 
 .registry_template: &registry_login
   before_script:
+  - ls -la
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
   - apk add make
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $REGISTRY_URI
@@ -39,6 +40,7 @@ analysis:
   - set -e
   - make analysis
   - make test
+  - ls -la
   artifacts:
     paths: [ coverage/, junit.xml ]
     reports:
