@@ -117,6 +117,9 @@ qemu:
 	docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 	docker buildx create --name multibuild
 	docker buildx use multibuild
+	# TODO - sometimes gitlab-ci cache isn't working, why not?
+	mkdir -p .yarn
+	touch .pnp.js
 
 .yarn/releases/yarn-berry.js:
 	yarn set version berry
