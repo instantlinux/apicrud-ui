@@ -25,7 +25,7 @@ ui_local: .env .yarn/releases/yarn-berry.js /usr/bin/yarn
 	@echo 'REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)' >>$@
 	@echo 'PORT=$(APICRUD_UI_PORT)' >>$@
 
-analysis:
+analysis: .yarn/releases/yarn-berry.js
 	@echo "Running ESLint code analysis"
 	yarn && yarn lint
 
@@ -108,7 +108,7 @@ clean:
 	find . -regextype egrep -regex '.*(coverage.xml|results.xml|~)' \
 	 -exec rm -rf {} \;
 wipe_clean: clean
-	rm -rf node_modules
+	rm -rf .yarn node_modules
 
 qemu:
 	mkdir -p /usr/lib/docker/cli-plugins
@@ -120,7 +120,6 @@ qemu:
 
 .yarn/releases/yarn-berry.js:
 	yarn set version berry
-	echo "pnpMode: loose" >> .yarnrc.yml
 
 /usr/bin/yarn:
 	sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -

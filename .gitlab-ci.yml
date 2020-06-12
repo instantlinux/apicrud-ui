@@ -41,7 +41,8 @@ analysis:
       junit: junit.xml
   cache:
     key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
-    paths: [ node_modules/ ]
+    paths: [ .pnp.js, .yarn/ ]
+    policy: push
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 
 create_apicrud_ui:
@@ -49,10 +50,9 @@ create_apicrud_ui:
   <<: *registry_login
   <<: *create_image
   # TODO docker-mount this cache to speed up image build
-  # cache:
-  #   key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
-  #   paths: [ node_modules/ ]
-  #   policy: pull
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+    paths: [ .pnp.js, .yarn/ ]
 
 # test:
 #   stage: Functional Tests
@@ -62,6 +62,10 @@ promote_images:
   stage: Promote Images
   <<: *registry_login
   script: apk add curl && IMAGES=ui make promote_images
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+    paths: [ .pnp.js, .yarn/ ]
+    policy: pull
   only: [ master, tags ]
 
 publish:
