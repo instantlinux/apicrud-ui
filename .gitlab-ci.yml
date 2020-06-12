@@ -18,7 +18,7 @@ before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
   - apk add make
 cache:
-  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+  key: $CI_COMMIT_SHA-$CI_PROJECT_DIR
   paths: [ .pnp.js, .yarn/ ]
   policy: pull
 
