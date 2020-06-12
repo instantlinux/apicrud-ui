@@ -3002,6 +3002,7 @@ __metadata:
     connected-react-router: ^6.8.0
     eslint: ^7.2.0
     final-form: ^4.20.0
+    final-form-arrays: ^3.0.2
     history: ^4.10.1
     jest-junit: ^10.0.0
     jsonexport: ^3.0.0
@@ -6607,7 +6608,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"final-form-arrays@npm:^3.0.1":
+"final-form-arrays@npm:^3.0.1, final-form-arrays@npm:^3.0.2":
   version: 3.0.2
   resolution: "final-form-arrays@npm:3.0.2"
   peerDependencies:
