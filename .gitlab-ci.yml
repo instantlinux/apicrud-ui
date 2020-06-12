@@ -18,7 +18,7 @@ before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
   - apk add make
 cache:
-  key: $CI_COMMIT_SHA-$CI_PROJECT_DIR
+  key: pipeline-$CI_PIPELINE_IID-$CI_COMMIT_SHORT_SHA
   paths: [ .pnp.js, .yarn/ ]
   policy: pull
 
@@ -44,6 +44,8 @@ analysis:
     reports:
       junit: junit.xml
   cache:
+    key: pipeline-$CI_PIPELINE_IID-$CI_COMMIT_SHORT_SHA
+    paths: [ .pnp.js, .yarn/ ]
     policy: push
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 

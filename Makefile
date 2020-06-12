@@ -5,6 +5,10 @@
 include Makefile.vars
 
 BUILDX               ?= https://github.com/docker/buildx/releases/download/v0.4.1/buildx-v0.4.1.linux-amd64
+BUILD_ARGS            = --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
+   --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
+   --build-arg=REACT_APP_API_URL=$(REACT_APP_API_URL) \
+   --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
 REGISTRY             ?= $(REGISTRY_URI)/$(USER_LOGIN)
 export APICRUD_ENV   ?= local
 export DOCKER_CLI_EXPERIMENTAL = enabled
@@ -46,11 +50,7 @@ create_image: qemu
 	@docker buildx build \
 	 --tag $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG) . \
 	 --push -f Dockerfile.$(CI_JOB_STAGE) \
-	 --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
-	 --build-arg=TAG=$(TAG) \
-	 --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
-	 --build-arg=REACT_APP_API_URL=$(REACT_APP_API_URL) \
-	 --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
+	 --build-arg=TAG=$(TAG) $(BUILD_ARGS)
 
 promote_images: qemu
 ifeq ($(CI_COMMIT_TAG),)
@@ -58,9 +58,7 @@ ifeq ($(CI_COMMIT_TAG),)
 	  image=$(shell basename $(target)) && \
 	  docker buildx build --platform $(PLATFORMS) \
 	    --tag $(REGISTRY)/$(APPNAME)-$${image}:latest \
-	    --push --file Dockerfile.$${image} . \
-	    --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
-	    --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
+	    --push --file Dockerfile.$${image} . $(BUILD_ARGS) \
 	;)
 	echo commit_tag=$(CI_COMMIT_TAG)
 else
@@ -73,9 +71,7 @@ else
 	    --tag $(REGISTRY)/$(APPNAME)-$${image}:latest \
 	    --tag $(USER_LOGIN)/$(APPNAME)-$${image}:$(CI_COMMIT_TAG) \
 	    --tag $(USER_LOGIN)/$(APPNAME)-$${image}:latest \
-	    --push --file Dockerfile.$${image} . \
-	    --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
-	    --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
+	    --push --file Dockerfile.$${image} . $(BUILD_ARGS) \
 	;)
 	curl -X post https://hooks.microbadger.com/images/$(USER_LOGIN)/$(APPNAME)-$${image}/$(MICROBADGER_TOKEN)
 endif
@@ -96,12 +92,7 @@ endif
 	@echo docker build -t $(REGISTRY)/$(APPNAME)-ui:$(TAG) -f Dockerfile.ui
 	docker login -u $(USER_LOGIN) -p $(DOCKER_TOKEN)
 	@docker build -t $(REGISTRY)/$(APPNAME)-ui:$(TAG) . \
-	 -f Dockerfile.ui \
-	 --build-arg=VCS_REF=$(shell git rev-parse HEAD^) \
-	 --build-arg=TAG=$(TAG) \
-	 --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
-	 --build-arg=REACT_APP_API_URL=$(REACT_APP_API_URL) \
-	 --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
+	 -f Dockerfile.ui --build-arg=TAG=$(TAG) $(BUILD_ARGS)
 
 clean:
 	rm -rf .env coverage

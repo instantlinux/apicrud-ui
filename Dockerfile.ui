@@ -11,7 +11,7 @@ WORKDIR /app
 
 # TODO figure out how to read this as a startup env var
 #  right now it has to be hardcoded at build time
-ARG REACT_APP_API_URL=https://example-dev.ci.net/api/v1
+ARG REACT_APP_API_URL=https://apicrud-dev.example.com/api/v1
 ARG REACT_APP_TOKEN_MAPBOX=must-be-set
 ENV REACT_APP_TOKEN_MAPBOX=$REACT_APP_TOKEN_MAPBOX
 
