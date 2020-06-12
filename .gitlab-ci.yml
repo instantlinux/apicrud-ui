@@ -27,7 +27,7 @@ before_script:
   services: [ "docker:dind" ]
 
 .create_image_template: &create_image
-  script: make create_image
+  script: ls -l .yarn ; make create_image
 
 analysis:
   stage: Analyze and Unit Test
@@ -66,7 +66,7 @@ promote_images:
     key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
     paths: [ .pnp.js, .yarn/ ]
     policy: pull
-  only: [ master, tags ]
+#  only: [ master, tags ]
 
 publish:
   stage: Publish Package
