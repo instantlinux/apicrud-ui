@@ -42,7 +42,8 @@ test_functional:
 
 publish:
 	@echo Publishing npm package
-	npm publish
+	cp package.json src/
+	cd src && npm publish
 
 create_image: qemu
 	@echo docker build -t $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
@@ -95,7 +96,7 @@ endif
 	 -f Dockerfile.ui --build-arg=TAG=$(TAG) $(BUILD_ARGS)
 
 clean:
-	rm -rf .env coverage
+	rm -rf .env coverage npm-debug.log
 	find . -regextype egrep -regex '.*(coverage.xml|results.xml|~)' \
 	 -exec rm -rf {} \;
 wipe_clean: clean
