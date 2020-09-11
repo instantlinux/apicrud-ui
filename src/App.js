@@ -33,6 +33,7 @@ import { albumCreate, albumEdit, albumList, albumShow } from './ra-views/album';
 import { credentialCreate, credentialEdit } from './ra-views/credential';
 import { categoryCreate, categoryEdit, categoryList } from './ra-views/category';
 import { contactCreate, contactEdit } from './ra-views/contact';
+import { grantEdit } from './ra-views/grant';
 import { listCreate, listEdit, listList, listShow } from './ra-views/list';
 import { locationCreate, locationEdit, locationList,
          locationShow } from './ra-views/location';
@@ -40,6 +41,7 @@ import { messageCreate, messageEdit, messageShow } from './ra-views/message';
 import { personCreate, personEdit, personList,
          personShow } from './ra-views/person';
 import { pictureCreate, pictureEdit } from './ra-views/picture';
+import { profileCreate, profileEdit } from './ra-views/profile';
 import { settingsEdit } from './ra-views/settings';
 import { storageCreate, storageEdit } from './ra-views/storage';
 import { tzEdit } from './ra-views/tz';
@@ -84,6 +86,8 @@ const App = () => (
           icon={categoryIcon} />,
         <Resource name='contact'
           create={contactCreate} edit={contactEdit} />,
+        <Resource name='grant'
+          edit={permissions.match(/^admin/) ? grantEdit : null} />,
         <Resource name='list'
           list={permissions.match(loggedin) ? listList : null}
           create={permissions.match(loggedin) ? listCreate : null}
@@ -104,6 +108,9 @@ const App = () => (
         <Resource name='picture'
           create={permissions.match(loggedin) ? pictureCreate : null}
           edit={permissions.match(loggedin) ? pictureEdit : null} />,
+        <Resource name='profile'
+          create={permissions.match(loggedin) ? profileCreate : null}
+          edit={permissions.match(loggedin) ? profileEdit : null} />,
         <Resource name='storage'
           create={permissions.match(loggedin) ? storageCreate : null}
           edit={permissions.match(loggedin) ? storageEdit : null} />,

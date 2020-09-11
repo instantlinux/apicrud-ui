@@ -54,7 +54,7 @@ export const contactCreate = props => {
 
 export const contactEdit = props => {
     const uid = sessionStorage.getItem('uid')
-    const redirect = uid ? `/person/${uid}/1` : '/event';
+    const redirect = uid ? `/person/${uid}/1` : '/list';
 
     return <Edit {...props} title={<MenuTitle />}>
         <SimpleForm redirect={redirect}>

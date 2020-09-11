@@ -59,8 +59,22 @@ export const personEdit = ({permissions, data, ...props}) => {
               uid === props.id) &&
              <CreateContactButton />}
         </FormTab>
+        <FormTab label='profile'>
+            <ReferenceManyField reference='profile' target='uid' addLabel={false}>
+                <Datagrid  rowClick='edit'>
+                    <ChipField source='item' />
+                    <TextField source='value' />
+                    {((permissions && permissions.match(/^admin/)) ||
+                      uid === props.id) &&
+                    <EditButton />};
+                </Datagrid>
+            </ReferenceManyField>
+            {((permissions && permissions.match(/^admin/)) ||
+              uid === props.id) &&
+             <CreateProfileButton />}
+        </FormTab>
         {isRegistered('picture') &&
-        <FormTab label='Pictures' >
+        <FormTab label='Pictures'>
             <ReferenceManyField reference='album' target='uid' 
                     filter={{list_id: null}} addLabel={false}>
                 <Datagrid  rowClick='show'>
@@ -112,6 +126,14 @@ export const personShow = (props) => (
           </ReferenceManyField>
         <CreateContactButton />
         </Tab>
+        <Tab label='profile'>
+          <ReferenceManyField reference='profile' target='uid' addLabel={false}>
+              <Datagrid>
+                  <ChipField source='item' />
+                  <TextField source='value' />
+              </Datagrid>
+          </ReferenceManyField>
+        </Tab>
         <Tab label='Pictures' >
             <ReferenceManyField reference='album' target='uid' 
                     filter={{list_id: null}} addLabel={false}>
@@ -136,6 +158,23 @@ const CreateContactButton = ({ record, permissions }) => {
     return <Button component={Link} variant='contained'
         to={{
             pathname: '/contact/create',
+            state: { record: { uid: record.id } },
+        }}>
+        Add
+    </Button>
+    }
+  else {
+      return <span></span>
+  }
+};
+
+const CreateProfileButton = ({ record, permissions }) => {
+  var uid = sessionStorage.getItem('uid');
+  if ((permissions && permissions.match(/^admin/)) ||
+      ((record && uid === record.id) || (record && record.referrer_id === uid))) {
+    return <Button component={Link} variant='contained'
+        to={{
+            pathname: '/profile/create',
             state: { record: { uid: record.id } },
         }}>
         Add

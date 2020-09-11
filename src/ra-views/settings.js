@@ -10,7 +10,6 @@ import Button from '@material-ui/core/Button';
 
 import isRegistered from '../lib/registry'
 import { privacyChoices } from '../lib/constants';
-import { BottombarNoSaveDel } from '../lib/ra-custom';
 import { validateKeywordAlpha } from '../lib/validate';
 
 export const settingsCreate = props => (
@@ -91,7 +90,7 @@ export const settingsEdit = props => (
           </ReferenceInput>
         </FormTab>
         {isRegistered('storage') &&
-        <FormTab label='Storage' toolbar={<BottombarNoSaveDel />} >
+        <FormTab label='Storage' toolbar={null} >
             <ReferenceManyField reference='storage' target='uid'
                     filter={{uid: sessionStorage.getItem('uid')}}
                     addLabel={false}>
@@ -108,7 +107,7 @@ export const settingsEdit = props => (
             </ReferenceManyField>
             <CreateStorageButton />
          </FormTab>}
-        <FormTab label='Credentials' toolbar={<BottombarNoSaveDel />}>
+        <FormTab label='Credentials' toolbar={null}>
             <ReferenceManyField reference='credential' target='settings_id'
                                 addLabel={false}>
                 <Datagrid rowClick='edit'>

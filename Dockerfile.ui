@@ -1,4 +1,4 @@
-FROM node:12.18.0-alpine as node-dep
+FROM node:12.18.3-alpine as node-dep
 MAINTAINER Rich Braun "docker@instantlinux.net"
 ARG BUILD_DATE
 ARG VCS_REF
@@ -22,7 +22,7 @@ COPY public/ ./public
 COPY src/ ./src
 RUN yarn build
 
-FROM nginx:1.19.0-alpine
+FROM nginx:1.19.2-alpine
 COPY --from=node-dep /app/build /usr/share/nginx/html
 # When in doubt about dependencies, yarn.lock documents them
 COPY yarn.lock /root/

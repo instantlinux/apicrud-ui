@@ -54,10 +54,4 @@ export const BottombarSaveOnly = props => (
     </Toolbar>
 );
 
-// Bottom toolbar: disable save/edit buttons
-// TODO disable
-export const BottombarNoSaveDel = props => (
-    <Toolbar {...props} >
-        <SaveButton label='nada' submitOnEnter={false} />
-    </Toolbar>
-);
+// Bottom toolbar: disable save/edit buttons - just use {null}

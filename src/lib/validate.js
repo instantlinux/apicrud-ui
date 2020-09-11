@@ -48,8 +48,11 @@ export const validateNameShort = [required(), isBlankorUpto64(), isNameOK()];
 export const validatePositive = [number(), minValue(1)];
 export const validateNumMax = max => [number(), minValue(1), maxValue(max)];
 export const validateSelected = [hasSelection()];
+export const validate32String = [isBlankorMin4Upto32()];
 export const validate64String = [isBlankorUpto64()];
 export const validate255String = [isBlankorUpto255()];
+export const validateRequired32String = [required(), minLength(2),
+                                         maxLength(32)];
 export const validateRequired128String = [required(), minLength(4),
                                           maxLength(128)];
 export const validateRequired255String = [required(), minLength(8),
