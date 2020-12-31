@@ -19,7 +19,7 @@ export DOCKER_CLI_EXPERIMENTAL = enabled
 #  make ui_local
 
 .PHONY: apicrud-%/tag qemu
-ui_local: .env .yarn/releases/yarn-berry.js /usr/bin/yarn
+ui_local: .env .yarn/releases/yarn-$(VERSION_YARN).cjs /usr/bin/yarn
 	REACT_APP_API_URL=$(REACT_APP_API_URL_DEV) \
 	yarn dev
 
@@ -29,7 +29,7 @@ ui_local: .env .yarn/releases/yarn-berry.js /usr/bin/yarn
 	@echo 'REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)' >>$@
 	@echo 'PORT=$(APICRUD_UI_PORT)' >>$@
 
-analysis: .yarn/releases/yarn-berry.js
+analysis: .yarn/releases/yarn-$(VERSION_YARN).cjs
 	@echo "Running ESLint code analysis"
 	yarn && yarn eslint
 
@@ -113,8 +113,9 @@ qemu:
 	mkdir -p .yarn
 	touch .pnp.js
 
-.yarn/releases/yarn-berry.js:
+.yarn/releases/yarn-$(VERSION_YARN).cjs:
 	yarn set version berry
+	yarn set version $(VERSION_YARN)
 
 /usr/bin/yarn:
 	sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -

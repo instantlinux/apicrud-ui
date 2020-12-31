@@ -121,6 +121,16 @@ export const settingsEdit = props => (
             </ReferenceManyField>
             <CreateCredentialButton />
         </FormTab>
+        <FormTab label='Scopes' toolbar={null}>
+            <ReferenceManyField reference='scope' target='settings_id'
+                                addLabel={false}>
+                <Datagrid rowClick='edit'>
+                    <TextField source='name' />
+                    <ChipField source='status' />
+                </Datagrid>
+            </ReferenceManyField>
+            <CreateScopeButton />
+        </FormTab>
       </TabbedForm>
     </Edit>
 );
@@ -150,6 +160,12 @@ const CreateCredentialButton = ({ record }) => (
     </Button>
 );
 
+const CreateScopeButton = ({ record }) => (
+    <Button component={Link} variant='contained'
+        to={{ pathname: '/scope/create' }}>
+        Add
+    </Button>
+);
 
 const CreateStorageButton = ({ record }) => (
     <Button component={Link} variant='contained'

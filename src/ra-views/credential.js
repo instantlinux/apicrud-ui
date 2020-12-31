@@ -4,22 +4,8 @@ import React from 'react';
 import { AutocompleteInput, Create, DateTimeInput, Edit, SimpleForm,
          TextInput } from 'react-admin';
 
-import { validateNameShort } from '../lib/validate'
-
-const vendors = [
-    { id: 'att', name: 'AT&T' },
-    { id: 'aws', name: 'AWS' },
-    { id: 'azure', name: 'Azure' },
-    { id: 'backblaze', name: 'Backblaze' },
-    { id: 'cloudflare', name: 'Cloudflare' },
-    { id: 'github', name: 'GitHub' },
-    { id: 'gitlab', name: 'GitLab' },
-    { id: 'google', name: 'Google' },
-    { id: 'local', name: 'local' },
-    { id: 'mapquest', name: 'Mapquest' },
-    { id: 'twilio', name: 'Twilio' },
-    { id: 'vonage', name: 'Vonage' },
-]
+import { validateNameShort } from '../lib/validate';
+import vendors from '../lib/vendors';
 
 export const credentialCreate = props => (
     <Create {...props}>

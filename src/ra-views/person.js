@@ -35,7 +35,7 @@ export const personEdit = ({permissions, data, ...props}) => {
         <FormTab label='identity' >
         <TextInput source='name' />
         <TextInput disabled source='identity' label='Identity (email)' />
-        {permissions && permissions.match(/^admin/) &&
+        {permissions && String(permissions).match(/^admin/) &&
         <AutocompleteInput source='status' choices={[
             { id: 'active', name: 'active' },
             { id: 'disabled', name: 'disabled' },
@@ -50,12 +50,12 @@ export const personEdit = ({permissions, data, ...props}) => {
                     <ChipField source='privacy' />
                     <BooleanField source='muted' />
                     <ChipField source='status' />
-                    {((permissions && permissions.match(/^admin/)) ||
+                    {((permissions && String(permissions).match(/^admin/)) ||
                       uid === props.id) &&
                     <EditButton />};
                 </Datagrid>
             </ReferenceManyField>
-            {((permissions && permissions.match(/^admin/)) ||
+            {((permissions && String(permissions).match(/^admin/)) ||
               uid === props.id) &&
              <CreateContactButton />}
         </FormTab>
@@ -64,12 +64,12 @@ export const personEdit = ({permissions, data, ...props}) => {
                 <Datagrid  rowClick='edit'>
                     <ChipField source='item' />
                     <TextField source='value' />
-                    {((permissions && permissions.match(/^admin/)) ||
+                    {((permissions && String(permissions).match(/^admin/)) ||
                       uid === props.id) &&
                     <EditButton />};
                 </Datagrid>
             </ReferenceManyField>
-            {((permissions && permissions.match(/^admin/)) ||
+            {((permissions && String(permissions).match(/^admin/)) ||
               uid === props.id) &&
              <CreateProfileButton />}
         </FormTab>
@@ -89,6 +89,18 @@ export const personEdit = ({permissions, data, ...props}) => {
             </ReferenceManyField>
             <CreateAlbumButton />
         </FormTab>}
+        <FormTab label='API keys' toolbar={null}>
+            <ReferenceManyField reference='apikey' target='uid'
+                                addLabel={false}>
+                <Datagrid rowClick='edit'>
+                    <TextField source='name' />
+                    <TextField source='prefix' />
+                    <DateField source='expires' />
+                    <ChipField source='status' />
+                </Datagrid>
+            </ReferenceManyField>
+            <CreateAPIkeyButton />
+        </FormTab>
       </TabbedForm>
     </Edit>
   </span>
@@ -134,6 +146,7 @@ export const personShow = (props) => (
               </Datagrid>
           </ReferenceManyField>
         </Tab>
+        {isRegistered('picture') &&
         <Tab label='Pictures' >
             <ReferenceManyField reference='album' target='uid' 
                     filter={{list_id: null}} addLabel={false}>
@@ -146,6 +159,18 @@ export const personShow = (props) => (
                     <DateField source='created' />
                 </Datagrid>
             </ReferenceManyField>
+        </Tab>}
+        <Tab label='API keys' toolbar={null}>
+            <ReferenceManyField reference='apikey' target='uid'
+                                addLabel={false}>
+                <Datagrid rowClick='edit'>
+                    <TextField source='name' />
+                    <TextField source='prefix' />
+                    <DateField source='expires' />
+                    <ChipField source='status' />
+                </Datagrid>
+            </ReferenceManyField>
+            <CreateAPIkeyButton />
         </Tab>
       </TabbedShowLayout>
     </Show>
@@ -153,7 +178,7 @@ export const personShow = (props) => (
 
 const CreateContactButton = ({ record, permissions }) => {
   var uid = sessionStorage.getItem('uid');
-  if ((permissions && permissions.match(/^admin/)) ||
+  if ((permissions && String(permissions).match(/^admin/)) ||
       ((record && uid === record.id) || (record && record.referrer_id === uid))) {
     return <Button component={Link} variant='contained'
         to={{
@@ -170,7 +195,7 @@ const CreateContactButton = ({ record, permissions }) => {
 
 const CreateProfileButton = ({ record, permissions }) => {
   var uid = sessionStorage.getItem('uid');
-  if ((permissions && permissions.match(/^admin/)) ||
+  if ((permissions && String(permissions).match(/^admin/)) ||
       ((record && uid === record.id) || (record && record.referrer_id === uid))) {
     return <Button component={Link} variant='contained'
         to={{
@@ -194,6 +219,16 @@ const CreateAlbumButton = ({ record }) => {
         Add
     </Button>
 }
+
+const CreateAPIkeyButton = ({ record }) => (
+    <Button component={Link} variant='contained'
+        to={{
+            pathname: '/apikey/create',
+            state: { record: { uid: record.id } },
+        }}>
+        Add
+    </Button>
+);
 
 const ListFilter = (props) => (
     <Filter {...props}>

@@ -61,8 +61,9 @@ export const toolbarOpts = [
 export const excludeFields = [
     'created', 'geo', 'id', 'referrer_id', 'responded', 'sender_id', 'viewed',
     'category', 'default_category', 'invalid_attempts', 'is_encrypted',
-    'last_invalid_attempt', 'last_login', 'lists', 'magic_expires', 'modified',
-    'orientation', 'owner', 'rbac', 'sha1', 'sha256', 'thumbnail50x50'];
+    'last_invalid_attempt', 'last_login', 'last_used', 'lists', 'magic_expires',
+    'modified', 'orientation', 'owner', 'prefix', 'rbac', 'sha1', 'sha256',
+    'thumbnail50x50'];
 export const excludeExifFields = [
     'compression', 'datetime_original', 'duration', 'gps_altitude', 'height',
     'make', 'model', 'width'];

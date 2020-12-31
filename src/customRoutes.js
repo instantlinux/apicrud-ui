@@ -4,6 +4,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import welcome from './views/welcome.js';
 import aboutPage from './views/aboutPage.js';
+import apikeyNew from './views/apikey-new.js';
 import cnfrm from './views/confirm.js';
 import confirmWait from './views/confirm-wait.js';
 import magic from './lib/magic.js';
@@ -13,6 +14,7 @@ export default [
     <Route exact path="/" component={welcome} />,
     <Route exact path="/welcome" component={welcome} />,
     <Route exact path="/about" component={aboutPage} />,
+    <Route exact path="/apikeynew" component={apikeyNew} />,
     <Route exact path="/confirm" component={cnfrm} />,
     <Route exact path="/confirmwait" component={confirmWait} />,
     <Route exact path="/ev" component={magic} noLayout />,

@@ -30,6 +30,7 @@ import isRegistered from './lib/registry';
 import { accountCreate, accountEdit, accountList, accountPassword,
          accountShow } from './ra-views/account';
 import { albumCreate, albumEdit, albumList, albumShow } from './ra-views/album';
+import { ApikeyCreate, apikeyEdit } from './ra-views/apikey';
 import { credentialCreate, credentialEdit } from './ra-views/credential';
 import { categoryCreate, categoryEdit, categoryList } from './ra-views/category';
 import { contactCreate, contactEdit } from './ra-views/contact';
@@ -42,6 +43,7 @@ import { personCreate, personEdit, personList,
          personShow } from './ra-views/person';
 import { pictureCreate, pictureEdit } from './ra-views/picture';
 import { profileCreate, profileEdit } from './ra-views/profile';
+import { scopeCreate, scopeEdit } from './ra-views/scope';
 import { settingsEdit } from './ra-views/settings';
 import { storageCreate, storageEdit } from './ra-views/storage';
 import { tzEdit } from './ra-views/tz';
@@ -76,6 +78,9 @@ const App = () => (
           list={isRegistered('album') && permissions.match(/^admin/) ? albumList : null}
           create={albumCreate} edit={albumEdit}
           show={albumShow} icon={pictureIcon} />,
+        <Resource name='apikey'
+          create={permissions.match(loggedin) ? ApikeyCreate : null}
+          edit={permissions.match(loggedin) ? apikeyEdit : null} />,
         <Resource name='credential'
           create={permissions.match(loggedin) ? credentialCreate : null}
           edit={permissions.match(loggedin) ? credentialEdit : null} />,
@@ -111,6 +116,9 @@ const App = () => (
         <Resource name='profile'
           create={permissions.match(loggedin) ? profileCreate : null}
           edit={permissions.match(loggedin) ? profileEdit : null} />,
+        <Resource name='scope'
+          create={permissions.match(/^admin/) ? scopeCreate : null}
+          edit={permissions.match(/^admin/) ? scopeEdit : null} />,
         <Resource name='storage'
           create={permissions.match(loggedin) ? storageCreate : null}
           edit={permissions.match(loggedin) ? storageEdit : null} />,
