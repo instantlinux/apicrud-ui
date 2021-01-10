@@ -2,9 +2,10 @@
 
 import React from 'react';
 import { AutocompleteInput, BooleanInput, ChipField, Create, Datagrid,
-         DateField, Edit, FormTab, List, ReferenceField, ReferenceManyField,
-         SaveButton, Show, SimpleForm, TabbedForm, TextField, TextInput,
-         Toolbar } from 'react-admin';
+         DateField, Edit, FormTab, Link, List, ReferenceField,
+         ReferenceManyField, SaveButton, Show, SimpleForm, TabbedForm,
+         TextField, TextInput, Toolbar } from 'react-admin';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
@@ -45,20 +46,39 @@ export const accountCreate = props => {
 
 // TODO verify_password
 // (value) => value === watch('new_password')
-export const accountPassword = ({permissions, ...props}) => {
-    return <Edit {...props} title={<MenuUpdateTitle />} >
-        <SimpleForm redirect='/welcome?buttons=login'>
-            {permissions && (permissions.match(/user|pwchange/)) &&
+export const accountSecurity = ({permissions, ...props}) => {
+  const uid = sessionStorage.getItem('uid')
+  // console.log('auth=' + sessionStorage.getItem('auth'))
+  return (
+    <Edit {...props} title={<MenuUpdateTitle />} >
+      <TabbedForm redirect='/welcome?buttons=login'>
+        <FormTab label='password'>
+            {permissions && (String(permissions).match(/user|pwchange/)) &&
              <TextInput source='old_password' type='password' />}
             <TextInput source='new_password' type='password'
                 validate={validatePasswordOK} />
             <TextInput source='verify_password' type='password'
                 validate={validatePasswordOK} />
-            {(permissions && !permissions.match(/user|pwchange/)) &&
+            {(permissions && !String(permissions).match(/user|pwchange/)) &&
              <TextInput disabled source='reset_token' 
                 defaultValue={sessionStorage.getItem('reset_token')} />}
-        </SimpleForm>
+        </FormTab>
+        {permissions && String(permissions).match(/user/) &&
+        <FormTab label='API keys' toolbar={null}>
+          <ReferenceManyField reference='apikey' target='uid'
+                              addLabel={false}>
+              <Datagrid rowClick='edit'>
+                  <TextField source='name' />
+                  <TextField source='prefix' />
+                  <DateField source='expires' />
+                  <ChipField source='status' />
+              </Datagrid>
+          </ReferenceManyField>
+          <CreateAPIkeyButton uid={uid} />
+        </FormTab>}
+      </TabbedForm>
     </Edit>
+  );
 };
 
 export const accountShow = props => (
@@ -151,5 +171,19 @@ class RegisterForm extends React.Component {
 const RegisterToolbar = props => <Toolbar {...props} >
       <SaveButton label="submit" submitOnEnter={true} />
 </Toolbar>
+
+// TODO this function (almost verbatim from the CreateEdit reference)
+//   throws warning about forwardRef:
+// Failed prop type: Invalid prop `component` supplied to
+// `ForwardRef(ButtonBase)`. Expected an element type that can hold a ref.
+const CreateAPIkeyButton = ({ uid }) => (
+    <Button component={Link} variant='contained'
+        to={{
+            pathname: '/apikey/create',
+            state: { record: { uid: uid } },
+        }}>
+        Add
+    </Button>
+);
 
 export default accountCreate;

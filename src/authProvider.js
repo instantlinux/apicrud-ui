@@ -25,7 +25,7 @@ export default {
                 sessionStorage.setItem('token', decodedJwt.jti);
                 sessionStorage.setItem('auth', decodedJwt.auth);
                 sessionStorage.setItem('account_id', decodedJwt.acc);
-		sessionStorage.setItem('resource_endpoints',
+                sessionStorage.setItem('resource_endpoints',
                     JSON.stringify(resources));
                 sessionStorage.setItem('settings_id', settings_id);
                 sessionStorage.setItem('storage_id', storage_id);
@@ -59,9 +59,9 @@ export default {
     },
     getPermissions: () => {
         const auth = sessionStorage.getItem('auth');
-	// console.log('getPermissions: ' + auth);
+        // console.log('getPermissions: ' + auth);
         if (auth || window.location.hash.match(skipAuthPaths)) {
-            return Promise.resolve(auth);
+            return Promise.resolve(auth || '');
         }
         return Promise.resolve('');
     },

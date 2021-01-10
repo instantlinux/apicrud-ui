@@ -89,18 +89,6 @@ export const personEdit = ({permissions, data, ...props}) => {
             </ReferenceManyField>
             <CreateAlbumButton />
         </FormTab>}
-        <FormTab label='API keys' toolbar={null}>
-            <ReferenceManyField reference='apikey' target='uid'
-                                addLabel={false}>
-                <Datagrid rowClick='edit'>
-                    <TextField source='name' />
-                    <TextField source='prefix' />
-                    <DateField source='expires' />
-                    <ChipField source='status' />
-                </Datagrid>
-            </ReferenceManyField>
-            <CreateAPIkeyButton />
-        </FormTab>
       </TabbedForm>
     </Edit>
   </span>
@@ -160,18 +148,6 @@ export const personShow = (props) => (
                 </Datagrid>
             </ReferenceManyField>
         </Tab>}
-        <Tab label='API keys' toolbar={null}>
-            <ReferenceManyField reference='apikey' target='uid'
-                                addLabel={false}>
-                <Datagrid rowClick='edit'>
-                    <TextField source='name' />
-                    <TextField source='prefix' />
-                    <DateField source='expires' />
-                    <ChipField source='status' />
-                </Datagrid>
-            </ReferenceManyField>
-            <CreateAPIkeyButton />
-        </Tab>
       </TabbedShowLayout>
     </Show>
 );
@@ -219,16 +195,6 @@ const CreateAlbumButton = ({ record }) => {
         Add
     </Button>
 }
-
-const CreateAPIkeyButton = ({ record }) => (
-    <Button component={Link} variant='contained'
-        to={{
-            pathname: '/apikey/create',
-            state: { record: { uid: record.id } },
-        }}>
-        Add
-    </Button>
-);
 
 const ListFilter = (props) => (
     <Filter {...props}>
