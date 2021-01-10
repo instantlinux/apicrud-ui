@@ -78,7 +78,7 @@ class ActionButtons extends React.Component {
         <div style={{textAlign: 'center' }}>
         {uid !== undefined &&
 	 <Button component={Link} variant='contained'
-	  to={{ pathname: '/account_password/' + this.state.uid + '/edit' }}>
+	  to={{ pathname: '/account_password/' + this.state.uid }}>
 	  Set Password
 	 </Button>}
 	<Button component={Link} variant='contained' to='/event'>

@@ -27,7 +27,7 @@ import dataProvider from './dataProvider';
 import { customLayout, theme } from './customLayout';
 import customRoutes from './customRoutes';
 import isRegistered from './lib/registry';
-import { accountCreate, accountEdit, accountList, accountPassword,
+import { accountCreate, accountEdit, accountList, accountSecurity,
          accountShow } from './ra-views/account';
 import { albumCreate, albumEdit, albumList, albumShow } from './ra-views/album';
 import { ApikeyCreate, apikeyEdit } from './ra-views/apikey';
@@ -73,7 +73,7 @@ const App = () => (
           edit={permissions.match(loggedin) ? accountEdit : null}
           show={permissions.match(loggedin) ? accountShow : null}
           icon={accountIcon} />,
-        <Resource name='account_password' edit={accountPassword} />,
+        <Resource name='account_password' edit={accountSecurity} />,
         <Resource name='album'
           list={isRegistered('album') && permissions.match(/^admin/) ? albumList : null}
           create={albumCreate} edit={albumEdit}
