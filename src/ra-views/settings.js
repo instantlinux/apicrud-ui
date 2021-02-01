@@ -21,11 +21,8 @@ export const settingsCreate = props => (
         <TextInput source='smtp_smarthost' />
         <NumberInput source='smtp_port' />
         <ReferenceInput source='smtp_credential_id' label='SMTP credential'
-                reference='credential'>
+                reference='credential' allowEmpty>
            <SelectInput optionText='name' />
-        </ReferenceInput>
-        <ReferenceInput source="smtp_credential_id" reference="credential">
-           <SelectInput optionText="name" />
         </ReferenceInput>
         <ReferenceInput source="administrator_id" reference="person">
            <SelectInput optionText="name" />
@@ -54,7 +51,7 @@ export const settingsEdit = props => (
           <TextInput source='smtp_smarthost' label='SMTP smarthost' />
           <NumberInput source='smtp_port' label='SMTP port' />
           <ReferenceInput source='smtp_credential_id' label='SMTP credential'
-                  reference='credential'>
+                  reference='credential' allowEmpty>
              <SelectInput optionText='name' />
           </ReferenceInput>
           <ReferenceInput source='administrator_id' reference='person'>

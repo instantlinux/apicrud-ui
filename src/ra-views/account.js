@@ -94,6 +94,7 @@ export const accountShow = props => (
     </Show>
 );
 
+// TODO the grants tab doesn't work yet
 export const accountEdit = props => (
     <Edit {...props} title={<MenuTitle />}>
       <TabbedForm>
@@ -118,8 +119,8 @@ export const accountEdit = props => (
         </FormTab>
         <FormTab label='Grants'>
             <ReferenceManyField reference='grant' target='uid'
-                    addLabel={false}>
-                <Datagrid  rowClick='edit'>
+                    filter={{uid: 'x-23450001'}} addLabel={false}>
+                <Datagrid rowClick='edit'>
                     <TextField source='name' />
                     <TextField source='value' />
                 </Datagrid>
