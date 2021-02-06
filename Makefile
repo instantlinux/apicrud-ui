@@ -40,9 +40,9 @@ test:
 test_functional:
 	@echo "Run Functional Tests - not yet implemented"
 
-publish:
+publish: clean
 	@echo Publishing npm package
-	cp package.json src/
+	cp package.json README.md src/
 	cd src && npm publish
 
 create_image: qemu
@@ -96,7 +96,7 @@ endif
 	 -f Dockerfile.ui --build-arg=TAG=$(TAG) $(BUILD_ARGS)
 
 clean:
-	rm -rf .env coverage npm-debug.log
+	rm -rf .env coverage npm-debug.log src/package.json src/README.md
 	find . -regextype egrep -regex '.*(coverage.xml|results.xml|~)' \
 	 -exec rm -rf {} \;
 wipe_clean: clean

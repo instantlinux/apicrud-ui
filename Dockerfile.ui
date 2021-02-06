@@ -17,7 +17,7 @@ ENV REACT_APP_TOKEN_MAPBOX=$REACT_APP_TOKEN_MAPBOX
 
 COPY package.json yarn.lock .pnp.js ./
 COPY .yarn/ ./.yarn
-RUN yarn set version berry && yarn
+RUN yarn set version berry && yarn set version 2.4.0 && yarn
 COPY public/ ./public
 COPY src/ ./src
 RUN yarn build
