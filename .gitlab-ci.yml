@@ -13,7 +13,7 @@ stages:
   - Publish Package
   - Clean
 
-image: node:12.18.0-alpine
+image: node:12.20.1-alpine
 before_script:
   - export TAG=bld_$CI_PIPELINE_IID_${CI_COMMIT_SHA:0:7}
   - apk add make
@@ -67,9 +67,11 @@ promote_images:
 publish:
   stage: Publish Package
   script:
-  - echo always-auth=true >.npmrc
-  - echo "//registry.npmjs.org/:_authToken=$NPMJS_TOKEN" >>.npmrc
-  - npm config set registry https://registry.npmjs.org/
+  - echo "//registry.npmjs.org/:_authToken=$NPMJS_TOKEN" >$HOME/.npmrc
+  - npm config set always-auth=true
+  - pwd
+  - npm install -g npm@7.5.2
+  - npm config list
   - TAG=$CI_COMMIT_TAG make publish
   only: [ tags ]
 
