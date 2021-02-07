@@ -97,7 +97,7 @@ endif
 
 clean:
 	rm -rf .env coverage npm-debug.log src/package.json src/README.md
-	find . -regextype egrep -regex '.*(coverage.xml|results.xml|~)' \
+	find . -name coverage.xml -o -name results.xml -o -name '*~' \
 	 -exec rm -rf {} \;
 wipe_clean: clean
 	rm -rf .yarn node_modules
