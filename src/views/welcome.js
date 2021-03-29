@@ -14,7 +14,7 @@ const welcome = () => {
     if (search.length > 1) {
       const query = queryString.parse(search[1]);
       buttons = 'buttons' in query && query.buttons;
-      if (buttons.includes('login')) {
+      if (buttons && buttons.includes('login')) {
         // Came here from accountPassword reset: logout
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('uid');

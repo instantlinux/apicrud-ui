@@ -27,6 +27,7 @@ import dataProvider from './dataProvider';
 import { customLayout, theme } from './customLayout';
 import customRoutes from './customRoutes';
 import isRegistered from './lib/registry';
+import LoginPage from './views/login';
 import { accountCreate, accountEdit, accountList, accountSecurity,
          accountShow } from './ra-views/account';
 import { albumCreate, albumEdit, albumList, albumShow } from './ra-views/album';
@@ -66,7 +67,7 @@ const App = () => (
     <Admin authProvider={authProvider}
            i18nProvider={i18nProvider}
            dataProvider={dataProvider} customRoutes={customRoutes}
-           layout={customLayout} theme={theme} >
+           layout={customLayout} loginPage={LoginPage} theme={theme} >
 	{permissions => [
         <Resource name='account' create={accountCreate}
           list={permissions.match(/^admin/) ? accountList : null}

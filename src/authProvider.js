@@ -5,20 +5,30 @@ import { skipAuthPaths } from './lib/constants';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
+function oauth_redir (loc) {
+    window.location = loc;
+};
+
 export default {
-    login: ({ username, password }) => {
+    login: ({username, password, method}) => {
+	console.log('login method=' + method)
         const request = new Request(apiUrl + '/auth', {
             method: 'POST',
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ username, password, method }),
             headers: new Headers({ 'Content-Type': 'application/json' }),
         })
         return fetch(request)
             .then(response => {
-                if (response.status < 200 || response.status >= 300) {
+                if (response.status < 200 || response.status >= 303) {
                     throw new Error(response.statusText);
                 }
                 return response.json();
             })
+	    .then(response => method === undefined || method === 'local' ?
+		  response :
+		  oauth_redir(response.location)
+		  // TODO remove next line
+                  .then(response => response.json()))
             .then(({ jwt_token, resources, storage_id, settings_id }) => {
                 const decodedJwt = decodeJwt(jwt_token);
                 sessionStorage.setItem('uid', decodedJwt.sub);

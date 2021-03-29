@@ -62,18 +62,18 @@ promote_images:
   stage: Promote Images
   <<: *registry_login
   script: apk add curl && IMAGES=ui make promote_images
-  only: [ master, tags ]
+  rules:
+  - if: '$CI_COMMIT_BRANCH == "master"'
+  - if: $CI_COMMIT_TAG
 
 publish:
   stage: Publish Package
   script:
   - echo "//registry.npmjs.org/:_authToken=$NPMJS_TOKEN" >$HOME/.npmrc
   - npm config set always-auth=true
-  - pwd
   - npm install -g npm@7.5.2
-  - npm config list
   - TAG=$CI_COMMIT_TAG make publish
-  only: [ tags ]
+  rules: [ if: $CI_COMMIT_TAG ]
 
 clean:
   stage: Clean

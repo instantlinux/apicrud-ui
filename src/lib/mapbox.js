@@ -4,6 +4,7 @@ import React from 'react';
 import { Error, Loading, Query } from 'react-admin';
 import CardHeader from '@material-ui/core/CardHeader';
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const Map = ReactMapboxGl({
     accessToken: process.env.REACT_APP_TOKEN_MAPBOX });
