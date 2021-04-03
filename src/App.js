@@ -18,7 +18,9 @@ import germanMessages from 'ra-language-german';
 import italianMessages from 'ra-language-italian';
 import portugueseMessages from 'ra-language-portuguese';
 import russianMessages from 'ra-language-russian';
-import spanishMessages from '@blackbox-vision/ra-language-spanish';
+// TODO resolve
+// Qualified path resolution failed - none of the candidates can be found on the disk.
+// import spanishMessages from '@blackbox-vision/ra-language-spanish';
 
 import './App.css';
 
@@ -57,7 +59,7 @@ const messages = {
     it: italianMessages,
     pt: portugueseMessages,
     ru: russianMessages,
-    es: spanishMessages,
+    // es: spanishMessages,
 };
 const i18nProvider = polyglotI18nProvider(locale => messages[locale],
     resolveBrowserLocale());
