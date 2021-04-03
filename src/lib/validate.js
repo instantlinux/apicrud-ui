@@ -10,8 +10,8 @@ const isNameOK = (message = 'Alphanumeric or _&.- characters') =>
     value => value.match(/^[a-zA-Z0-9]+[a-zA-Z0-9 _&.-]*$/) ? undefined : message
 const isKeywordAlphaNumeric = (message = 'Alphanumeric or _+@. characters') =>
     value => value.match(/^[a-zA-Z]+[a-zA-Z0-9_+@.]*$/) ? undefined : message;
-const isKeywordAlphaNumericLC = (message = 'Lowercase/numeric or _. characters') =>
-    value => value.match(/^[a-z]+[a-z0-9_.]*$/) ? undefined : message;
+const isKeywordAlphaNumericLC = (message = 'Lowercase/numeric or _-. characters') =>
+    value => value.match(/^[a-z]+[a-z0-9_.-]*$/) ? undefined : message;
 const isCountryCode = (message = 'Use uppercase') =>
     value => value != null &&
       value.match(/^[A-Z][A-Z]$/) ? undefined : message;
@@ -25,7 +25,7 @@ const hasComplexity = (message = 'Must have upper, lower, and symbol chars') =>
 const isBlankorMin4Upto32 = (message = 'Between 4 and 32 characters') =>
     value => value && (
       value.length < 4 || value.length > 32) ? message : undefined;
-const isBlankorUpto64 = (message = 'Between 2 and 63 characters') =>
+const isBlankorUpto64 = (message = 'Between 2 and 64 characters') =>
     value => value && (
       value.length < 2 || value.length > 64) ? message : undefined;
 const isBlankorUpto255 = (message = 'Between 8 and 255 characters') =>
@@ -53,6 +53,8 @@ export const validate64String = [isBlankorUpto64()];
 export const validate255String = [isBlankorUpto255()];
 export const validateRequired32String = [required(), minLength(2),
                                          maxLength(32)];
+export const validateRequired96String = [required(), minLength(2),
+                                         maxLength(96)];
 export const validateRequired128String = [required(), minLength(4),
                                           maxLength(128)];
 export const validateRequired255String = [required(), minLength(8),

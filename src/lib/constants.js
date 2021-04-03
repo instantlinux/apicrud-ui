@@ -35,6 +35,7 @@ export const profileChoices = [
     { id: 'lang', name: 'Language' },
     { id: 'location', name: 'Location' },
     { id: 'partner', name: 'Spouse / Partner' },
+    { id: 'picture', name: 'Picture' },
     { id: 'pronouns', name: 'Pronouns' },
     { id: 'reminders', name: 'Reminders' },
     { id: 'tz', name: 'Timezone' },

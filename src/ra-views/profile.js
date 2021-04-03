@@ -6,7 +6,7 @@ import { AutocompleteInput, Create, Edit, FormDataConsumer, ReferenceInput,
 
 import { localeChoices, privacyChoices, profileChoices,
          pronounChoices } from '../lib/constants';
-import { validateRequired32String, validateSelected } from '../lib/validate';
+import { validateRequired96String, validateSelected } from '../lib/validate';
 import { LocationRenderer, MenuTitle } from '../lib/ra-custom'
 
 export const profileCreate = props => {
@@ -58,7 +58,7 @@ const ProfileItemFields = ({item, record, ...props}) => {
     <FormDataConsumer>
         {({ formData, ...rest }) => [
             'lang', 'location', 'pronouns', 'tz'].includes(formData.item) ||
-        <TextInput source='value' validate={validateRequired32String} />}
+        <TextInput source='value' validate={validateRequired96String} />}
     </FormDataConsumer>
     <FormDataConsumer>
         {({ formData, ...rest }) => formData.item === 'lang' &&

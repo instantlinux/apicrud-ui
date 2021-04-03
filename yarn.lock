@@ -2264,7 +2264,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.0, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.4.4, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.6.3, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7":
+"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.0, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.4.4, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.6.3, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7":
   version: 7.12.5
   resolution: "@babel/runtime@npm:7.12.5"
   dependencies:
@@ -2367,12 +2367,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@blackbox-vision/ra-language-spanish@npm:^3.8.6":
-  version: 3.8.6
-  resolution: "@blackbox-vision/ra-language-spanish@npm:3.8.6"
-  dependencies:
-    ra-core: ^3.8.4
-  checksum: 5c4f2599513e7a01afea6ad60e417c318280e578bb471ecc51518388b8d1a3d381b68a19c158798e9cb7739dc72974611dbe1117a684c3148ddf9eb66f7546d3
+"@blackbox-vision/ra-language-spanish@npm:^3.12.2":
+  version: 3.12.2
+  resolution: "@blackbox-vision/ra-language-spanish@npm:3.12.2"
+  peerDependencies:
+    ra-core: ^3.14.0
+    react: ^16.11.0
+  checksum: 3619e7ae0ab739f09e2e296608cae40188a88097a29a4a0b7f803499f59a9e88ca80cf81dc1309ff02ef3f5fd184ab02d0e5f842cb7dd7892148143e0621519c
   languageName: node
   linkType: hard
 
@@ -2686,17 +2687,6 @@ __metadata:
     source-map: ^0.6.1
     write-file-atomic: ^3.0.0
   checksum: 28e97c9eb837af80095f8e94e34a81b4515912a25d13c70a83e3920757783751be6ccb7bca9acb4a384ab78cd54f0ebcf34c1be826173719fdf88d981d54e4b7
-  languageName: node
-  linkType: hard
-
-"@jest/types@npm:^24.9.0":
-  version: 24.9.0
-  resolution: "@jest/types@npm:24.9.0"
-  dependencies:
-    "@types/istanbul-lib-coverage": ^2.0.0
-    "@types/istanbul-reports": ^1.1.1
-    "@types/yargs": ^13.0.0
-  checksum: 7cd388ad9d3a6de7e0ca29cbaf34dd9da9f6485d26747fc2ef6732bf06dc98d79519b7f3684b7287bd6d5168c394d8f806dc1343bd3c1b3cdc3e85486a518c63
   languageName: node
   linkType: hard
 
@@ -3074,13 +3064,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sheerun/mutationobserver-shim@npm:^0.3.2":
-  version: 0.3.3
-  resolution: "@sheerun/mutationobserver-shim@npm:0.3.3"
-  checksum: 95f804bb26b7d8fbe685593f1a73df4ee87e756350b7791abb0d4582abf7292842e6059c88eeb235aec41cab8413df3786632752a0383992a461d1783b728815
-  languageName: node
-  linkType: hard
-
 "@sinonjs/commons@npm:^1.7.0":
   version: 1.8.2
   resolution: "@sinonjs/commons@npm:1.8.2"
@@ -3240,61 +3223,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^5.6.1":
-  version: 5.6.1
-  resolution: "@testing-library/dom@npm:5.6.1"
-  dependencies:
-    "@babel/runtime": ^7.5.5
-    "@sheerun/mutationobserver-shim": ^0.3.2
-    aria-query: 3.0.0
-    pretty-format: ^24.8.0
-    wait-for-expect: ^1.2.0
-  checksum: 698cd144f6e3b15a1948e1e3beed1abb440e4c4cdca1326d933aee21871c88cd624b7055bd222879352e0f95d9204ae90868e41c195e98f4a1cb6984e31fae86
-  languageName: node
-  linkType: hard
-
-"@testing-library/dom@npm:^7.28.1":
-  version: 7.29.4
-  resolution: "@testing-library/dom@npm:7.29.4"
-  dependencies:
-    "@babel/code-frame": ^7.10.4
-    "@babel/runtime": ^7.12.5
-    "@types/aria-query": ^4.2.0
-    aria-query: ^4.2.2
-    chalk: ^4.1.0
-    dom-accessibility-api: ^0.5.4
-    lz-string: ^1.4.4
-    pretty-format: ^26.6.2
-  checksum: a5e59bc7b37f10f02b9d330d153e4ca2866b9ebf23c55b1f158460d6632dc5bdad45496da43529b747a27e8372011008b51d9276557cefaf24dace2ef9c20b79
-  languageName: node
-  linkType: hard
-
-"@testing-library/react@npm:^11.2.3":
-  version: 11.2.3
-  resolution: "@testing-library/react@npm:11.2.3"
-  dependencies:
-    "@babel/runtime": ^7.12.5
-    "@testing-library/dom": ^7.28.1
-  peerDependencies:
-    react: "*"
-    react-dom: "*"
-  checksum: a310ca61cd6668d8825c366c33febef024538d6e03b25a161d69ad0c9ec4a0336f189eb8a9400327f47b8f1127811ccac04b57646ca8f0a3d48d8a16a2988603
-  languageName: node
-  linkType: hard
-
-"@testing-library/react@npm:^8.0.7":
-  version: 8.0.9
-  resolution: "@testing-library/react@npm:8.0.9"
-  dependencies:
-    "@babel/runtime": ^7.5.5
-    "@testing-library/dom": ^5.6.1
-  peerDependencies:
-    react: "*"
-    react-dom: "*"
-  checksum: c15fde8238cd36d3cf4f1fc026ce18f45fa1121851665b30de5f6a1d512d3024ef9c491cef13c700cd43f34c611404324012ae35a4eabcee0d1b8c9b0515222a
-  languageName: node
-  linkType: hard
-
 "@turf/bbox@npm:4.7.3":
   version: 4.7.3
   resolution: "@turf/bbox@npm:4.7.3"
@@ -3322,13 +3250,6 @@ __metadata:
   version: 1.3.1
   resolution: "@types/anymatch@npm:1.3.1"
   checksum: 1647865e528a168f66f57a077e9651c10a4c172b656cc3686fddf176555d42ca0a1647bfc626ea2fceb68fc7701426ab708224be1762b4a5216fe8368ffdba3c
-  languageName: node
-  linkType: hard
-
-"@types/aria-query@npm:^4.2.0":
-  version: 4.2.1
-  resolution: "@types/aria-query@npm:4.2.1"
-  checksum: 1b64d16e09ebb071f9c97a4a0ae0d0f6b573a3c14e9f966d51c9ebfc30d19681782428d7cb4ec75d93aa1b58a857f5f17babbfedeefebc85c4047cf5f6b96d5f
   languageName: node
   linkType: hard
 
@@ -3443,16 +3364,6 @@ __metadata:
   dependencies:
     "@types/istanbul-lib-coverage": "*"
   checksum: 78aa9f859b6d1b2c02387b401e4e42fdec2e26ffede392e544da108abc6aff35c95b40821116ca46006d94c8b405ffd64465c32514549e997b04f8363de1af5e
-  languageName: node
-  linkType: hard
-
-"@types/istanbul-reports@npm:^1.1.1":
-  version: 1.1.2
-  resolution: "@types/istanbul-reports@npm:1.1.2"
-  dependencies:
-    "@types/istanbul-lib-coverage": "*"
-    "@types/istanbul-lib-report": "*"
-  checksum: 92bd1f76a4ce16f5390c80b6b0e657171faf0003b0ff370b3c37739087c825d664493c9debf442c0871d864f1be15c88460f2399ae748186d1a944f16958aea4
   languageName: node
   linkType: hard
 
@@ -3640,15 +3551,6 @@ __metadata:
   version: 20.2.0
   resolution: "@types/yargs-parser@npm:20.2.0"
   checksum: 202b8ca16a1589514f6b3155194c6fde9b5e5b2ffc1025849f93483f70ca9318f4d0423f209efc180beecbc447dcf14cf18e6177db296036e7927e302329dc94
-  languageName: node
-  linkType: hard
-
-"@types/yargs@npm:^13.0.0":
-  version: 13.0.11
-  resolution: "@types/yargs@npm:13.0.11"
-  dependencies:
-    "@types/yargs-parser": "*"
-  checksum: 8592d76c18ae57c25e9eeff29a63c2e0885527014ebd6d76244440d5dc1c6e0cf70753d256d77c09f516b082241e6124c1a83a72c061ee83cf5722d5d52f452f
   languageName: node
   linkType: hard
 
@@ -4197,7 +4099,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-regex@npm:^4.0.0, ansi-regex@npm:^4.1.0":
+"ansi-regex@npm:^4.1.0":
   version: 4.1.0
   resolution: "ansi-regex@npm:4.1.0"
   checksum: 53b6fe447cf92ee59739379de637af6f86b3b8a9537fbfe36a66f946f1d9d34afc3efe664ac31bcc7c3af042d43eabcfcfd3f790316d474bbc7b19a4b1d132dd
@@ -4253,16 +4155,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "apicrud-ui@workspace:."
   dependencies:
-    "@blackbox-vision/ra-language-spanish": ^3.8.6
+    "@blackbox-vision/ra-language-spanish": ^3.12.2
     "@material-ui/core": ^4.11.2
     "@material-ui/icons": ^4.11.2
     "@material-ui/styles": ^4.11.2
-    classnames: ~2.2.5
     connected-react-router: ^6.8.0
     eslint: ^7.17.0
     eslint-config-react-app: ^6.0.0
-    final-form: ^4.20.1
+    final-form: ^4.20.2
     final-form-arrays: ^3.0.2
+    final-form-submit-errors: ^0.1.2
     history: ^4.9.0
     immutable: ^4.0.0-rc.12
     jest-junit: ^12.0.0
@@ -4272,20 +4174,20 @@ __metadata:
     moment: ^2.29.1
     prop-types: ^15.7.2
     query-string: ^6.13.8
-    ra-core: ^3.12.1
-    ra-data-json-server: ^3.12.1
-    ra-i18n-polyglot: ^3.12.1
-    ra-input-rich-text: ^3.12.0
-    ra-language-chinese: ^2.0.8
-    ra-language-english: ^3.12.1
-    ra-language-french: ^3.12.1
-    ra-language-german: ^2.1.2
+    ra-core: ^3.14.2
+    ra-data-json-server: ^3.14.2
+    ra-i18n-polyglot: ^3.14.2
+    ra-input-rich-text: ^3.14.0
+    ra-language-chinese: ^2.0.10
+    ra-language-english: ^3.14.2
+    ra-language-french: ^3.14.2
+    ra-language-german: ^3.13.4
     ra-language-italian: ^3.0.0
     ra-language-portuguese: ^1.6.0
-    ra-language-russian: ^3.3.0
-    ra-ui-materialui: ^3.12.1
+    ra-language-russian: ^3.13.5
+    ra-ui-materialui: ^3.14.2
     react: ^17.0.0
-    react-admin: ^3.12.1
+    react-admin: ^3.14.2
     react-dom: ^17.0.0
     react-dropzone-uploader: ^2.11.0
     react-final-form: ^6.5.2
@@ -4328,16 +4230,6 @@ __metadata:
   dependencies:
     sprintf-js: ~1.0.2
   checksum: 435adaef5f6671c3ef1478a22be6fd54bdb99fdbbce8f5561b9cbbb05068ccce87b7df3b9f3322ff52a6ebb9cab2b427cbedac47a07611690a9beaa5184093e2
-  languageName: node
-  linkType: hard
-
-"aria-query@npm:3.0.0":
-  version: 3.0.0
-  resolution: "aria-query@npm:3.0.0"
-  dependencies:
-    ast-types-flow: 0.0.7
-    commander: ^2.11.0
-  checksum: 4603ead43ae64ef3920268b42c612adfc977941f72de1c1b1fcee99041388f7d6dd7cd4fb51957bc160f574b6c4748f478d9f366922bac77eb8e43f4002311bc
   languageName: node
   linkType: hard
 
@@ -4518,7 +4410,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ast-types-flow@npm:0.0.7, ast-types-flow@npm:^0.0.7":
+"ast-types-flow@npm:^0.0.7":
   version: 0.0.7
   resolution: "ast-types-flow@npm:0.0.7"
   checksum: 4211a734ae7823e8ed55f68bd2cee5027a59ae3cbc8152f36485059859c5ef29560b0091fafdf40419ee42c433fe255c24ce54297e5cd299f8ded1a8eab7729c
@@ -5412,7 +5304,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^4.0.0, chalk@npm:^4.1.0":
+"chalk@npm:^4.0.0":
   version: 4.1.0
   resolution: "chalk@npm:4.1.0"
   dependencies:
@@ -5706,7 +5598,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^2.11.0, commander@npm:^2.20.0":
+"commander@npm:^2.20.0":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
   checksum: b73428e97de7624323f81ba13f8ed9271de487017432d18b4da3f07cfc528ad754bbd199004bd5d14e0ccd67d1fdfe0ec8dbbd4c438b401df3c4cc387bfd1daa
@@ -6763,13 +6655,6 @@ __metadata:
   dependencies:
     esutils: ^2.0.2
   checksum: 2eae469bd2889ceee9892083a67340b3622568fe5290edce620e5d5ddab23d644b2a780e9a7c68ad9c8a62716a70c5e484402ac93a398fa78b54b7505592aa7f
-  languageName: node
-  linkType: hard
-
-"dom-accessibility-api@npm:^0.5.4":
-  version: 0.5.4
-  resolution: "dom-accessibility-api@npm:0.5.4"
-  checksum: 39351d26a3732312f14411effef698204bf6c79a7d5eb0664441897541243f2cdf2e508aca52684ccf3b10df6708a6c265d1fde323eebcb8363a1093f5927b10
   languageName: node
   linkType: hard
 
@@ -7998,7 +7883,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"final-form-arrays@npm:^3.0.1, final-form-arrays@npm:^3.0.2":
+"final-form-arrays@npm:^3.0.2":
   version: 3.0.2
   resolution: "final-form-arrays@npm:3.0.2"
   peerDependencies:
@@ -8007,12 +7892,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"final-form@npm:^4.20.0, final-form@npm:^4.20.1":
-  version: 4.20.1
-  resolution: "final-form@npm:4.20.1"
+"final-form-submit-errors@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "final-form-submit-errors@npm:0.1.2"
+  peerDependencies:
+    final-form: ^4.18.2
+    react: ^16.8.6
+    react-final-form: ^6.3.0
+  checksum: 39d6f61972d854a4c8698d56fd6fe650f3851590a6cbad53d2be1fee8a1e1150a26b0b8b0ee1f9b9fbcaa41df20542abe84bd60031f3ac14820bdd78670cdbb7
+  languageName: node
+  linkType: hard
+
+"final-form@npm:^4.20.2":
+  version: 4.20.2
+  resolution: "final-form@npm:4.20.2"
   dependencies:
     "@babel/runtime": ^7.10.0
-  checksum: 007bc31ead06ad92ec9a3a917183c8e36cbf2f4a5a7188fa938b8212953e16580db61eedbfca443edcc8402d671b7828b3514f82f5ab03886611f8ccf8f3f847
+  checksum: f3c11f7d5596441ae83f1c6571f61f1e1b5d6e0fc9194b40b533d331c84b55c98f11d621fc9173dd4f68381478fb1a8adba105637e1b9518065095a2131a2c1d
   languageName: node
   linkType: hard
 
@@ -10970,15 +10866,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"lz-string@npm:^1.4.4":
-  version: 1.4.4
-  resolution: "lz-string@npm:1.4.4"
-  bin:
-    lz-string: bin/bin.js
-  checksum: 60a13f8a724d109cffc7dda4cb98569adfa0516750f8a75b7236f6bc94b47edffb59e8a1e501364404e3867cf399e6612c3981f9c81c2de75751203431bf2e69
-  languageName: node
-  linkType: hard
-
 "magic-string@npm:^0.25.0, magic-string@npm:^0.25.7":
   version: 0.25.7
   resolution: "magic-string@npm:0.25.7"
@@ -13369,18 +13256,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:^24.8.0":
-  version: 24.9.0
-  resolution: "pretty-format@npm:24.9.0"
-  dependencies:
-    "@jest/types": ^24.9.0
-    ansi-regex: ^4.0.0
-    ansi-styles: ^3.2.0
-    react-is: ^16.8.4
-  checksum: a61c5c21a638239ebdc9bfe259746dc1aca29555f8da997318031ebee3ea36662f60f329132365c0cace2a0d122a1f7f9550261b3f04aaa18029d16efc5b45fe
-  languageName: node
-  linkType: hard
-
 "pretty-format@npm:^26.6.0, pretty-format@npm:^26.6.2":
   version: 26.6.2
   resolution: "pretty-format@npm:26.6.2"
@@ -13654,11 +13529,10 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"ra-core@npm:^3.12.1":
-  version: 3.12.1
-  resolution: "ra-core@npm:3.12.1"
+"ra-core@npm:^3.14.2":
+  version: 3.14.2
+  resolution: "ra-core@npm:3.14.2"
   dependencies:
-    "@testing-library/react": ^11.2.3
     classnames: ~2.2.5
     date-fns: ^1.29.0
     eventemitter3: ^3.0.0
@@ -13669,70 +13543,43 @@ fsevents@~2.1.2:
     reselect: ~3.0.0
   peerDependencies:
     connected-react-router: ^6.5.2
-    final-form: ^4.18.5
+    final-form: ^4.20.2
+    final-form-submit-errors: ^0.1.2
     react: ^16.9.0 || ^17.0.0
     react-dom: ^16.9.0 || ^17.0.0
-    react-final-form: ^6.3.3
+    react-final-form: ^6.5.2
     react-redux: ^7.1.0
     react-router: ^5.1.0
     react-router-dom: ^5.1.0
     redux: ^3.7.2 || ^4.0.3
     redux-saga: ^1.0.0
-  checksum: fb788d20c6873589ec5be9a84a94229876044ea16de4d14f5eb265560958b04dc0fd17c55398c8457f23ee9825d2a784caee339b337e1db8db2365e31be17731
+  checksum: 74e44d02bf89cc9a545565ad7e228889bc79763ad923497e4abf9482dc622ae41f7d5ba0d390e904985fc4f61ea2b7e7292c1f797b58ef47b3fd6c6c03c3415e
   languageName: node
   linkType: hard
 
-"ra-core@npm:^3.8.4":
-  version: 3.11.1
-  resolution: "ra-core@npm:3.11.1"
-  dependencies:
-    "@testing-library/react": ^8.0.7
-    classnames: ~2.2.5
-    date-fns: ^1.29.0
-    eventemitter3: ^3.0.0
-    inflection: ~1.12.0
-    lodash: ~4.17.5
-    prop-types: ^15.6.1
-    query-string: ^5.1.1
-    reselect: ~3.0.0
-  peerDependencies:
-    connected-react-router: ^6.5.2
-    final-form: ^4.18.5
-    react: ^16.9.0 || ^17.0.0
-    react-dom: ^16.9.0 || ^17.0.0
-    react-final-form: ^6.3.3
-    react-redux: ^7.1.0
-    react-router: ^5.1.0
-    react-router-dom: ^5.1.0
-    redux: ^3.7.2 || ^4.0.3
-    redux-saga: ^1.0.0
-  checksum: 9a9be50a4dbf3c6f58dee4fb95791d4923b410e6ff00a97deb4d9939099170201ce4f84c2990c1856a7f79e337af3b07a627d20afc5d805edcce1da825cbe727
-  languageName: node
-  linkType: hard
-
-"ra-data-json-server@npm:^3.12.1":
-  version: 3.12.1
-  resolution: "ra-data-json-server@npm:3.12.1"
+"ra-data-json-server@npm:^3.14.2":
+  version: 3.14.2
+  resolution: "ra-data-json-server@npm:3.14.2"
   dependencies:
     query-string: ^5.1.1
-    ra-core: ^3.12.1
-  checksum: 48b1bb76e5a9231fe15641a3a158fa8910fdb3a47dfddb4c8c2b7ef2aaff3b52de637eb6804799f37ab0494f2f7d9899b84ff64943565407147f893656c8125c
+    ra-core: ^3.14.2
+  checksum: 0bc3e5ff7ebb74e761d0f3b6423f14c5fc99fde61c41972a7318ebe68588bbb040d32cc4853e7b740bf80d8b094b9ea25271efa3ef185a0b079cb677ed5376af
   languageName: node
   linkType: hard
 
-"ra-i18n-polyglot@npm:^3.12.1":
-  version: 3.12.1
-  resolution: "ra-i18n-polyglot@npm:3.12.1"
+"ra-i18n-polyglot@npm:^3.14.2":
+  version: 3.14.2
+  resolution: "ra-i18n-polyglot@npm:3.14.2"
   dependencies:
     node-polyglot: ^2.2.2
-    ra-core: ^3.12.1
-  checksum: 7061aedee22582760eb6ba504add6aadae857234732e38631938f8bac70a4442e974a85ca807243224079980f7b6afe97de1d51517a0fc1737a3cace2ea93b56
+    ra-core: ^3.14.2
+  checksum: a438852185ceeedf2f3b957af5ca66ed6f4c5d949d7e293913de64addd1f29f2978e599733539e73c3d891d9fefddb8fdb72ee511610d030502e4d52c960006d
   languageName: node
   linkType: hard
 
-"ra-input-rich-text@npm:^3.12.0":
-  version: 3.12.0
-  resolution: "ra-input-rich-text@npm:3.12.0"
+"ra-input-rich-text@npm:^3.14.0":
+  version: 3.14.0
+  resolution: "ra-input-rich-text@npm:3.14.0"
   dependencies:
     "@types/quill": ~1.3.0
     lodash: ~4.17.5
@@ -13743,39 +13590,39 @@ fsevents@~2.1.2:
     ra-ui-materialui: ^3.9.0
     react: ^16.9.0 || ^17.0.0
     react-dom: ^16.9.0 || ^17.0.0
-  checksum: 6014d72019bf65a8c7bd5a5060c9ac7b6845ed689b9329421fcad80826413c708de04a0ce260a86bd0cc59284aaa4e437a7b3219db377fcd20df58225440a30a
+  checksum: 7bf192f009a782989d20fc67d86cc7619a260d92d3bfa82a9d6c39423945a9e92bff62b7d1d5a1e9b0fb289912a078dffc3893c3046b5664e3ba50561ed39821
   languageName: node
   linkType: hard
 
-"ra-language-chinese@npm:^2.0.8":
-  version: 2.0.8
-  resolution: "ra-language-chinese@npm:2.0.8"
-  checksum: b4e4ef6fe814746b013b0c5cd182f2e12f39a0780f7c3edcaaf629009b8b8a8b970b9e789865114cbd977888b7f070b61d0f17379f5a09aebf149eeec00e4eb7
+"ra-language-chinese@npm:^2.0.10":
+  version: 2.0.10
+  resolution: "ra-language-chinese@npm:2.0.10"
+  checksum: 2516ceb676278e8451a8f7f2ec45c3ee282c1313c70b8e26c5076b619a14e9b218ab25aa562e5cff23ae6dceb07a728e7e056fbe67a3c17dff4330be2e1c2e31
   languageName: node
   linkType: hard
 
-"ra-language-english@npm:^3.12.1":
-  version: 3.12.1
-  resolution: "ra-language-english@npm:3.12.1"
+"ra-language-english@npm:^3.14.2":
+  version: 3.14.2
+  resolution: "ra-language-english@npm:3.14.2"
   dependencies:
-    ra-core: ^3.12.1
-  checksum: 9df4ca96e19f64b74430045835ee950920e1fee618b3e2d562543ec6d5157dcb5b4c5afa6b26cfc6e134e0e89c2c529adafb861ba6c0661e1e7ab0eeac75beb4
+    ra-core: ^3.14.2
+  checksum: 503075cc53dcc849df51495a0a3c971e1a98072694d4fff0ad9050ce29d2b5857289d6edd38af9ee54c16b79f1ecbb0cefdeb40a6fb4a5fe6157662a1cb571b7
   languageName: node
   linkType: hard
 
-"ra-language-french@npm:^3.12.1":
-  version: 3.12.1
-  resolution: "ra-language-french@npm:3.12.1"
+"ra-language-french@npm:^3.14.2":
+  version: 3.14.2
+  resolution: "ra-language-french@npm:3.14.2"
   dependencies:
-    ra-core: ^3.12.1
-  checksum: 8e43a51e6b21cc467e39d50643e51b768fb6557e1921d9d35c5b0a381b03b568bef17b09b77bc86f2a01909fa845f3e92db2782160079fe24b525638a3fb70fa
+    ra-core: ^3.14.2
+  checksum: 2fe361530e5e2d1388c04bb6f9b454c3afdfbc573ce49a3caccb920c6ef6dc17ec9c7d6d99da7013942cb53d6e0dc666a925615da3c5f83ebb938b2e296fa419
   languageName: node
   linkType: hard
 
-"ra-language-german@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "ra-language-german@npm:2.1.2"
-  checksum: 74f90316daf61f0f193570d97eb35160bcc83275a7085a1c1ec8a00a3e3fe73885b6bfffb58685b7377e75d6ffd36e92f9d467f8bb94dbf736913bc2e2de7651
+"ra-language-german@npm:^3.13.4":
+  version: 3.13.4
+  resolution: "ra-language-german@npm:3.13.4"
+  checksum: 2fe6ed64cff1bf783eb85a544d176ca68e2471160973f1d78d653785bed76ac6e305e5bf4214128cd4c2adccb2d697a9281736795dd3f0edb77ec32093915188
   languageName: node
   linkType: hard
 
@@ -13793,16 +13640,16 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"ra-language-russian@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "ra-language-russian@npm:3.3.0"
-  checksum: 66f0efcdee123d8163889860a00c4c4739292254c2f86cee2635f248d96cc47b0d3df87b191585edd70487765bf412f8e1fde95e6480c965a9e0aa658e7736c9
+"ra-language-russian@npm:^3.13.5":
+  version: 3.13.5
+  resolution: "ra-language-russian@npm:3.13.5"
+  checksum: 2b20f664632770affd7588d7f116e8d835f74aa7f58c5e313c586d2fa9277cbae258659bb7b46e0c68501f3d1165c9026fc269955f91d1a1536b1e669d3a005a
   languageName: node
   linkType: hard
 
-"ra-ui-materialui@npm:^3.12.1":
-  version: 3.12.1
-  resolution: "ra-ui-materialui@npm:3.12.1"
+"ra-ui-materialui@npm:^3.14.2":
+  version: 3.14.2
+  resolution: "ra-ui-materialui@npm:3.14.2"
   dependencies:
     autosuggest-highlight: ^3.1.1
     classnames: ~2.2.5
@@ -13820,18 +13667,18 @@ fsevents@~2.1.2:
     "@material-ui/core": ^4.11.2
     "@material-ui/icons": ^4.11.2
     "@material-ui/styles": ^4.11.2
-    final-form: ^4.20.0
-    final-form-arrays: ^3.0.1
-    ra-core: ^3.9.0
+    final-form: ^4.20.2
+    final-form-arrays: ^3.0.2
+    ra-core: ^3.14.0
     react: ^16.9.0 || ^17.0.0
     react-dom: ^16.9.0 || ^17.0.0
-    react-final-form: ^6.3.3
-    react-final-form-arrays: ^3.1.1
+    react-final-form: ^6.5.2
+    react-final-form-arrays: ^3.1.3
     react-redux: ^7.1.0
     react-router: ^5.1.0
     react-router-dom: ^5.1.0
     redux: ^3.7.2 || ^4.0.3
-  checksum: 000c54f449a0d3a98706e157bea34ef9f3f6a176b699dd2af128b840c5e986c1eeac1c11a58cd3fe3d96494ddc41d6ea98dc9916527e566d1eba0e6cf8aac501
+  checksum: 47f2fac214246c9eccba773cbf32f6291aec9fa7fd3e3ac31c3a20bfa931fb0dc3820c3cce2b9572fb726d4cf7562dde7e1e1facbd3e77d9990f80a24a1b1522
   languageName: node
   linkType: hard
 
@@ -13882,22 +13729,23 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"react-admin@npm:^3.12.1":
-  version: 3.12.1
-  resolution: "react-admin@npm:3.12.1"
+"react-admin@npm:^3.14.2":
+  version: 3.14.2
+  resolution: "react-admin@npm:3.14.2"
   dependencies:
     "@material-ui/core": ^4.11.2
     "@material-ui/icons": ^4.11.2
     "@material-ui/styles": ^4.11.2
     connected-react-router: ^6.5.2
-    final-form: ^4.20.0
-    final-form-arrays: ^3.0.1
-    ra-core: ^3.12.1
-    ra-i18n-polyglot: ^3.12.1
-    ra-language-english: ^3.12.1
-    ra-ui-materialui: ^3.12.1
-    react-final-form: ^6.3.3
-    react-final-form-arrays: ^3.1.1
+    final-form: ^4.20.2
+    final-form-arrays: ^3.0.2
+    final-form-submit-errors: ^0.1.2
+    ra-core: ^3.14.2
+    ra-i18n-polyglot: ^3.14.2
+    ra-language-english: ^3.14.2
+    ra-ui-materialui: ^3.14.2
+    react-final-form: ^6.5.2
+    react-final-form-arrays: ^3.1.3
     react-redux: ^7.1.0
     react-router: ^5.1.0
     react-router-dom: ^5.1.0
@@ -13906,7 +13754,7 @@ fsevents@~2.1.2:
   peerDependencies:
     react: ^16.9.0 || ^17.0.0
     react-dom: ^16.9.0 || ^17.0.0
-  checksum: 82d4b87d6e678242e606d2b794fe9b957e367a883e9570dab74a6bf2149bd98a906890e46bf446ac9f5502ede70c8e05159e7a4b05801388969047f9b2e514ab
+  checksum: b15cd10f69fc838d30951ec1eb9bf8c3e1d873c91c38fd35feccf766ae1443611df2d03b20c7bae9da09947f46fbe3f96a666c3060d34861947b033a019e1520
   languageName: node
   linkType: hard
 
@@ -14002,7 +13850,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"react-final-form-arrays@npm:^3.1.1, react-final-form-arrays@npm:^3.1.3":
+"react-final-form-arrays@npm:^3.1.3":
   version: 3.1.3
   resolution: "react-final-form-arrays@npm:3.1.3"
   dependencies:
@@ -14016,7 +13864,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"react-final-form@npm:^6.3.3, react-final-form@npm:^6.5.2":
+"react-final-form@npm:^6.5.2":
   version: 6.5.2
   resolution: "react-final-form@npm:6.5.2"
   dependencies:
@@ -14045,7 +13893,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.13.1, react-is@npm:^16.5.2, react-is@npm:^16.6.0, react-is@npm:^16.7.0, react-is@npm:^16.8.1, react-is@npm:^16.8.4":
+"react-is@npm:^16.13.1, react-is@npm:^16.5.2, react-is@npm:^16.6.0, react-is@npm:^16.7.0, react-is@npm:^16.8.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 11bcf1267a314a522615f626f3ce3727a3a24cdbf61c4d452add3550a7875326669631326cfb1ba3e92b6f72244c32ffecf93ad21c0cad8455d3e169d0e3f060
@@ -16901,13 +16749,6 @@ typescript@^3.9.3:
   dependencies:
     xml-name-validator: ^3.0.0
   checksum: 2327c8a6c7302ed4b685125c193f4b4b859ee12cd6e1938407a02dda9cfcfff7f0c103de387b268444c4b61d7892d5260b5c684eb7519886fb3a07798bd565ba
-  languageName: node
-  linkType: hard
-
-"wait-for-expect@npm:^1.2.0":
-  version: 1.3.0
-  resolution: "wait-for-expect@npm:1.3.0"
-  checksum: 7a222528c565eac826415ecabdc26976f17f5c072c5e3e9d86e0da56ca011659d05901e822355757c4b83b3a5279f7260d569b665da7c135bffe892aeaffecc2
   languageName: node
   linkType: hard
 

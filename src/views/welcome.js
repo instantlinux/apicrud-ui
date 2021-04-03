@@ -28,8 +28,7 @@ const welcome = () => {
         This is an example message-board application with a python REST backend and a React frontend. You can build your own full-stack applications by adding new schema and logic to the models, views and controllers. Make them secure by customizing the RBAC and privacy features of instantlinux/apicrud.
         {(!uid || (buttons && buttons.includes('login'))) && <div>
            <p />
-           <div style={{textAlign: 'center' }}><LoginButton /> <RegisterButton /> 
-           <ForgotPWButton />
+           <div style={{textAlign: 'center' }}><LoginButton /> <ForgotPWButton />
            </div></div>}
           {uid !== null && auth && auth.match(/pwchange/) &&
            <div style={{textAlign: 'center' }}>
@@ -52,13 +51,6 @@ const welcome = () => {
 const LoginButton = () => (
     <Button component={Link} variant='contained' to='/login'>
         Login
-    </Button>
-);
-
-const RegisterButton = () => (
-    <Button component={Link} variant='contained'
-        to='/account/create?forgot=false'>
-        Register Account
     </Button>
 );
 

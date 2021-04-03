@@ -2,6 +2,7 @@
 //  adapted from standard ra-ui-materialui form
 import React, { useEffect, useState } from 'react';
 import { useLogin, useSafeSetState, useTranslate } from 'react-admin';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Field, Form } from 'react-final-form';
 import { Avatar, Button, ButtonGroup, CardActions, CircularProgress, TextField,
@@ -18,6 +19,7 @@ const useStyles = makeStyles(
     (theme) => ({
         button: {
             width: '100%',
+            marginTop: theme.spacing(1),
         },
         icon: {
             marginRight: theme.spacing(1),
@@ -43,6 +45,7 @@ const Input = ({
 function LoginButton ({ redirectTo, ...props }) {
     const [loading, setLoading] = useSafeSetState(false);
     const login = useLogin();
+    const history = useHistory();
     const translate = useTranslate();
     const notify = useNotify();
     const classes = useStyles(props);
@@ -58,21 +61,17 @@ function LoginButton ({ redirectTo, ...props }) {
         login({ method, state })
             .catch(error => {})
     }
+
     function logo (method) {
-	switch (method) {
-	case 'facebook': return facebookLogo;
-	case 'github': return githubLogo;
-	case 'google': return googleLogo;
-	case 'twitter': return twitterLogo;
-	}
+      switch (method) {
+        case 'facebook': return facebookLogo;
+        case 'github': return githubLogo;
+        case 'google': return googleLogo;
+        case 'twitter': return twitterLogo; }
     }
-	    
+
     const loadingProgress = (
-	<CircularProgress
-	    className={classes.icon}
-	    size={18}
-	    thickness={2}
-	/>
+        <CircularProgress className={classes.icon} size={18} thickness={2} />
     );
 
     useEffect(() => {
@@ -99,34 +98,49 @@ function LoginButton ({ redirectTo, ...props }) {
 
     class AuthButtons extends React.Component {
       constructor(props){
-	super(props);
-	this.state = { data: null }
+        super(props);
+        this.state = { data: null }
       }
       componentDidMount(){
-	fetch(apiUrl + '/auth_methods')
-	  .then(response => response.json())
-	  .then(data => this.setState({
-	    methods: data.items
-	  }))
+        fetch(apiUrl + '/auth_methods')
+          .then(response => response.json())
+          .then(data => this.setState({
+            methods: data.items,
+            policies: data.policies
+          }))
       }
       render() {
-        const { methods } = this.state;
+        const { methods, policies } = this.state;
         const buttons = [];
-	if (methods) {
-        for (const method of methods) {
-	    if (method !== 'local') {
-	      buttons.push(
-		<Button {...props}
-		  onClick={() => handleLoginOAuth(method)}
-		    variant="contained" color="primary"
-		    disabled={loading}
-		    className={classes.button}>
-		  {loading && loadingProgress}
-		  {logo(method) &&
-		   <Avatar src={logo(method)} className={classes.avatar} />}
-		  {translate('ra.auth.sign_in')} with {method}
-		 </Button>
-	      )
+        if (methods) {
+          if (methods.includes('local') && ['open', 'onrequest'].includes(
+                policies['login_internal']))  {
+            buttons.push(
+              <Button {...props}
+                onClick={() => history.push('/account/create?forgot=false')}
+                  variant="contained" color="primary"
+                  disabled={loading}
+                  className={classes.button}>
+                {loading && loadingProgress}
+                {translate('ra.action.create')} {translate('ra.auth.username')}
+              </Button>
+            )
+          }
+          // TODO fix error "Each child in a list should have a unique key prop"
+          for (const method of methods) {
+            if (method !== 'local') {
+              buttons.push(
+                <div><Button {...props}
+                  onClick={() => handleLoginOAuth(method)}
+                    variant="contained" color="primary"
+                    disabled={loading}
+                    className={classes.button}>
+                  {loading && loadingProgress}
+                  {logo(method) &&
+                   <Avatar src={logo(method)} className={classes.avatar} />}
+                  {translate('ra.auth.sign_in')} with {method}
+                </Button></div>
+              )
             }
           }
         }
@@ -191,7 +205,10 @@ function LoginButton ({ redirectTo, ...props }) {
                         </div>
                     </div>
                     <CardActions>
-		      <ButtonGroup fullWidth={true} orientation='vertical'>
+                      {/* TODO whether or not fullWidth is specified here,
+                       an error message appears from React for it and
+                       disableElevation, disableFocusRipple, disableRipple */}
+                      <ButtonGroup fullWidth={true} orientation='vertical'>
                         <Button
                             variant="contained"
                             type="submit"
@@ -208,8 +225,8 @@ function LoginButton ({ redirectTo, ...props }) {
                             )}
                             {translate('ra.auth.sign_in')}
                         </Button><br />
-		        <AuthButtons />
-		      </ButtonGroup>
+                        <AuthButtons />
+                      </ButtonGroup>
                     </CardActions>
                 </form>
             )}

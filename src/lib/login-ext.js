@@ -25,7 +25,7 @@ export const loginExt = props => {
             decodedJwt.sub + ':' + decodedJwt.jti),
         mode: 'no-cors'})
     })
-    return fetch(request)
+    fetch(request)
         .then(response => {
             if (response.status < 200 || response.status >= 300) {
                 throw new Error(response.statusText);
@@ -38,7 +38,7 @@ export const loginExt = props => {
             sessionStorage.setItem('settings_id', settings_id);
             sessionStorage.setItem('storage_id', storage_id);
             window.location = '/#/welcome';
-            // window.location.reload(true);
         });
+    return null;
 };
 export default loginExt;
