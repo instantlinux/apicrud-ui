@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { Title } from 'react-admin';
 import queryString from 'query-string';
 
+
 const welcome = () => {
     const search = window.location.hash.split('?');
     var buttons = null;
@@ -48,16 +49,20 @@ const welcome = () => {
     </Card>
 };
 
-const LoginButton = () => (
-    <Button component={Link} variant='contained' to='/login'>
-        Login
-    </Button>
-);
+const LoginButton = () => {
+    // TODO this translate isn't working here
+    // const translate = useTranslate();
+    //  {translate('ra.auth.sign_in')}
+    return (
+	<Button component={Link} variant='contained' to='/login'>
+            Sign In
+	</Button>)
+};
 
 const ForgotPWButton = () => (
     <Button component={Link} variant='contained'
-        to='/account/create?forgot=true'>
-        Forgot Password
+	to='/account/create?forgot=true'>
+	Forgot Password
     </Button>
 );
 

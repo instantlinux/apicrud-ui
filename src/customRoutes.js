@@ -9,7 +9,8 @@ import cnfrm from './views/confirm.js';
 import confirmWait from './views/confirm-wait.js';
 import loginExt from './lib/login-ext.js';
 import magic from './lib/magic.js';
-import prefs from './views/prefs.js';
+import MFA from './views/mfa.js';
+import prefs from './lib/prefs.js';
 
 export default [
     <Route exact path="/" component={welcome} />,
@@ -20,5 +21,6 @@ export default [
     <Route exact path="/confirmwait" component={confirmWait} />,
     <Route exact path="/ev" component={magic} noLayout />,
     <Route exact path="/login/ext" component={loginExt} />,
+    <Route exact path="/mfa" component={MFA} />,
     <Route exact path="/prefs" component={prefs} noLayout />,
 ];

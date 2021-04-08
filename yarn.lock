@@ -4196,6 +4196,7 @@ __metadata:
     react-is: ^17.0.0
     react-mapbox-gl: ^5.1.1
     react-moment: ^1.1.1
+    react-qr-svg: ^2.3.0
     react-redux: ^7.2.2
     react-router: ^5.2.0
     react-router-dom: ^5.2.0
@@ -13430,6 +13431,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"qr.js@npm:0.0.0":
+  version: 0.0.0
+  resolution: "qr.js@npm:0.0.0"
+  checksum: 83e1d6140ec8781d0def39a70d7ef9e7a7ff455697d8e078b86aeeb773dd33fd5235d4f94710b871fc3cfdefb806165503b8241cd4cd9b18a4b9b4160f48db43
+  languageName: node
+  linkType: hard
+
 "qs@npm:6.7.0":
   version: 6.7.0
   resolution: "qs@npm:6.7.0"
@@ -13933,6 +13941,18 @@ fsevents@~2.1.2:
     prop-types: ^15.7.0
     react: ^16.0 || ^17.0.0
   checksum: f32240af16b783d9d3f565a170f21f9953ed2fa0ec0a065363138038c0d2239b63f8c4636dddda464551b34df3ed428942d70fed11a1ac3b6728c43f504a77ab
+  languageName: node
+  linkType: hard
+
+"react-qr-svg@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "react-qr-svg@npm:2.3.0"
+  dependencies:
+    prop-types: ^15.5.8
+    qr.js: 0.0.0
+  peerDependencies:
+    react: ">= 0.11.2 < 18.0.0"
+  checksum: e564e0c66d40f516ce41edf6a0404c8b59752abd2d1daa050c6fe75e5e2761065a8fcc79630b2a5e0102fc22db93da4948d4bd67f1d85109b7da43910ef16937
   languageName: node
   linkType: hard
 

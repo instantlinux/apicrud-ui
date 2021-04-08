@@ -1,8 +1,8 @@
 // created 5-apr-2019 by rich braun <docker@instantlinux.net>
 
 import React from 'react';
-import { AutocompleteInput, BooleanInput, ChipField, Create, Datagrid,
-         DateField, Edit, FormTab, Link, List, ReferenceField,
+import { AutocompleteInput, BooleanField, BooleanInput, ChipField, Create,
+         Datagrid, DateField, Edit, FormTab, Link, List, ReferenceField,
          ReferenceManyField, SaveButton, Show, SimpleForm, TabbedForm,
          TextField, TextInput, Toolbar } from 'react-admin';
 import Button from '@material-ui/core/Button';
@@ -62,6 +62,8 @@ export const accountSecurity = ({permissions, ...props}) => {
             {(permissions && !String(permissions).match(/user|pwchange/)) &&
              <TextInput disabled source='reset_token' 
                 defaultValue={sessionStorage.getItem('reset_token')} />}
+            {permissions && String(permissions).match(/user|mfarequired/) &&
+             <CreateMFAButton />}
         </FormTab>
         {permissions && String(permissions).match(/user/) &&
         <FormTab label='API keys' toolbar={null}>
@@ -88,8 +90,8 @@ export const accountShow = props => (
                <TextField source='name' />
             </ReferenceField>
             <TextField source='name' label='Username'/>
-            <TextField source='reminders' />
             <DateField source='last_login' showTime />
+            <BooleanField source='totp' label='MFA' />
         </SimpleForm>
     </Show>
 );
@@ -106,12 +108,7 @@ export const accountEdit = props => (
                <TextField source='name' />
             </ReferenceField>
             <BooleanInput source='password_must_change' />
-            <AutocompleteInput source='reminders' choices={[
-                { id: 'always', name: 'always' },
-                { id: 'more', name: 'more' },
-                { id: 'fewer', name: 'fewer' },
-                { id: 'never', name: 'never' },
-            ]} />
+            <BooleanInput source='totp' label='MFA' />
             <AutocompleteInput source='status' choices={[
                 { id: 'active', name: 'active' },
                 { id: 'disabled', name: 'disabled' },
@@ -138,6 +135,7 @@ export const accountList = props => (
                <TextField source='name' />
             </ReferenceField>
             <DateField source='last_login' showTime />
+            <BooleanField source='totp' label='MFA' />
             <ChipField source='status' />
         </Datagrid>
     </List>
@@ -184,6 +182,13 @@ const CreateAPIkeyButton = ({ uid }) => (
             state: { record: { uid: uid } },
         }}>
         Add
+    </Button>
+);
+
+const CreateMFAButton = () => (
+    <Button component={Link} variant='contained'
+        to={{ pathname: '/mfa' }}>
+        MFA
     </Button>
 );
 

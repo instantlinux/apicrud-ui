@@ -44,15 +44,17 @@ const Input = ({
 
 function LoginButton ({ redirectTo, ...props }) {
     const [loading, setLoading] = useSafeSetState(false);
+    const [askPassword, setAskPassword] = useSafeSetState(true);
+    const [askTOTP, setAskTOTP] = useSafeSetState(false);
     const login = useLogin();
     const history = useHistory();
     const translate = useTranslate();
     const notify = useNotify();
     const classes = useStyles(props);
 
-    const handleLoginLocal = (code, state) => {
+    const handleLoginLocal = (code, state, otp) => {
         setLoading(true)
-        login({ code, state })
+        login({ code, state, otp })
             .catch(error => {})
     }
 
@@ -86,12 +88,28 @@ function LoginButton ({ redirectTo, ...props }) {
 
     const validate = (values: FormData) => {
         const errors = { username: undefined, password: undefined };
+        const digits = new RegExp('^[0-9]+$');
+        const alphanum = new RegExp('^[0-9a-z]+$');
 
         if (!values.username) {
             errors.username = translate('ra.validation.required');
         }
-        if (!values.password) {
+        if (askPassword && !values.password) {
             errors.password = translate('ra.validation.required');
+        }
+        if (askTOTP && !values.otp) {
+            errors.otp = translate('ra.validation.required');
+        }
+        if (values.otp && values.otp.length !== 6 && values.otp.length !== 8) {
+            errors.otp = 'Length must be 6 or 8'
+        }
+        if (values.otp && (values.otp.length === 6 &&
+                           !digits.test(values.otp))) {
+            errors.otp = 'Enter 6 digits'
+        }
+        if (values.otp && (values.otp.length === 8 &&
+                           !alphanum.test(values.otp))) {
+            errors.otp = 'Enter 8 lowercase letters or digits'
         }
         return errors;
     };
@@ -156,6 +174,11 @@ function LoginButton ({ redirectTo, ...props }) {
             })
             .catch(error => {
                 setLoading(false);
+                if (error.message === 'pendingtotp') {
+                    setAskTOTP(true);
+                    setAskPassword(false);
+                    error.message = 'OTP ' + translate('ra.validation.required');
+                }
                 notify(
                     typeof error === 'string'
                         ? error
@@ -185,8 +208,7 @@ function LoginButton ({ redirectTo, ...props }) {
                         <div className={classes.input}>
                             <Field
                                 autoFocus
-                                id="username"
-                                name="username"
+                                id="username" name="username"
                                 component={Input}
                                 label={translate('ra.auth.username')}
                                 disabled={loading}
@@ -194,15 +216,24 @@ function LoginButton ({ redirectTo, ...props }) {
                         </div>
                         <div className={classes.input}>
                             <Field
-                                id="password"
-                                name="password"
+                                id="password" name="password"
                                 component={Input}
                                 label={translate('ra.auth.password')}
                                 type="password"
-                                disabled={loading}
+                                disabled={loading || !askPassword}
                                 autoComplete="current-password"
                             />
                         </div>
+                        {askTOTP &&
+                        <div className={classes.input}>
+                            <Field
+                                autoFocus
+                                id="otp" name="otp"
+                                component={Input}
+                                label="Access Token"
+                                disabled={loading}
+                            />
+                        </div>}
                     </div>
                     <CardActions>
                       {/* TODO whether or not fullWidth is specified here,

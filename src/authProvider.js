@@ -5,17 +5,33 @@ import { skipAuthPaths } from './lib/constants';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
+function authHeaders () {
+    const uid = sessionStorage.getItem('uid');
+    const token = sessionStorage.getItem('token');
+    return new Headers({
+        Accept: 'application/json',
+        Authorization: 'Basic ' + btoa(uid + ':' + token),
+        'Content-Type': 'application/json',
+        mode: 'no-cors',
+    });
+};
+
 function oauth_redir (loc) {
     window.location = loc;
 };
 
 export default {
-    login: ({username, password, method}) => {
-	console.log('login method=' + method)
+    login: ({username, password, method, otp}) => {
+        var headers;
+        if (sessionStorage.getItem('auth') === 'pendingtotp') {
+            headers = authHeaders();
+        } else {
+            headers = new Headers({ 'Content-Type': 'application/json' });
+        }
         const request = new Request(apiUrl + '/auth', {
             method: 'POST',
-            body: JSON.stringify({ username, password, method }),
-            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify({ username, password, method, otp }),
+            headers: headers,
         })
         return fetch(request)
             .then(response => {
@@ -24,10 +40,9 @@ export default {
                 }
                 return response.json();
             })
-	    .then(response => method === undefined || method === 'local' ?
-		  response :
-		  oauth_redir(response.location)
-		  // TODO remove next line
+            .then(response => method === undefined || method === 'local' ?
+                  response : oauth_redir(response.location)
+                  // TODO see if this line can be removed
                   .then(response => response.json()))
             .then(({ jwt_token, resources, storage_id, settings_id }) => {
                 const decodedJwt = decodeJwt(jwt_token);
@@ -40,19 +55,19 @@ export default {
                 sessionStorage.setItem('settings_id', settings_id);
                 sessionStorage.setItem('storage_id', storage_id);
                 // console.log('auth: ' + JSON.stringify(decodedJwt));
+                if (decodedJwt.auth.includes('pendingtotp')) {
+                    throw new Error('pendingtotp')
+                }
+                else if (decodedJwt.auth.includes('mfarequired')) {
+                    window.location = '/#/mfa'
+                    window.location.reload(true)
+                }
             });
     },
     logout: () => {
-        const uid = sessionStorage.getItem('uid');
-        const token = sessionStorage.getItem('token');
-        const headers = new Headers({
-            Accept: 'application/json',
-            Authorization: 'Basic ' + btoa(uid + ':' + token),
-            mode: 'no-cors',
-        });
         const request = new Request(apiUrl + '/logout', {
             method: 'GET',
-            headers: headers,
+            headers: authHeaders (),
         });
         return fetch(request)
             .then(response => {
