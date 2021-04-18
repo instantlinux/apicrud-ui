@@ -48,10 +48,15 @@ export const accountCreate = props => {
 // (value) => value === watch('new_password')
 export const accountSecurity = ({permissions, ...props}) => {
   const uid = sessionStorage.getItem('uid')
+  const auth = sessionStorage.getItem('auth')
   // console.log('auth=' + sessionStorage.getItem('auth'))
+
+  // TODO redirect to logout; it goes to Not Found unless set to /
+  const redir = auth.includes('user') ? '/welcome?buttons=login' : '/';
+
   return (
     <Edit {...props} title={<MenuUpdateTitle />} >
-      <TabbedForm redirect='/welcome?buttons=login'>
+      <TabbedForm redirect={redir}>
         <FormTab label='password'>
             {permissions && (String(permissions).match(/user|pwchange/)) &&
              <TextInput source='old_password' type='password' />}

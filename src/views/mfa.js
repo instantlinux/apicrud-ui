@@ -26,8 +26,7 @@ class MFAGenerate extends React.Component {
     const request = new Request(apiUrl + '/auth_totp', {
         headers: new Headers({
           Accept: 'application/json',
-          Authorization: 'Basic ' + btoa(uid + ':' + token),
-          mode: 'no-cors'})
+            Authorization: 'Basic ' + btoa(uid + ':' + token)})
     })
     // TODO handle errors
     fetch(request)
@@ -82,6 +81,7 @@ const MFA = ({redirectTo, ...props}) => {
   const [registered, setRegistered] = useSafeSetState(false);
   const [totp_toggle, setTotpToggle] = useSafeSetState(false);
   const [backup_codes, setBackupCodes] = useSafeSetState(null);
+  const [redir, setRedir] = useSafeSetState(redirectTo);
   const history = useHistory();
   const notify = useNotify();
   const translate = useTranslate();
@@ -90,8 +90,7 @@ const MFA = ({redirectTo, ...props}) => {
   const authHeaders = new Headers({
             Accept: 'application/json',
             Authorization: 'Basic ' + btoa(uid + ':' + token),
-            'Content-Type': 'application/json',
-            mode: 'no-cors'})
+            'Content-Type': 'application/json'})
 
   const validate = (values: FormData) => {
       const errors = { otp_first: undefined };
@@ -127,8 +126,9 @@ const MFA = ({redirectTo, ...props}) => {
               setBackupCodes(json.backup_codes.join("\n"));
               setRegistered(true);
               if (auth && auth.includes('mfarequired')) {
-                  sessionStorage.removeItem('auth')
-                  sessionStorage.removeItem('token')
+                  setRedir('/logout');
+                  sessionStorage.removeItem('auth');
+                  sessionStorage.removeItem('token');
               }
               return json;
           })
@@ -153,7 +153,6 @@ const MFA = ({redirectTo, ...props}) => {
 
   const submit = values => {
       setLoading(true);
-      // TODO redirect to /welcome if auth.includes('mfarequired')
       register(values, redirectTo)
           .then(() => {
               setLoading(false);
@@ -224,7 +223,7 @@ const MFA = ({redirectTo, ...props}) => {
                     <Button variant='contained'
                             type='submit' color='primary' disabled={loading}
                             onClick={() => (!totp_toggle || registered) &&
-                                history.push(redirectTo)}
+                                history.push(redir)}
                             className={classes.icon}>
                     {!totp_toggle || registered ?
                             translate('ra.action.close') :

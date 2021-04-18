@@ -12,7 +12,6 @@ function authHeaders () {
         Accept: 'application/json',
         Authorization: 'Basic ' + btoa(uid + ':' + token),
         'Content-Type': 'application/json',
-        mode: 'no-cors',
     });
 };
 
@@ -31,6 +30,7 @@ export default {
         const request = new Request(apiUrl + '/auth', {
             method: 'POST',
             body: JSON.stringify({ username, password, method, otp }),
+            credentials: 'include',
             headers: headers,
         })
         return fetch(request)

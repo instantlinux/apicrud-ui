@@ -20,7 +20,6 @@ function httpClient(url, options={}) {
     options.headers = new Headers({
         Accept: 'application/json',
         Authorization: 'Basic ' + btoa(uid + ':' + token),
-        mode: 'no-cors',
     })
     // console.log('httpClient ' + url + ', opt=' + JSON.stringify(options));
     return fetchUtils.fetchJson(url, {...options, credentials: 'include'});
