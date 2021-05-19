@@ -1,6 +1,6 @@
 // created 23 mar 2021 by richb @ instantlinux.net
 //  adapted from standard ra-ui-materialui form
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useLogin, useSafeSetState, useTranslate } from 'react-admin';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -69,7 +69,8 @@ function LoginButton ({ redirectTo, ...props }) {
         case 'facebook': return facebookLogo;
         case 'github': return githubLogo;
         case 'google': return googleLogo;
-        case 'twitter': return twitterLogo; }
+        case 'twitter': return twitterLogo;
+        default: return null }
     }
 
     const loadingProgress = (
@@ -82,8 +83,10 @@ function LoginButton ({ redirectTo, ...props }) {
         const state = searchParams.get('state');
 
         if (code && state) {
-            handleLoginLocal(code, state);
+            handleLoginLocal(code, state, null);
         }
+        // TODO learn how to write this properly
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const validate = (values: FormData) => {
@@ -134,21 +137,20 @@ function LoginButton ({ redirectTo, ...props }) {
           if (methods.includes('local') && ['open', 'onrequest'].includes(
                 policies['login_internal']))  {
             buttons.push(
-              <Button {...props}
+              <div key='create'><Button {...props}
                 onClick={() => history.push('/account/create?forgot=false')}
                   variant="contained" color="primary"
                   disabled={loading}
                   className={classes.button}>
                 {loading && loadingProgress}
                 {translate('ra.action.create')} {translate('ra.auth.username')}
-              </Button>
+              </Button></div>
             )
           }
-          // TODO fix error "Each child in a list should have a unique key prop"
           for (const method of methods) {
-            if (method !== 'local') {
+            if (!['ldap', 'local'].includes(method)) {
               buttons.push(
-                <div><Button {...props}
+                <div key={method}><Button {...props}
                   onClick={() => handleLoginOAuth(method)}
                     variant="contained" color="primary"
                     disabled={loading}

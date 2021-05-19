@@ -3,15 +3,14 @@
 // TODO this should be a Dialog instead of a separate page
 
 import React from 'react';
-import { maxLength, minLength, required, useSafeSetState,
-         useTranslate } from 'react-admin';
+import { useSafeSetState, useTranslate } from 'react-admin';
 import { useNotify } from 'ra-core';
 import { Field, Form } from 'react-final-form';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Box, Button, Card, CardActions, CardContent,
          Switch, TextField, makeStyles } from '@material-ui/core'
 import { Title } from 'react-admin';
-import { QRCode } from 'react-qr-svg';
+import { QRCode } from 'qrcode.react';
 
 import { apiUrl } from '../lib/constants';
 
@@ -26,7 +25,7 @@ class MFAGenerate extends React.Component {
     const request = new Request(apiUrl + '/auth_totp', {
         headers: new Headers({
           Accept: 'application/json',
-            Authorization: 'Basic ' + btoa(uid + ':' + token)})
+          Authorization: 'Basic ' + btoa(uid + ':' + token)})
     })
     // TODO handle errors
     fetch(request)
@@ -42,7 +41,7 @@ class MFAGenerate extends React.Component {
     if (uri) {
         return(
             <div>Scan this QR code on your authenticator app<p />
-            <QRCode value={uri} style={{ width: 192 }} /></div>
+            <QRCode renderAs='svg' value={uri} style={{ width: 192 }} /></div>
         )
     } else {
         return ''

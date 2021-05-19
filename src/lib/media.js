@@ -63,7 +63,8 @@ export const MediaInput = props => {
   }
 
   return (
-    <Dropzone.default
+    // TODO alternative to this .default syntax
+    <Dropzone.default  // eslint-disable-line
       getUploadParams={getUploadParams}
       inputContent='Drop photos or click here'
       inputWithFilesContent='Add another  '

@@ -19,7 +19,7 @@ function oauth_redir (loc) {
     window.location = loc;
 };
 
-export default {
+const authProvider = {
     login: ({username, password, method, otp}) => {
         var headers;
         if (sessionStorage.getItem('auth') === 'pendingtotp') {
@@ -105,3 +105,5 @@ export default {
         return Promise.reject();
     }
 };
+
+export default authProvider;

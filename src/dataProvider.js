@@ -31,7 +31,7 @@ function cacheSeconds(seconds=apiCacheSec) {
     return validUntil;
 }
 
-export default {
+const dataProvider = {
     getList: (resource, params) => {
         const query = {
             limit: params.pagination.perPage,
@@ -110,3 +110,5 @@ export default {
             method: 'DELETE'})
         .then(({ json }) => ({ data: json })),
 };
+
+export default dataProvider;

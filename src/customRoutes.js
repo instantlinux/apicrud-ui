@@ -12,7 +12,7 @@ import magic from './lib/magic.js';
 import MFA from './views/mfa.js';
 import prefs from './lib/prefs.js';
 
-export default [
+const customRoutes = [
     <Route exact path="/" component={welcome} />,
     <Route exact path="/welcome" component={welcome} />,
     <Route exact path="/about" component={aboutPage} />,
@@ -24,3 +24,5 @@ export default [
     <Route exact path="/mfa" component={MFA} />,
     <Route exact path="/prefs" component={prefs} noLayout />,
 ];
+
+export default customRoutes;
