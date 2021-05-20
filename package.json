@@ -1,6 +1,6 @@
 {
   "name": "apicrud-ui",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "The UI for apicrud full-stack framework with RBAC.",
   "main": "./index.js",
   "repository": {

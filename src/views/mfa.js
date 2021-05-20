@@ -10,9 +10,10 @@ import { useHistory } from 'react-router-dom';
 import { Box, Button, Card, CardActions, CardContent,
          Switch, TextField, makeStyles } from '@material-ui/core'
 import { Title } from 'react-admin';
-import { QRCode } from 'qrcode.react';
 
 import { apiUrl } from '../lib/constants';
+
+var QRCode = require('qrcode.react');
 
 class MFAGenerate extends React.Component {
   constructor(props){
@@ -41,7 +42,7 @@ class MFAGenerate extends React.Component {
     if (uri) {
         return(
             <div>Scan this QR code on your authenticator app<p />
-            <QRCode renderAs='svg' value={uri} style={{ width: 192 }} /></div>
+		<QRCode renderAs={'svg'} value={uri} size={192} /></div>
         )
     } else {
         return ''
