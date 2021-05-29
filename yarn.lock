@@ -3501,20 +3501,20 @@ __metadata:
     prop-types: ^15.7.2
     qrcode.react: ^1.0.1
     query-string: ^6.13.8
-    ra-core: ^3.15.1
-    ra-data-json-server: ^3.15.1
-    ra-i18n-polyglot: ^3.15.1
+    ra-core: ^3.15.2
+    ra-data-json-server: ^3.15.2
+    ra-i18n-polyglot: ^3.15.2
     ra-input-rich-text: ^3.14.0
     ra-language-chinese: ^2.0.10
-    ra-language-english: ^3.15.1
-    ra-language-french: ^3.15.1
+    ra-language-english: ^3.15.2
+    ra-language-french: ^3.15.2
     ra-language-german: ^3.13.4
-    ra-language-italian: ^3.0.0
+    ra-language-italian: ^3.13.1
     ra-language-portuguese: ^1.6.0
     ra-language-russian: ^3.13.5
-    ra-ui-materialui: ^3.15.1
+    ra-ui-materialui: ^3.15.2
     react: ^17.0.2
-    react-admin: ^3.15.1
+    react-admin: ^3.15.2
     react-dom: ^17.0.2
     react-dropzone-uploader: ^2.11.0
     react-final-form: ^6.5.2
@@ -13004,9 +13004,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"ra-core@npm:^3.15.1":
-  version: 3.15.1
-  resolution: "ra-core@npm:3.15.1"
+"ra-core@npm:^3.15.2":
+  version: 3.15.2
+  resolution: "ra-core@npm:3.15.2"
   dependencies:
     classnames: ~2.2.5
     date-fns: ^1.29.0
@@ -13027,27 +13027,27 @@ fsevents@^1.2.7:
     react-router-dom: ^5.1.0
     redux: ^3.7.2 || ^4.0.3
     redux-saga: ^1.0.0
-  checksum: 04c95a67ba7a353fa54170effc89ae10e128adf36a96671bb83a20c3115c628477177d0ae4af032aa5a120884da4c2a832fda0a9315edde23d03417e390a1681
+  checksum: eaf900e5b5985718fb5c05ebbb7f870f2a65cf9940017948c31a75edcfbd58793fc8c52a25b7bc08594837500bf5e2a8ac611fe4733bf404226a2cd0c77fe4e7
   languageName: node
   linkType: hard
 
-"ra-data-json-server@npm:^3.15.1":
-  version: 3.15.1
-  resolution: "ra-data-json-server@npm:3.15.1"
+"ra-data-json-server@npm:^3.15.2":
+  version: 3.15.2
+  resolution: "ra-data-json-server@npm:3.15.2"
   dependencies:
     query-string: ^5.1.1
-    ra-core: ^3.15.1
-  checksum: 70cee51449ee6ba837cc0f42ce06335e15a5c9ed023617a4787a0f0f2f07ae5b456f547396e0c0313c5db93f3bf3003bab2b7294059882819adb1978c78068db
+    ra-core: ^3.15.2
+  checksum: 03546778e3d683b9189a0d4a251468cd7c9a2ae48da6453a4a590ca326ade4cff22d7b5b101b2d6de4cb8cb90cc1416c50b075cca7023954ff40f90ae2e73e50
   languageName: node
   linkType: hard
 
-"ra-i18n-polyglot@npm:^3.15.1":
-  version: 3.15.1
-  resolution: "ra-i18n-polyglot@npm:3.15.1"
+"ra-i18n-polyglot@npm:^3.15.2":
+  version: 3.15.2
+  resolution: "ra-i18n-polyglot@npm:3.15.2"
   dependencies:
     node-polyglot: ^2.2.2
-    ra-core: ^3.15.1
-  checksum: efc67b40008f504f100dc84a54d16ab854bddd617aba4964578c2936c08c7cf92516d128b75de3cb7a934e98c34252a5171311d114d7d897fa73ef0f910f2962
+    ra-core: ^3.15.2
+  checksum: dc7579ee8d56b1cbe9d925974148381893fc9dabd32b2097e51da0d07f4d054dbe6fd21622bd190e61a96492a6aa287044bff747634afd498224e80d663baa4e
   languageName: node
   linkType: hard
 
@@ -13075,21 +13075,21 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"ra-language-english@npm:^3.15.1":
-  version: 3.15.1
-  resolution: "ra-language-english@npm:3.15.1"
+"ra-language-english@npm:^3.15.2":
+  version: 3.15.2
+  resolution: "ra-language-english@npm:3.15.2"
   dependencies:
-    ra-core: ^3.15.1
-  checksum: 22800a2b437e72b9f639e802ca5f9e32eb79160f2ee0ff89b94ea524f58d078e8cb28f23942a72a6a42ad3cef73f9e82163aad8b7fd5f7a596a2077067dcdfa7
+    ra-core: ^3.15.2
+  checksum: 2cb6ae3fb91ee033fb973494eed01d2c10d107110c77b384226a3dddf3bfbb7829fc7ba18b61f786d67426cb52be3d52d0c40ac0547a1c4cf354e5ab98c66383
   languageName: node
   linkType: hard
 
-"ra-language-french@npm:^3.15.1":
-  version: 3.15.1
-  resolution: "ra-language-french@npm:3.15.1"
+"ra-language-french@npm:^3.15.2":
+  version: 3.15.2
+  resolution: "ra-language-french@npm:3.15.2"
   dependencies:
-    ra-core: ^3.15.1
-  checksum: b2b7414132022eb05232636c03428c3b14dea81c6888890991325f47fd6544117feea397a44409ce5289a65059ac7b2bf652e92731cc4095139e4fe4b7814191
+    ra-core: ^3.15.2
+  checksum: 43eea048c36ea23ac13abfc1d519917c249909f2a0ff9b78fa61cbb22429895bd4ce60dcf02fd4f922fb6eff7e3861506c774ddaa064db7332347eeca140354f
   languageName: node
   linkType: hard
 
@@ -13100,7 +13100,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"ra-language-italian@npm:^3.0.0":
+"ra-language-italian@npm:^3.13.1":
   version: 3.13.1
   resolution: "ra-language-italian@npm:3.13.1"
   checksum: f2a607c71d96f6843973c33d4db65e1301e6744cdf3a2bd5495585a67f231a2575383d0f68b82bf671ac58110bd609b5582b98a65f2b0102de660936640a2d02
@@ -13121,9 +13121,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"ra-ui-materialui@npm:^3.15.1":
-  version: 3.15.1
-  resolution: "ra-ui-materialui@npm:3.15.1"
+"ra-ui-materialui@npm:^3.15.2":
+  version: 3.15.2
+  resolution: "ra-ui-materialui@npm:3.15.2"
   dependencies:
     autosuggest-highlight: ^3.1.1
     classnames: ~2.2.5
@@ -13152,7 +13152,7 @@ fsevents@^1.2.7:
     react-router: ^5.1.0
     react-router-dom: ^5.1.0
     redux: ^3.7.2 || ^4.0.3
-  checksum: 4fdfd4d606c0bd651b959bd879b47d6b303f36d34acb1036bf417e4db5532c8f357bc647c894bd368da5231f314c641c68685a5438a4ff611c163c42fbe30184
+  checksum: 75c8d9f79153589d8953f8de7c18e312c75b8e486346a567f0b7033720552bc2cf4342c94b4a9eab7b1af141cbd346d723cb5a4fc159360de3612425bc5a0239
   languageName: node
   linkType: hard
 
@@ -13203,9 +13203,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-admin@npm:^3.15.1":
-  version: 3.15.1
-  resolution: "react-admin@npm:3.15.1"
+"react-admin@npm:^3.15.2":
+  version: 3.15.2
+  resolution: "react-admin@npm:3.15.2"
   dependencies:
     "@material-ui/core": ^4.11.2
     "@material-ui/icons": ^4.11.2
@@ -13213,10 +13213,10 @@ fsevents@^1.2.7:
     connected-react-router: ^6.5.2
     final-form: ^4.20.2
     final-form-arrays: ^3.0.2
-    ra-core: ^3.15.1
-    ra-i18n-polyglot: ^3.15.1
-    ra-language-english: ^3.15.1
-    ra-ui-materialui: ^3.15.1
+    ra-core: ^3.15.2
+    ra-i18n-polyglot: ^3.15.2
+    ra-language-english: ^3.15.2
+    ra-ui-materialui: ^3.15.2
     react-final-form: ^6.5.2
     react-final-form-arrays: ^3.1.3
     react-redux: ^7.1.0
@@ -13227,7 +13227,7 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ^16.9.0 || ^17.0.0
     react-dom: ^16.9.0 || ^17.0.0
-  checksum: a319cb11791088b9ef5efc2ab8e39c8daa14c974be4db3ee0e31bd497e564a347957a5f523b11927a23dfa0f80c97074874a9b6ab14353f37c6799d5670612d4
+  checksum: 502bcd34cb22778ce00078aff0efd53224af580f07357cc56637bc11ba0607b1c42e5ce2bc1cddb2eb9a7216c64f30e9907c5ab5d29d718047ad907688d01ae5
   languageName: node
   linkType: hard
 

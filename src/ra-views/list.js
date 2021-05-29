@@ -49,7 +49,8 @@ export const listEdit = props => (
         <SimpleForm>
             <TextInput source='name' label='List'
                 validate={validateNameShort} />
-            <RichTextInput source='description' toolbar={toolbarOpts} />
+            <RichTextInput source='description' label='Description'
+                toolbar={toolbarOpts} />
             <AutocompleteInput source='privacy' choices={privacyChoices} />
             <ReferenceInput source='category_id' reference='category' >
                 <SelectInput optionText='name' />

@@ -42,7 +42,7 @@ class MFAGenerate extends React.Component {
     if (uri) {
         return(
             <div>Scan this QR code on your authenticator app<p />
-		<QRCode renderAs={'svg'} value={uri} size={192} /></div>
+                <QRCode renderAs={'svg'} value={uri} size={192} /></div>
         )
     } else {
         return ''

@@ -9,6 +9,7 @@ import locationIcon from '@material-ui/icons/Place';
 import messageIcon from '@material-ui/icons/Chat';
 import personIcon from '@material-ui/icons/People';
 import pictureIcon from '@material-ui/icons/PhotoCamera';
+import trashcanIcon from '@material-ui/icons/Delete';
 
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 import chineseMessages from 'ra-language-chinese';
@@ -49,6 +50,7 @@ import { profileCreate, profileEdit } from './ra-views/profile';
 import { scopeCreate, scopeEdit } from './ra-views/scope';
 import { settingsEdit } from './ra-views/settings';
 import { storageCreate, storageEdit } from './ra-views/storage';
+import { trashcanEdit, trashcanList } from './ra-views/trashcan';
 import { tzEdit } from './ra-views/tz';
 
 const messages = {
@@ -70,7 +72,7 @@ const App = () => (
            i18nProvider={i18nProvider}
            dataProvider={dataProvider} customRoutes={customRoutes}
            layout={customLayout} loginPage={LoginPage} theme={theme} >
-	{permissions => [
+       {permissions => [
         <Resource name='account' create={accountCreate}
           list={permissions.match(/^admin/) ? accountList : null}
           edit={permissions.match(loggedin) ? accountEdit : null}
@@ -127,6 +129,10 @@ const App = () => (
           edit={permissions.match(loggedin) ? storageEdit : null} />,
         <Resource name='settings'
           edit={permissions.match(/^admin/) ? settingsEdit : null} />,
+        <Resource name='trashcan'
+          list={permissions.match(loggedin) ? trashcanList : null}
+          edit={permissions.match(loggedin) ? trashcanEdit : null}
+          icon={trashcanIcon} options={{ label: 'Trash' }} />,
         <Resource name='tz' edit={tzEdit} />,
 	]}
     </Admin>
