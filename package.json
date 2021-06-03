@@ -1,8 +1,9 @@
 {
+    "private": true,
   "name": "apicrud-ui",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "The UI for apicrud full-stack framework with RBAC.",
-  "main": "./index.js",
+  "main": "./build/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instantlinux/apicrud-ui.git"

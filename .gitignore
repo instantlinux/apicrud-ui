@@ -4,6 +4,7 @@
 .pnp.js
 .yarn
 .yarnrc.yml
+build
 coverage
 env-config.js
 htmlcov
