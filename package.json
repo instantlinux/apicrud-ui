@@ -1,5 +1,4 @@
 {
-    "private": true,
   "name": "apicrud-ui",
   "version": "0.0.35",
   "description": "The UI for apicrud full-stack framework with RBAC.",

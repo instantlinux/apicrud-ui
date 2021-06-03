@@ -18,7 +18,7 @@ import { validateRequired128String,
 function redirect(props) {
     const { list_id } = (typeof props.location.state !== 'undefined' 
                           && props.location.state.record);
-    console.log('redirect list_id=' + list_id);
+    // console.log('redirect list_id=' + list_id);
     return list_id ? `/list/${list_id}/show` : 'show';
 }
 
