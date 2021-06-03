@@ -120,9 +120,9 @@ export const accountEdit = props => (
             ]} />
         </FormTab>
         <FormTab label='Grants'>
-            <ReferenceManyField reference='grant' target='uid'
-                    filter={{uid: 'x-23450001'}} addLabel={false}>
-                <Datagrid rowClick='edit'>
+            <ReferenceManyField reference='grant' target='account_id'
+                    addLabel={false}>
+                <Datagrid rowClick={editGrant}>
                     <TextField source='name' />
                     <TextField source='value' />
                 </Datagrid>
@@ -145,6 +145,11 @@ export const accountList = props => (
         </Datagrid>
     </List>
 );
+
+const editGrant = (id) => {
+    var url = new URL(window.location.href);
+    return `/grant/${id}?account_id=${url.hash.split('/')[2]}`
+};
 
 const MenuUpdateTitle = ({ record }) => {
     return <span>Password Update - {record.username}</span>
