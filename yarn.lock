@@ -3515,6 +3515,7 @@ __metadata:
     ra-ui-materialui: ^3.15.2
     react: ^17.0.2
     react-admin: ^3.15.2
+    react-app-rewired: ^2.1.8
     react-dom: ^17.0.2
     react-dropzone-uploader: ^2.11.0
     react-final-form: ^6.5.2
@@ -13242,6 +13243,19 @@ fsevents@^1.2.7:
     regenerator-runtime: ^0.13.7
     whatwg-fetch: ^3.4.1
   checksum: 96b8bb3bdeb5279ebb73622744dcaba75a2f48861e8353052cb758e33db850845b11fa7da87c52663a4e4ee9ed356069f6a1e42151a74f01dc24bbfbbc5ad79a
+  languageName: node
+  linkType: hard
+
+"react-app-rewired@npm:^2.1.8":
+  version: 2.1.8
+  resolution: "react-app-rewired@npm:2.1.8"
+  dependencies:
+    semver: ^5.6.0
+  peerDependencies:
+    react-scripts: ">=2.1.3"
+  bin:
+    react-app-rewired: bin/index.js
+  checksum: 26b4127f8f8f0cb6f2ba07084fbc46d651a7d327ba9b22014b766bde66797d17a7cdad15eb3fbddaa03d8896684036a984a2b8975b6430de2fefe28cb634624e
   languageName: node
   linkType: hard
 
