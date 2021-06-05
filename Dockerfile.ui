@@ -15,7 +15,7 @@ ARG REACT_APP_API_URL=https://apicrud-dev.example.com/api/v1
 ARG REACT_APP_TOKEN_MAPBOX=must-be-set
 ENV REACT_APP_TOKEN_MAPBOX=$REACT_APP_TOKEN_MAPBOX
 
-COPY package.json yarn.lock .pnp.js ./
+COPY config-overrides.js package.json yarn.lock .pnp.js ./
 COPY .yarn/ ./.yarn
 RUN yarn set version berry && yarn set version 2.4.0 && yarn
 COPY public/ ./public
