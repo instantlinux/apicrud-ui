@@ -1554,7 +1554,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-react@npm:^7.12.5":
+"@babel/preset-react@npm:^7.12.5, @babel/preset-react@npm:^7.13.13":
   version: 7.13.13
   resolution: "@babel/preset-react@npm:7.13.13"
   dependencies:
@@ -3482,6 +3482,7 @@ __metadata:
   resolution: "apicrud-ui@workspace:."
   dependencies:
     "@babel/plugin-transform-react-jsx": ^7.14.3
+    "@babel/preset-react": ^7.13.13
     "@blackbox-vision/ra-language-spanish": ^3.12.2
     "@material-ui/core": ^4.11.2
     "@material-ui/icons": ^4.11.2
