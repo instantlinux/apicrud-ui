@@ -1208,7 +1208,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-react-jsx@npm:^7.12.1, @babel/plugin-transform-react-jsx@npm:^7.12.17, @babel/plugin-transform-react-jsx@npm:^7.13.12":
+"@babel/plugin-transform-react-jsx@npm:^7.12.1, @babel/plugin-transform-react-jsx@npm:^7.12.17, @babel/plugin-transform-react-jsx@npm:^7.13.12, @babel/plugin-transform-react-jsx@npm:^7.14.3":
   version: 7.14.3
   resolution: "@babel/plugin-transform-react-jsx@npm:7.14.3"
   dependencies:
@@ -3481,11 +3481,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "apicrud-ui@workspace:."
   dependencies:
+    "@babel/plugin-transform-react-jsx": ^7.14.3
     "@blackbox-vision/ra-language-spanish": ^3.12.2
     "@material-ui/core": ^4.11.2
     "@material-ui/icons": ^4.11.2
     "@material-ui/styles": ^4.11.2
     connected-react-router: ^6.8.0
+    customize-cra: ^1.0.0
     eslint: ^7.26.0
     eslint-config-react-app: ^6.0.0
     final-form: ^4.20.2
@@ -5648,6 +5650,15 @@ __metadata:
   version: 3.0.8
   resolution: "csstype@npm:3.0.8"
   checksum: e15233592a2c580fd72c4346a5c921044b8f4f29bcb81628a81199c4d6a91eb8f8e4875f440ef9c990e85f179a3370f3b842fe55e4743119ad0ce712519e7123
+  languageName: node
+  linkType: hard
+
+"customize-cra@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "customize-cra@npm:1.0.0"
+  dependencies:
+    lodash.flow: ^3.5.0
+  checksum: 577bd3a9fecfbb38b482eb03aa476b8535a1d0e59ef09eef49fc32a3e90a08760cf7de0b507e999c87e86ad045be496c3998fbdba830f42198810149582a60b8
   languageName: node
   linkType: hard
 
@@ -10119,6 +10130,13 @@ fsevents@^1.2.7:
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
   checksum: b6042bd8c09ff1961c9127d32266316bc21f946ece5e3464a663ec61fadb98e7d56ec0ef7e23b47d393695310c19cf24e651c1756be6da91ac02c72be7f79465
+  languageName: node
+  linkType: hard
+
+"lodash.flow@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "lodash.flow@npm:3.5.0"
+  checksum: 52204602c6ec53e78497387751bf2cf432a9db7b0982e62b01b489be847b68efde8f7efed6fbeaeaeb66d7c7bd171d389c32d548908eafc00958bba8d462e55a
   languageName: node
   linkType: hard
 

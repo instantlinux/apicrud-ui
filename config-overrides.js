@@ -1,11 +1,6 @@
-const { injectBabelPlugin } = require("react-app-rewired");
+const { override, addExternalBabelPlugins } = require('customize-cra');
 
-module.exports = {
-  webpack: function(config, env) {
-      if (env !== 'production') {
-	  return config;
-      }
-      config = injectBabelPlugin(['@babel/plugin-transform-react-jsx'])
-      return config;
-  }
-};
+module.exports = override(...addExternalBabelPlugins(
+    '@babel/plugin-transform-react-jsx'
+  )
+);
