@@ -43,6 +43,8 @@ test_functional:
 publish: clean
 	@echo Publishing npm package
 	@mkdir -p build
+	@echo Workaround for https://gist.github.com/ugultopu/e1949b60bfcd86df782dd16ae51caf05
+	npm install $(cat package.json |jq -r '.devDependencies'|grep @ |awk  -F '"' '{ print $2"@"$4 }')
 	yarn transpile
 	@cp package.json README.md build/
 	cd build && npm publish

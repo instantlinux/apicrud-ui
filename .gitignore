@@ -11,7 +11,5 @@ htmlcov
 node_modules
 npm-debug.log
 junit.xml
-src/package.json
-src/tsconfig.json
-src/README.md
+package-lock.json
 tmp

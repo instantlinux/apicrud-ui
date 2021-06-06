@@ -89,7 +89,6 @@ function LoginButton ({ redirectTo, ...props }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    // const validate = (values: FormData) => {
     const validate = (values) => {
         const errors = { username: undefined, password: undefined };
         const digits = new RegExp('^[0-9]+$');
