@@ -92,7 +92,8 @@ const MFA = ({redirectTo, ...props}) => {
             Authorization: 'Basic ' + btoa(uid + ':' + token),
             'Content-Type': 'application/json'})
 
-  const validate = (values: FormData) => {
+  // const validate = (values: FormData) => {
+  const validate = (values) => {
       const errors = { otp_first: undefined };
       const digits = new RegExp('^[0-9]+$');
 

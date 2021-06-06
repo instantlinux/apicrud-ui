@@ -42,8 +42,10 @@ test_functional:
 
 publish: clean
 	@echo Publishing npm package
-	cp package.json README.md src/
-	cd src && npm publish
+	@mkdir -p build
+	yarn transpile
+	@cp package.json README.md build/
+	cd build && npm publish
 
 create_image: qemu
 	@echo docker build -t $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
@@ -96,7 +98,8 @@ endif
 	 -f Dockerfile.ui --build-arg=TAG=$(TAG) $(BUILD_ARGS)
 
 clean:
-	rm -rf .env coverage npm-debug.log src/package.json src/README.md
+	rm -rf .env build coverage npm-debug.log src/package.json \
+	 src/README.md
 	find . -name coverage.xml -o -name results.xml -o -name '*~' \
 	 -exec rm -rf {} \;
 wipe_clean: clean
