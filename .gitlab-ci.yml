@@ -34,7 +34,7 @@ cache:
   services: [ "docker:dind" ]
 
 .create_image_template: &create_image
-  script: echo skipping || make create_image
+  script: make create_image
 
 analysis:
   stage: Analyze and Unit Test
