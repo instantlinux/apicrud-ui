@@ -76,7 +76,7 @@ publish:
   - npm config set always-auth=true
   - npm install -g npm@$VERSION_NPM
   - TAG=$CI_COMMIT_TAG make publish
-  rules: [ if: $CI_COMMIT_TAG ]
+  # rules: [ if: $CI_COMMIT_TAG ]
 
 clean:
   stage: Clean
