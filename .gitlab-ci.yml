@@ -75,6 +75,7 @@ publish:
   - echo "//registry.npmjs.org/:_authToken=$NPMJS_TOKEN" >$HOME/.npmrc
   - npm config set always-auth=true
   - npm install -g npm@$VERSION_NPM
+  - apk add jq
   - TAG=$CI_COMMIT_TAG make publish
   # rules: [ if: $CI_COMMIT_TAG ]
 
