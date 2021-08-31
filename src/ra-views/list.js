@@ -4,7 +4,7 @@ import React from 'react';
 import { AutocompleteInput, AutocompleteArrayInput, ChipField, Create,
          Datagrid, Edit, EditButton, Filter, FunctionField, List, ReferenceArrayField,
          ReferenceArrayInput, ReferenceField, ReferenceInput,
-         ReferenceManyField, RichTextField, SelectInput, Show,
+         ReferenceManyField, RichTextField, SearchInput, SelectInput, Show,
          ShowController, ShowView, SimpleForm, SingleFieldList, Tab,
          TabbedShowLayout, TextField, TextInput } from 'react-admin';
 import Button from '@material-ui/core/Button';
@@ -117,20 +117,20 @@ export const ListShowTabs = ({record, ...props}) => (
 
 export const listShow = props => {
     return <ShowController {...props}>
-	{controllerProps =>
-	 <ShowView actions={null} title=' ' {...props} {...controllerProps}>
-	     <ListShowTabs {...props} />
-	 </ShowView>}
+        {controllerProps =>
+         <ShowView actions={null} title=' ' {...props} {...controllerProps}>
+             <ListShowTabs {...props} />
+         </ShowView>}
     </ShowController>
 };
 
 const CreateMessageButton = ({ record }) => {
     return <Button component={Link} variant='contained'
-	to={{
-	    pathname: '/message/create',
-	    state: { record: { list_id: record.id } },
-	}}>
-	Post
+        to={{
+            pathname: '/message/create',
+            state: { record: { list_id: record.id } },
+        }}>
+        Post
     </Button>
 };
 
@@ -143,6 +143,7 @@ const ListFilter = (props) => (
         <ReferenceInput source='category_id' reference='category'>
           <SelectInput optionText='name' />
         </ReferenceInput>
+        <SearchInput source='name' />
         <AutocompleteInput source='privacy' choices={privacyChoices} />
     </Filter>
 );

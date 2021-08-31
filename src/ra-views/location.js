@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { AutocompleteInput, ChipField, Create, Datagrid, Edit, Filter, List,
-         ReferenceInput, SelectInput, Show, SimpleForm, SimpleShowLayout,
-         TextField, TextInput } from 'react-admin';
+         ReferenceInput, SearchInput, SelectInput, Show, SimpleForm,
+         SimpleShowLayout, TextField, TextInput } from 'react-admin';
 
 import { privacyChoices } from '../lib/constants';
 import { LocationMap } from '../lib/mapbox';
@@ -99,9 +99,10 @@ const ListFilter = (props) => (
         <ReferenceInput source='category_id' reference='category'>
           <SelectInput optionText='name' />
         </ReferenceInput>
-        <ReferenceInput source='uid' reference='person'>
-          <SelectInput optionText='name' />
+        <ReferenceInput source='uid' reference='person' label='Owner'>
+          <AutocompleteInput optionText='name' />
         </ReferenceInput>
+        <SearchInput source='name' />
     </Filter>
 );
 

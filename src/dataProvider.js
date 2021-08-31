@@ -44,6 +44,10 @@ const dataProvider = {
         if (params.filter.hasOwnProperty('q')) {
             params.filter.name = params.filter.q + '%';
             delete params.filter.q;
+	}
+	else if (params.filter.hasOwnProperty('name') &&
+                 params.filter.name[0] !== '%') {
+            params.filter.name = `%${params.filter.name}%`;
         }
         if (Object.keys(params.filter).length > 0) {
             query.filter = JSON.stringify(params.filter);

@@ -4,14 +4,15 @@ import React from 'react';
 import { AutocompleteInput, Create, DateTimeInput, Edit, SimpleForm,
          TextInput } from 'react-admin';
 
-import { validateNameShort } from '../lib/validate';
+import { validateNameShort, validateSelected } from '../lib/validate';
 import vendors from '../lib/vendors';
 
 export const credentialCreate = props => (
     <Create {...props}>
       <SimpleForm redirect={`/settings/${sessionStorage.getItem('settings_id')}/2`} >
         <TextInput source='name' validate={validateNameShort} />
-	<AutocompleteInput source='vendor' choices={vendors} />
+	<AutocompleteInput source='vendor' choices={vendors}
+            validate={validateSelected} />
         <TextInput source='key' label='Username or key ID' />
 	<TextInput source='secret' type='password' />
 	<TextInput source='otherdata' label='Other data' type='password' />
@@ -26,7 +27,8 @@ export const credentialEdit = props => (
     <Edit {...props} title={<MenuTitle />}>
       <SimpleForm redirect={`/settings/${sessionStorage.getItem('settings_id')}/2`} >
         <TextInput source='name' validate={validateNameShort} />
-	<AutocompleteInput source='vendor' choices={vendors} />
+	<AutocompleteInput source='vendor' choices={vendors}
+            validate={validateSelected} />
         <TextInput source='key' label='Username or key ID' />
 	<TextInput source='secret' type='password' />
 	<TextInput source='otherdata' label='Other data' type='password' />

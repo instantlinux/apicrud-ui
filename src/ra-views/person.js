@@ -4,7 +4,7 @@ import React from 'react';
 import { AutocompleteInput, BooleanField, ChipField, Create, Datagrid,
          DateField, Edit, EditButton, Filter, FormTab, FunctionField, ImageField,
          List, ReferenceField, ReferenceInput, ReferenceManyField,
-         SimpleForm, Show, Tab, TabbedForm, TabbedShowLayout,
+         SearchInput, SimpleForm, Show, Tab, TabbedForm, TabbedShowLayout,
          TextField, TextInput } from 'react-admin';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
@@ -198,7 +198,7 @@ const CreateAlbumButton = ({ record }) => {
 
 const ListFilter = (props) => (
     <Filter {...props}>
-        <TextInput source='name' />
+        <SearchInput source='name' />
     </Filter>
 );
 

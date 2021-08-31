@@ -3,11 +3,18 @@
 import React from 'react';
 import { Error, Loading, Query } from 'react-admin';
 import CardHeader from '@material-ui/core/CardHeader';
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+import mapboxgl from 'mapbox-gl';
+import ReactMapboxGl, { Feature, Layer, Marker } from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require(
+    'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 export const Map = ReactMapboxGl({
     accessToken: process.env.REACT_APP_TOKEN_MAPBOX });
+// See https://labs.mapbox.com/maki-icons/  (but not all are available)
+const markerIcon = 'marker-11'
 
 export const EventLocationMap = ({ id }) => {
   return (
@@ -29,9 +36,12 @@ export const EventLocationMap = ({ id }) => {
                 center={data.geo} zoom={[data.address ? 15 : 11]}
                 containerStyle={{ height: "30vh", width: "50vw" }}>
                 <Layer type='symbol' id='marker'
-                   layout={{ 'icon-image': data.address ? 'marker-15' : 'circle-15' }}>
+                     layout={{ 'icon-image': data.address ? markerIcon : 'circle-15' }}>
                   <Feature coordinates={data.geo} />
                 </Layer>
+               {data.name && <Marker coordinates={data.geo} anchor="top">
+                  {data.name}
+                </Marker>}
               </Map>
               </div>
             }
@@ -48,9 +58,12 @@ export const LocationMap = data => {
         style='mapbox://styles/mapbox/streets-v8'
         center={data.geo} zoom={[data.address ? 15 : 11]}
         containerStyle={{ height: "30vh", width: "50vw" }}>
-        <Layer type='symbol' id='marker' layout={{ 'icon-image': 'marker-15' }}>
+        <Layer type='symbol' id='marker' layout={{ 'icon-image': markerIcon }}>
           <Feature coordinates={data.geo} />
         </Layer>
+       {data.name && <Marker coordinates={data.geo} anchor="top">
+          {data.name}
+        </Marker>}
       </Map>
   )
 };
