@@ -79,7 +79,6 @@ else
 	    --tag $(USER_LOGIN)/$(APPNAME)-$${image}:latest \
 	    --push --file Dockerfile.$${image} . $(BUILD_ARGS) \
 	;)
-	curl -X post https://hooks.microbadger.com/images/$(USER_LOGIN)/$(APPNAME)-$${image}/$(MICROBADGER_TOKEN)
 endif
 
 clean_images:
