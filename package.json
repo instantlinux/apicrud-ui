@@ -34,7 +34,7 @@
     "immutable": "^4.0.0-rc.12",
     "jsonexport": "^3.1.0",
     "jwt-decode": "^3.1.2",
-    "mapbox-gl": "^2.3.0",
+    "mapbox-gl": "^1.13.1",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
     "qrcode.react": "^1.0.1",

@@ -7,6 +7,7 @@ import mapboxgl from 'mapbox-gl';
 import ReactMapboxGl, { Feature, Layer, Marker } from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+// TODO this is not working with ci-test
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require(
     'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
