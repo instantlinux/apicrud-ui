@@ -47,6 +47,7 @@ export const pronounChoices = [
     { id: 'they/they/their', name: 'they/them/theirs' },
 ]
 
+export const recaptchaSitekey = process.env.REACT_APP_RECAPTCHA_SITEKEY;
 export const skipAuthPaths = /^#\/(account\/create|account_password|event)/
 export const toolbarOpts = [
     [{'font': []}, {'size': ['small', false, 'large', 'huge']},

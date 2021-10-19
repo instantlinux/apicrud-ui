@@ -10,8 +10,10 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import { parse } from 'query-string';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 import { MenuTitle } from '../lib/ra-custom';
+import { recaptchaSitekey } from '../lib/constants';
 import { validateEmail, validateName, validatePasswordOK,
          validateUsername } from '../lib/validate';
 
@@ -37,7 +39,10 @@ export const accountCreate = props => {
       <Grid item xl={6} md={6} sm={12} xs={12}>
         <Create {...props} title='Account Registration' >
             <SimpleForm redirect='/confirmwait' toolbar={<RegisterToolbar />} >
-            <RegisterForm forgot={forgotbool} />
+	    <GoogleReCaptchaProvider reCaptchaKey={recaptchaSitekey}
+                  scriptProps={{ defer: true, }} >
+              <RegisterForm forgot={forgotbool} />
+            </GoogleReCaptchaProvider>
           </SimpleForm>
         </Create>
       </Grid>
