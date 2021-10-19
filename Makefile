@@ -27,6 +27,7 @@ ui_local: .env .yarn/releases/yarn-$(VERSION_YARN).cjs /usr/bin/yarn
 .env:
 	echo 'REACT_APP_API_URL=$(REACT_APP_API_URL_DEV)' >$@
 	@echo 'REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)' >>$@
+	@echo 'REACT_APP_RECAPTCHA_SITEKEY=$(REACT_APP_RECAPTCHA_SITEKEY)' >>$@
 	@echo 'PORT=$(APICRUD_UI_PORT)' >>$@
 
 analysis: .yarn/releases/yarn-$(VERSION_YARN).cjs
