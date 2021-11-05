@@ -19,7 +19,9 @@ export const personCreate = props => (
             <TextInput source='name' />
             <TextInput source='identity' label='Identity (email)' />
             <ReferenceInput source='location_id' reference='location'>
-               <AutocompleteInput optionText={LocationRenderer} />
+               {/* TODO remove workaround - https://github.com/marmelab/react-admin/issues/6715
+               <AutocompleteInput optionText={LocationRenderer} /> */}
+               <AutocompleteInput optionText='name' />
             </ReferenceInput>
             <TextInput disabled source='status' defaultValue='active' />
             <TextInput disabled source='privacy' defaultValue='public' />

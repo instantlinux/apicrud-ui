@@ -1,7 +1,9 @@
 *~
 .coverage
 .env
+.pnp.cjs
 .pnp.js
+.pnp.loader.mjs
 .yarn
 .yarnrc.yml
 build
