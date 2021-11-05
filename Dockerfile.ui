@@ -1,4 +1,10 @@
-FROM node:12.18.3-alpine as node-dep
+# Version numbers to bump every few months: don't omit one of these - they
+#  should all be defined in one place but Dockerfile format doesn't allow it
+
+##########
+# 14.18.1
+##########
+FROM node:14.18.1-alpine as node-dep
 MAINTAINER Rich Braun "docker@instantlinux.net"
 ARG BUILD_DATE
 ARG VCS_REF
@@ -9,6 +15,10 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.vcs-url=https://github.com/instantlinux/apicrud-ui
 WORKDIR /app
 
+##########
+# 2.4.2
+##########
+ARG VERSION_YARN=2.4.2
 # TODO figure out how to read this as a startup env var
 #  right now it has to be hardcoded at build time
 ARG REACT_APP_API_URL=https://apicrud-dev.example.com/api/v1
@@ -17,12 +27,15 @@ ENV REACT_APP_TOKEN_MAPBOX=$REACT_APP_TOKEN_MAPBOX
 
 COPY package.json yarn.lock .pnp.js ./
 COPY .yarn/ ./.yarn
-RUN yarn set version berry && yarn set version 2.4.0 && yarn
+RUN yarn set version berry && yarn set version $VERSION_YARN && yarn
 COPY public/ ./public
 COPY src/ ./src
 RUN yarn build
 
-FROM nginx:1.19.2-alpine
+##########
+# 1.21.3
+##########
+FROM nginx:1.21.3-alpine
 COPY --from=node-dep /app/build /usr/share/nginx/html
 # When in doubt about dependencies, yarn.lock documents them
 COPY yarn.lock /root/
