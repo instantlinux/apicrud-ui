@@ -41,7 +41,7 @@ const aboutPage = () => (
 	<p />
 	Implementation/design includes these technologies: <a href="http://www.celeryproject.org/">celery</a>, <a href="https://aws.amazon.com/cloudfront/">CloudFront and S3</a>, <a href="https://www.docker.com/">docker</a>, <a href="http://flask.pocoo.org/">flask</a>, <a href="https://kubernetes.io/">kubernetes</a>, <a href="https://developer.mapquest.com/documentation/open/geocoding-api/">MapQuest geocoding</a>, <a href="https://www.mapbox.com/">mapbox</a>, <a href="https://mariadb.org/">MariaDB</a>, <a href="https://oauth.net/2/">OAuth 2.0</a>, <a href="](https://pyauth.github.io/pyotp/">PyOTP</a>, <a href="https://docs.python.org/3/">python 3</a>, <a href="https://www.rabbitmq.com/">RabbitMQ</a>, <a href="https://reactjs.org">react.js</a>, <a href="https://marmelab.com/react-admin">react-admin</a>, <a href="https://www.sqlalchemy.org/">sqlalchemy</a>, <a href="https://uwsgi-docs.readthedocs.io/en/latest/">uWSGI</a>.
 	<p />
-        Software copyright &copy; 2021 by Richard Braun &bull; <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license <p />
+        Software copyright &copy; 2022 by Richard Braun &bull; <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license <p />
         <VersionInfo />
         </CardContent>
     </Card>
