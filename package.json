@@ -21,13 +21,12 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
     "@blackbox-vision/ra-language-spanish": "^3.16.2",
     "@material-ui/core": "^4.12.1",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/styles": "^4.11.4",
     "connected-react-router": "^6.8.0",
-    "eslint-config-react-app": "^6.0.0",
+    "eslint-config-react-app": "^7.0.0",
     "final-form": "^4.20.4",
     "final-form-arrays": "^3.0.2",
     "final-form-submit-errors": "^0.1.2",
@@ -72,14 +71,14 @@
     "worker-loader": "^3.0.8"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.12",
-    "@babel/preset-env": "^7.14.4",
-    "@babel/preset-react": "^7.13.13",
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.2",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
     "commander": "^7.2.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.9.0",
     "jest-junit": "^12.0.0",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^5.0.0"
   },
   "scripts": {
     "dev": "react-scripts start",
