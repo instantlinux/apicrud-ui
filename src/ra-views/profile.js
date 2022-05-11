@@ -74,8 +74,7 @@ const ProfileItemFields = ({item, record, ...props}) => {
         {({ formData, ...rest }) => formData.item === 'location' &&
         <ReferenceInput source='location_id' reference='location'
                  validate={validateSelected}>
-           {/* TODO remove workaround - https://github.com/marmelab/react-admin/issues/6715
-           <AutocompleteInput optionText={LocationRenderer} /> */}
+           <AutocompleteInput optionText={LocationRenderer} />
            <AutocompleteInput optionText='name' />
         </ReferenceInput>}
     </FormDataConsumer>

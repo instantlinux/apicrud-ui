@@ -36,22 +36,22 @@
     "jsonexport": "^3.1.0",
     "jwt-decode": "^3.1.2",
     "mapbox-gl": "^1.13.2",
-    "moment": "^2.29.1",
+    "moment": "^2.29.3",
     "prop-types": "^15.7.2",
     "qrcode.react": "^1.0.1",
     "query-string": "^6.13.8",
     "ra-core": "^3.19.8",
-    "ra-data-json-server": "^3.19.8",
-    "ra-i18n-polyglot": "^3.19.8",
-    "ra-input-rich-text": "^3.19.8",
+    "ra-data-json-server": "^3.19.11",
+    "ra-i18n-polyglot": "^3.19.11",
+    "ra-input-rich-text": "^3.19.11",
     "ra-language-chinese": "^2.0.10",
-    "ra-language-english": "^3.19.8",
-    "ra-language-french": "^3.19.8",
+    "ra-language-english": "^3.19.11",
+    "ra-language-french": "^3.19.11",
     "ra-language-german": "^3.13.5",
     "ra-language-italian": "^3.13.1",
     "ra-language-portuguese": "^1.6.0",
     "ra-language-russian": "^3.13.5",
-    "ra-ui-materialui": "^3.19.8",
+    "ra-ui-materialui": "^3.19.11",
     "react": "^17.0.2",
     "react-admin": "^3.19.8",
     "react-dom": "^17.0.2",
@@ -72,14 +72,15 @@
     "worker-loader": "^3.0.8"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.12",
-    "@babel/preset-env": "^7.14.4",
-    "@babel/preset-react": "^7.13.13",
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "@babel/preset-react": "^7.16.7",
     "commander": "^7.2.0",
     "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.20.3",
     "jest-junit": "^12.0.0",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "dev": "react-scripts start",
@@ -91,7 +92,12 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app"
+    ],
+    "plugins": [
+      "react"
+    ]
   },
   "babel": {
     "presets": [
