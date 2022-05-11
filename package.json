@@ -78,6 +78,7 @@
     "@babel/preset-react": "^7.16.7",
     "commander": "^7.2.0",
     "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-react": "^7.20.3",
     "jest-junit": "^12.0.0",
     "react-scripts": "^5.0.1"
