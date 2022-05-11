@@ -4118,6 +4118,7 @@ __metadata:
     connected-react-router: ^6.8.0
     eslint: ^7.32.0
     eslint-config-react-app: ^6.0.0
+    eslint-plugin-import: ^2.22.0
     eslint-plugin-react: ^7.20.3
     final-form: ^4.20.4
     final-form-arrays: ^3.0.2
@@ -6441,7 +6442,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import@npm:^2.25.3":
+"eslint-plugin-import@npm:^2.22.0, eslint-plugin-import@npm:^2.25.3":
   version: 2.26.0
   resolution: "eslint-plugin-import@npm:2.26.0"
   dependencies:
