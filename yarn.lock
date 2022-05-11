@@ -4118,8 +4118,12 @@ __metadata:
     connected-react-router: ^6.8.0
     eslint: ^7.32.0
     eslint-config-react-app: ^6.0.0
+    eslint-plugin-flowtype: ^8.0.3
     eslint-plugin-import: ^2.22.0
-    eslint-plugin-react: ^7.20.3
+    eslint-plugin-jest: ^25.3.0
+    eslint-plugin-jsx-a11y: ^6.5.1
+    eslint-plugin-react: ^7.27.1
+    eslint-plugin-react-hooks: ^4.3.0
     final-form: ^4.20.4
     final-form-arrays: ^3.0.2
     final-form-submit-errors: ^0.1.2
@@ -6513,7 +6517,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.20.3, eslint-plugin-react@npm:^7.27.1":
+"eslint-plugin-react@npm:^7.27.1":
   version: 7.29.4
   resolution: "eslint-plugin-react@npm:7.29.4"
   dependencies:
