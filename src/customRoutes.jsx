@@ -2,15 +2,15 @@
 
 import React from 'react';
 import { Route } from 'react-router-dom';
-import welcome from './views/welcome.js';
-import aboutPage from './views/aboutPage.js';
-import apikeyNew from './views/apikey-new.js';
-import cnfrm from './views/confirm.js';
-import confirmWait from './views/confirm-wait.js';
-import loginExt from './lib/login-ext.js';
-import magic from './lib/magic.js';
-import MFA from './views/mfa.js';
-import prefs from './lib/prefs.js';
+import welcome from './views/welcome';
+import aboutPage from './views/aboutPage';
+import apikeyNew from './views/apikey-new';
+import cnfrm from './views/confirm';
+import confirmWait from './views/confirm-wait';
+import loginExt from './lib/login-ext';
+import magic from './lib/magic';
+import MFA from './views/mfa';
+import prefs from './lib/prefs';
 
 const customRoutes = [
     <Route exact path="/" component={welcome} />,

@@ -1,6 +1,7 @@
 // created 25-may-2019 by rich braun <docker@instantlinux.net>
 
-export const apiUrl = process.env.REACT_APP_API_URL;
+// export const apiUrl = process.env.REACT_APP_API_URL;
+export const apiUrl = import.meta.env.REACT_APP_API_URL;
 export const apiCacheSec = 30;
 export const defaultThumbnailSizes = [120, 720];
 export const localeChoices = [

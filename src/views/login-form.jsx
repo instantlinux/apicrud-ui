@@ -2,7 +2,7 @@
 //  adapted from standard ra-ui-materialui form
 import React, { useEffect } from 'react';
 import { useLogin, useSafeSetState, useTranslate } from 'react-admin';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Field, Form } from 'react-final-form';
 import { Avatar, Button, ButtonGroup, CardActions, CircularProgress, TextField,
@@ -47,7 +47,7 @@ function LoginButton ({ redirectTo, ...props }) {
     const [askPassword, setAskPassword] = useSafeSetState(true);
     const [askTOTP, setAskTOTP] = useSafeSetState(false);
     const login = useLogin();
-    const history = useHistory();
+    const history = useNavigate();
     const translate = useTranslate();
     const notify = useNotify();
     const classes = useStyles(props);

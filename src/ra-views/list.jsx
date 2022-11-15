@@ -8,7 +8,7 @@ import { AutocompleteInput, AutocompleteArrayInput, ChipField, Create,
          ShowController, ShowView, SimpleForm, SingleFieldList, Tab,
          TabbedShowLayout, TextField, TextInput } from 'react-admin';
 import Button from '@material-ui/core/Button';
-import RichTextInput from 'ra-input-rich-text';
+import { RichTextInput } from 'ra-input-rich-text';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { parse } from 'query-string';

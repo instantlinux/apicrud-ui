@@ -6,7 +6,7 @@ import { AutocompleteInput, ChipField, Create, Datagrid, Edit, Filter, List,
          SimpleShowLayout, TextField, TextInput } from 'react-admin';
 
 import { privacyChoices } from '../lib/constants';
-import { LocationMap } from '../lib/mapbox';
+// import { LocationMap } from '../lib/mapbox';
 import { TopbarActions } from '../lib/ra-custom';
 import { validateCountry,
          validateNameShort } from '../lib/validate';
@@ -52,13 +52,14 @@ export const locationEdit = props => (
       </SimpleForm>
     </Edit>
 );
-
+{/*
 const Aside = ({record}) => (
     <LocationMap {...record} />
 );
-
+ */}
 export const locationShow = props => (
-    <Show {...props} aside={<Aside />} title={<MenuTitle />}
+    // <Show {...props} aside={<Aside />} title={<MenuTitle />}
+    <Show {...props} title={<MenuTitle />}
           actions={<TopbarActions />}>
       <SimpleShowLayout>
         <TextField source='name' label='Venue Name' emptyText=' ' />

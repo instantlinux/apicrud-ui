@@ -9,7 +9,7 @@ import { apiCacheSec, excludeExifFields, excludeFields
        } from './lib/constants';
 
 function urlPrefix(resource) {
-    const fallbackUrl = process.env.REACT_APP_API_URL;
+    const fallbackUrl = import.meta.env.REACT_APP_API_URL;
     var res = JSON.parse(sessionStorage.getItem('resource_endpoints'))
     return `${res && resource in res ? res[resource] : fallbackUrl}/${resource}`;
 }

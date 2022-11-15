@@ -7,7 +7,7 @@ import { ChipField, Create, Datagrid, DateField, Edit, FormTab, FunctionField,
          TextInput } from 'react-admin';
 // import { Link } from 'react-router-dom';
 // import Button from '@material-ui/core/Button';
-import RichTextInput from 'ra-input-rich-text';
+import { RichTextInput } from 'ra-input-rich-text';
 import moment from 'moment';
 
 import { privacyChoices, toolbarOpts } from '../lib/constants';

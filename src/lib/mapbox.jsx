@@ -13,7 +13,7 @@ mapboxgl.workerClass = require(
     'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 export const Map = ReactMapboxGl({
-    accessToken: process.env.REACT_APP_TOKEN_MAPBOX });
+    accessToken: import.meta.env.REACT_APP_TOKEN_MAPBOX });
 // See https://labs.mapbox.com/maki-icons/  (but not all are available)
 const markerIcon = 'marker-11'
 

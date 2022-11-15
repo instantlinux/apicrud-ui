@@ -6,14 +6,15 @@ import React from 'react';
 import { useSafeSetState, useTranslate } from 'react-admin';
 import { useNotify } from 'ra-core';
 import { Field, Form } from 'react-final-form';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Box, Button, Card, CardActions, CardContent,
          Switch, TextField, makeStyles } from '@material-ui/core'
 import { Title } from 'react-admin';
 
 import { apiUrl } from '../lib/constants';
 
-var QRCode = require('qrcode.react');
+// var QRCode = require('qrcode.react');
+import QRCode from 'qrcode.react';
 
 class MFAGenerate extends React.Component {
   constructor(props){
@@ -82,7 +83,7 @@ const MFA = ({redirectTo, ...props}) => {
   const [totp_toggle, setTotpToggle] = useSafeSetState(false);
   const [backup_codes, setBackupCodes] = useSafeSetState(null);
   const [redir, setRedir] = useSafeSetState(redirectTo);
-  const history = useHistory();
+  const history = useNavigate();
   const notify = useNotify();
   const translate = useTranslate();
   const uid = sessionStorage.getItem('uid');

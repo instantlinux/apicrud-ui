@@ -3,7 +3,7 @@
 import decodeJwt from 'jwt-decode';
 import { skipAuthPaths } from './lib/constants';
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = import.meta.env.REACT_APP_API_URL;
 
 function authHeaders () {
     const uid = sessionStorage.getItem('uid');
