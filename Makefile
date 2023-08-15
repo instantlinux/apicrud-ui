@@ -7,8 +7,8 @@ include Makefile.vars
 BUILDX               ?= https://github.com/docker/buildx/releases/download/v0.4.1/buildx-v0.4.1.linux-amd64
 BUILD_ARGS            = --build-arg=VCS_REF=$(CI_COMMIT_SHA) \
    --build-arg=BUILD_DATE=$(shell date +%Y-%m-%dT%H:%M:%SZ) \
-   --build-arg=REACT_APP_API_URL=$(REACT_APP_API_URL) \
-   --build-arg=REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)
+   --build-arg=VITE_API_URL=$(VITE_API_URL) \
+   --build-arg=VITE_TOKEN_MAPBOX=$(VITE_TOKEN_MAPBOX)
 REGISTRY             ?= $(REGISTRY_URI)/$(USER_LOGIN)
 export APICRUD_ENV   ?= local
 export DOCKER_CLI_EXPERIMENTAL = enabled
@@ -20,13 +20,13 @@ export DOCKER_CLI_EXPERIMENTAL = enabled
 
 .PHONY: apicrud-%/tag qemu
 ui_local: .env .yarn/releases/yarn-$(VERSION_YARN).cjs /usr/bin/yarn
-	REACT_APP_API_URL=$(REACT_APP_API_URL_DEV) \
+	VITE_API_URL=$(VITE_API_URL_DEV) \
 	yarn dev
 
-# All vars passed via process.env must be prefixed REACT_APP_
+# All vars passed via import.meta.env must be prefixed VITE_
 .env:
-	echo 'REACT_APP_API_URL=$(REACT_APP_API_URL_DEV)' >$@
-	@echo 'REACT_APP_TOKEN_MAPBOX=$(REACT_APP_TOKEN_MAPBOX)' >>$@
+	echo 'VITE_API_URL=$(VITE_API_URL_DEV)' >$@
+	@echo 'VITE_TOKEN_MAPBOX=$(VITE_TOKEN_MAPBOX)' >>$@
 	@echo 'PORT=$(APICRUD_UI_PORT)' >>$@
 
 analysis: .yarn/releases/yarn-$(VERSION_YARN).cjs
@@ -52,7 +52,7 @@ publish: clean
 
 create_image: qemu
 	@echo docker build -t $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG)
-	@echo Hardcoded REACT_APP_API_URL=$(REACT_APP_API_URL)
+	@echo Hardcoded VITE_API_URL=$(VITE_API_URL)
 	@docker buildx build \
 	 --tag $(REGISTRY)/$(APPNAME)-$(CI_JOB_STAGE):$(TAG) . \
 	 --push -f Dockerfile.$(CI_JOB_STAGE) \

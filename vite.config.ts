@@ -11,6 +11,6 @@ export default defineConfig({
     mainFields: [],
   },
   server: {
-    port: 32080
+    port: 3000
   }
 })

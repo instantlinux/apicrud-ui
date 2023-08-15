@@ -8,7 +8,7 @@ import HomeIcon from  '@material-ui/icons/Home';
 import PasswordIcon from  '@material-ui/icons/VpnKey';
 import ProfileIcon from '@material-ui/icons/PersonPin';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 
 const CustomUserMenu = (props) => {
@@ -40,7 +40,7 @@ const CustomUserMenu = (props) => {
 
 const CustomAppBar = props => <AppBar {...props} userMenu={<CustomUserMenu />} />;
 
-export const theme = createMuiTheme({
+export const theme = createTheme({
     palette: { secondary: blue, contrastThreshold: 3, tonalOffset: 0.2 },
     sidebar: { width: 150, closedWidth: 55 },
 });

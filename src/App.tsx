@@ -1,7 +1,10 @@
 // created 25-mar-2019 by rich braun <docker@instantlinux.net>
 
 import React from 'react';
-import { Admin, Resource, resolveBrowserLocale } from 'react-admin';
+import { Admin, CustomRoutes, Resource,
+         resolveBrowserLocale } from 'react-admin';
+import { Route } from 'react-router-dom';
+
 import accountIcon from '@material-ui/icons/PersonPin';
 import categoryIcon from '@material-ui/icons/Style';
 import listIcon from '@material-ui/icons/Sort';
@@ -21,6 +24,7 @@ import portugueseMessages from 'ra-language-portuguese';
 import russianMessages from 'ra-language-russian';
 // TODO resolve
 // Qualified path resolution failed - none of the candidates can be found on the disk.
+// The package may have incorrect main/module/exports specified in its package.json.
 // import spanishMessages from '@blackbox-vision/ra-language-spanish';
 
 import './App.css';
@@ -28,7 +32,6 @@ import './App.css';
 import authProvider from './authProvider';
 import dataProvider from './dataProvider';
 import { customLayout, theme } from './customLayout';
-import customRoutes from './customRoutes';
 import isRegistered from './lib/registry';
 import LoginPage from './views/login';
 import { accountCreate, accountEdit, accountList, accountSecurity,
@@ -53,6 +56,16 @@ import { storageCreate, storageEdit } from './ra-views/storage';
 import { trashcanEdit, trashcanList } from './ra-views/trashcan';
 import { tzEdit } from './ra-views/tz';
 
+import Welcome from './views/welcome';
+import AboutPage from './views/aboutPage';
+import ApikeyNew from './views/apikey-new';
+import Cnfrm from './views/confirm';
+import ConfirmWait from './views/confirm-wait';
+import LoginExt from './lib/login-ext';
+import Magic from './lib/magic';
+import MFA from './views/mfa';
+import Prefs from './lib/prefs';
+
 const messages = {
     zh: chineseMessages,
     en: englishMessages,
@@ -70,8 +83,22 @@ const loggedin = /^(admin|user)/;
 const App = () => (
     <Admin authProvider={authProvider}
            i18nProvider={i18nProvider}
-           dataProvider={dataProvider} customRoutes={customRoutes}
+           dataProvider={dataProvider}
            layout={customLayout} loginPage={LoginPage} theme={theme} >
+       <CustomRoutes>
+	 <Route path="/" element={<Welcome />} />
+	 <Route path="/welcome" element={<Welcome />} />
+	 <Route path="/about" element={<AboutPage />} />
+	 <Route path="/apikeynew" element={<ApikeyNew />} />
+	 <Route path="/confirm" element={<Cnfrm />} />
+	 <Route path="/confirmwait" element={<ConfirmWait />} />
+	 <Route path="/login/ext" element={<LoginExt />} />
+	 <Route path="/mfa" element={<MFA />} />
+       </CustomRoutes>
+       <CustomRoutes noLayout>
+	 <Route path="/ev" element={<Magic />} />
+	 <Route path="/prefs" element={<Prefs />} />
+       </CustomRoutes>
        {permissions => [
         <Resource name='account' create={accountCreate}
           list={permissions.match(/^admin/) ? accountList : null}

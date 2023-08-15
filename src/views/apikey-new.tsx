@@ -28,7 +28,7 @@ class ApikeyGet extends React.Component {
   }
 }
 
-const apikeyNew = () => {
+const ApikeyNew = () => {
   return (
     <Card>
       <Title title="Your new API key" />
@@ -49,4 +49,4 @@ const apikeyNew = () => {
   );
 };
 
-export default apikeyNew;
+export default ApikeyNew;

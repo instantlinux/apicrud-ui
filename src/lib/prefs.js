@@ -6,7 +6,7 @@ import decodeJwt from 'jwt-decode';
 
 const apiUrl = import.meta.env.REACT_APP_API_URL;
 
-export const prefs = props => {
+export const Prefs = props => {
     const query = queryString.parse(props.location.search);
     const { guest_id, magic, cid } = query;
     const request = new Request(apiUrl + '/auth', {
@@ -32,4 +32,4 @@ export const prefs = props => {
         });
 };
 
-export default prefs;
+export default Prefs;

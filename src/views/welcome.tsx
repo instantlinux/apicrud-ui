@@ -9,7 +9,7 @@ import { Title } from 'react-admin';
 import queryString from 'query-string';
 
 
-const welcome = () => {
+const Welcome = () => {
     const search = window.location.hash.split('?');
     var buttons = null;
     if (search.length > 1) {
@@ -66,4 +66,4 @@ const ForgotPWButton = () => (
     </Button>
 );
 
-export default welcome;
+export default Welcome;

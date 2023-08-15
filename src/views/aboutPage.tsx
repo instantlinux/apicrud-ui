@@ -29,7 +29,7 @@ class VersionInfo extends React.Component {
   }
 }
 
-const aboutPage = () => (
+const AboutPage = () => (
     <Card>
 	<Title title="About apicrud UI Example" />
 	<CardContent>
@@ -46,4 +46,4 @@ const aboutPage = () => (
         </CardContent>
     </Card>
 );
-export default aboutPage;
+export default AboutPage;

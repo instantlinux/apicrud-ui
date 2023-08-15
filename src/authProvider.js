@@ -3,7 +3,7 @@
 import decodeJwt from 'jwt-decode';
 import { skipAuthPaths } from './lib/constants';
 
-const apiUrl = import.meta.env.REACT_APP_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function authHeaders () {
     const uid = sessionStorage.getItem('uid');
@@ -65,6 +65,8 @@ const authProvider = {
             });
     },
     logout: () => {
+        console.log('apiURL=' + apiUrl);
+
         const request = new Request(apiUrl + '/logout', {
             method: 'GET',
             headers: authHeaders (),

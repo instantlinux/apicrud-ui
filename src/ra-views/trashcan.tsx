@@ -47,7 +47,7 @@ const TrashFilter = (props) => {
     })
     return <Filter {...props}>
         <SelectInput source='resource' choices={ resources }
-            allowEmpty={false} alwaysOn />
+            allowempty="false" alwaysOn />
         <ReferenceInput source='uid' reference='person' label='Person'>
           <AutocompleteInput optionText='name' />
         </ReferenceInput>

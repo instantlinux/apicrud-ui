@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { Title } from 'react-admin';
 
-const confirmWait = () => (
+const ConfirmWait = () => (
     <Card>
 	<Title title="Account Confirmation" />
 	<CardContent>
@@ -14,4 +14,4 @@ const confirmWait = () => (
 	</CardContent>
     </Card>
 );
-export default confirmWait;
+export default ConfirmWait;

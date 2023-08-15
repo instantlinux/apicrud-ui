@@ -49,12 +49,6 @@ export const pronounChoices = [
 ]
 
 export const skipAuthPaths = /^#\/(account\/create|account_password|event)/
-export const toolbarOpts = [
-    [{'font': []}, {'size': ['small', false, 'large', 'huge']},
-     'bold', 'italic', 'underline', 'blockquote',
-     {'indent': '-1'}, {'indent': '+1'},
-     {'list': 'ordered'}, {'list': 'bullet'},
-     {'color': []}, {'background': []}, 'link', {'align': []}  ]];
 
 /*
  * On UPDATE, this list excludes any read-only fields fetched by GET
@@ -69,5 +63,3 @@ export const excludeFields = [
 export const excludeExifFields = [
     'compression', 'datetime_original', 'duration', 'gps_altitude', 'height',
     'make', 'model', 'width'];
-
-export default toolbarOpts;

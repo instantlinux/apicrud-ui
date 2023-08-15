@@ -13,13 +13,15 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { parse } from 'query-string';
 
-import { privacyChoices, toolbarOpts } from '../lib/constants';
+import { privacyChoices } from '../lib/constants';
+import { toolbarOpts } from '../lib/constants-react';
 import { MenuTitle, TopbarNoActions } from '../lib/ra-custom';
 import { validateNameShort } from '../lib/validate';
 
 export const listCreate = props => {
-    const { uid: uid_string } = parse(props.location.state);
-    const uid = uid_string || '';
+    // const { uid: uid_string } = parse(props.location.state);
+    // const uid = uid_string || '';
+    const uid = sessionStorage.getItem('uid');
     const redirect = uid ? `/person/${uid}/show/lists` : 'show';
 
     return (
@@ -78,7 +80,9 @@ export const listList = props => (
     </List>
 );
 
-export const ListShowTabs = ({record, ...props}) => (
+export const ListShowTabs = props => {
+    console.log('ListShowTabs: props=' + JSON.stringify(props));
+    return
     <Show {...props} title={<MenuTitle />} actions={<TopbarNoActions />}>
       <TabbedShowLayout>
         <Tab label='discussion'>
@@ -113,7 +117,7 @@ export const ListShowTabs = ({record, ...props}) => (
         </Tab>
       </TabbedShowLayout>
     </Show>
-);
+};
 
 export const listShow = props => {
     return <ShowController {...props}>

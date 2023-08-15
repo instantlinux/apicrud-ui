@@ -9,7 +9,7 @@ import { Title } from 'react-admin';
 
 const apiUrl = import.meta.env.REACT_APP_API_URL;
 
-export const cnfrm = () => {
+export const Cnfrm = () => {
     return <Card>
       <CardContent>
       <Title title='Confirming contact' />
@@ -90,4 +90,4 @@ class ActionButtons extends React.Component {
   }
 }
 
-export default cnfrm;
+export default Cnfrm;

@@ -324,6 +324,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@blackbox-vision/ra-language-spanish@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@blackbox-vision/ra-language-spanish@npm:4.4.0"
+  peerDependencies:
+    ra-core: ^4.4.0
+    react: "*"
+  checksum: 02a724ff4016927e7efa12bc429403c93d5c58cd49b6d1df33e16b5738e1c2eadeb4a5187750fb13976eff63b8b9550923282a0fcc8ca117a055145f29f8de3b
+  languageName: node
+  linkType: hard
+
 "@emotion/babel-plugin@npm:^11.10.5":
   version: 11.10.5
   resolution: "@emotion/babel-plugin@npm:11.10.5"
@@ -1500,6 +1510,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "apicrud-ui@workspace:."
   dependencies:
+    "@blackbox-vision/ra-language-spanish": ^4.4.0
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
     "@material-ui/core": ^4.12.4

@@ -10,7 +10,8 @@ import { ChipField, Create, Datagrid, DateField, Edit, FormTab, FunctionField,
 import { RichTextInput } from 'ra-input-rich-text';
 import moment from 'moment';
 
-import { privacyChoices, toolbarOpts } from '../lib/constants';
+import { privacyChoices } from '../lib/constants';
+import { toolbarOpts } from '../lib/constants-react';
 import { MenuTitle, TopbarActions } from '../lib/ra-custom';
 import { validateRequired128String,
          validateRequired4096String } from '../lib/validate';
@@ -29,7 +30,7 @@ export const messageCreate = ({permissions, ...props}) => (
         <FormTab label='Message'>
           <TextInput source='subject'
               validate={validateRequired128String} />
-          <RichTextInput source='content' toolbar={toolbarOpts}
+          <RichTextInput source='content' multiline toolbar={toolbarOpts}
               validate={validateRequired4096String} />
           <TextInput disabled source='privacy' defaultValue='invitee' />
         </FormTab>

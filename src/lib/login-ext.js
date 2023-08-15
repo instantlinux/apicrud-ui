@@ -10,7 +10,7 @@ import decodeJwt from 'jwt-decode';
 
 const apiUrl = import.meta.env.REACT_APP_API_URL;
 
-export const loginExt = props => {
+export const LoginExt = props => {
     const query = queryString.parse(props.location.search);
     const { token } = query;
     const decodedJwt = decodeJwt(token);
@@ -41,4 +41,4 @@ export const loginExt = props => {
         });
     return null;
 };
-export default loginExt;
+export default LoginExt;
